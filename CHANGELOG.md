@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.2 - 2026-09-19
 
 - Add section-title, spelling-consistency, and BCP 14 keyword review rules.
 - Generate abbreviation exceptions from a pinned RPC source revision.
