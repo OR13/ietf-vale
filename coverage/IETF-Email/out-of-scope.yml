@@ -5,6 +5,7 @@
 # considered rather than silently missing. Each requires thread context or
 # intent that a line-based linter does not have.
 
+# Issue: https://github.com/OR13/ietf-vale/issues/8
 # BCP 54, Section 2: "dispute ideas by using reasoned argument rather than
 # through intimidation or personal attack". Measured against 158 messages in
 # which a participant explicitly claimed a personal attack or ad hominem: the

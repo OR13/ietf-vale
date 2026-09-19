@@ -123,7 +123,9 @@ or it does not ship. See the [tool landscape](/tool-landscape.md).
 `AbbreviationVerbs`, `Abbreviations`, `DidacticCapitalization`,
 `NonAsciiPunctuation`, `DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`,
 `Concision`, `AbstractCitations`, `DraftTitleStatusWords`, `ExampleIPv4`,
-`ExampleIPv6`, `ExampleDomains`, `StaleText`, and `DoubleNegatives`. The
+`ExampleIPv6`, `ExampleDomains`, `StaleText`, `DoubleNegatives`,
+`SectionTitleCase`, `SpellingConsistency`, `Bcp14Lowercase`, and
+`Bcp14Sparingly`. The
 `Bcp14Boilerplate`, `CitationReferences`, `ExampleASN`, `ExamplePhone`, and
 `ExampleMAC` rules are also shipped. The
 inventory below records both shipped and planned rules.
@@ -151,9 +153,8 @@ than the requirement, these rules cover the requirement.
 
 The authoritative exception data for `IETF-Draft.Abbreviations` is
 `abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file.
-The current rule ships a conservative built-in list of common abbreviations;
-the next data-refresh task should generate its exceptions from that file rather
-than maintaining the list by hand.
+Run `make update-abbreviations` to regenerate the checked-in exceptions from
+that source.
 
 `IETF-Draft.InclusiveLanguage` is generated from NISTIR 8366 Table 1. Its
 message names the chain of authority (RFC Editor RECOMMENDED, via the IESG
@@ -287,22 +288,22 @@ claim of error.
 
 | Rule | Requirement | Basis | Extends |
 |---|---|---|---|
-| `IETF-Draft.SpellingConsistency` | Spelling is internally consistent | RFC 7322 §3.1 (see the exclusion below)[^rfc7322] | `consistency` (level: warning) |
+| `IETF-Draft.SpellingConsistency` | Spelling is internally consistent for a curated set of common variants | RFC 7322 §3.1 (see the exclusion below)[^rfc7322] | `script` (level: suggestion) |
 | `IETF-Draft.SectionTitleCase` | Section titles use title case | RFC 7322 §3.4, which also permits sentence-form titles[^rfc7322] | `capitalization` |
 | `IETF-Draft.HttpsUris` | Prefer HTTPS URIs | Style Guide RECOMMENDED: "HTTPS URIs should be used when possible"[^styleguide] | `existence` |
 | `IETF-Draft.DoubleNegatives` | Avoid double negatives | Style Guide RECOMMENDED: "Double negatives are discouraged"[^styleguide] | `existence` |
 | `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited ... and included as a normative reference"[^bcp14][^rfc7322] | `script` (level: warning) |
-| `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence`, **off by default** |
-| `IETF-Draft.Bcp14Sparingly` | Do not use SHOULD merely to express a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `occurrence` |
+| `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence` |
+| `IETF-Draft.Bcp14Sparingly` | Review SHOULD when nearby wording indicates a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `existence` |
 | `IETF-Draft.StaleText` | Avoid text that dates the document | authors.ietf.org "Stale text": non-permanent URLs, "send comments to" a named list, assigning future work to a named WG[^authors-language] | `existence` |
 
 `IETF-Draft.Abbreviations` uses Vale's `conditional` extension. It checks for an
 expansion in the same lint block, which keeps the rule predictable across Vale's
 supported input formats. It does not claim full document-wide first-use analysis.
 
-`IETF-Draft.Bcp14Lowercase` ships disabled because lowercase key words are explicitly
-legitimate under RFC 8174; the rule exists for authors who want to audit them,
-and enabling it is the author's choice, not this style's assertion.
+`IETF-Draft.Bcp14Lowercase` is a suggestion because lowercase key words are
+explicitly legitimate under RFC 8174. The alert asks authors to review intent;
+it does not claim that lowercase usage is an error.
 
 # Excluded checks
 

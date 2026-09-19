@@ -1,0 +1,9 @@
+extends: existence
+message: "Review SHOULD here: BCP 14 keywords should not express a mere preference."
+link: https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/
+level: suggestion
+ignorecase: false
+scope: ~code
+tokens:
+  - '\bSHOULD\b[^.!?]{0,100}\b(?:prefer|preference|style|convenient|desirable|rather than)\b'
+  - '\b(?:prefer|preference|style|convenient|desirable|rather than)\b[^.!?]{0,100}\bSHOULD\b'

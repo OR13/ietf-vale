@@ -3,9 +3,8 @@
 # RFC 7322 Section 3: language, punctuation, DNS names and URIs,
 # capitalization, citations, and abbreviation rules.
 
-# Either American or British spelling, as long as the document is
-# internally consistent (Section 3.1).
-language: false
+# SpellingConsistency.yml
+language: true
 
 # Serial commas, quotation marks, hyphenation, spacing.
 # NonAsciiPunctuation.yml
@@ -27,6 +26,5 @@ capitalization: true
 citations: true
 
 # Expansion on first use, and the RFC Editor abbreviations list.
-# AbbreviationVerbs.yml -- expansion on first use is not yet implemented.
-# Abbreviations.yml
+# AbbreviationVerbs.yml and Abbreviations.yml
 abbreviations: true

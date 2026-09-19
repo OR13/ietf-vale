@@ -9,6 +9,7 @@ terms-list: true
 # Abbreviations.yml
 expansions: true
 
+# Issue: https://github.com/OR13/ietf-vale/issues/9
 protocol-names: false
 
 # ExampleIPv4.yml, ExampleIPv6.yml, ExampleDomains.yml

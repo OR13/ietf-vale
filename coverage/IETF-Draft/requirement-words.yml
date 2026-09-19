@@ -6,12 +6,12 @@
 
 # The key words themselves: MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD,
 # SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, OPTIONAL.
-key-words: false
+# Bcp14Boilerplate.yml
+key-words: true
 
 # The RFC 8174 boilerplate paragraph and its reference to both RFCs.
 # Bcp14Boilerplate.yml
 boilerplate: true
 
-# Lowercase uses of the key words, which RFC 8174 says have their ordinary
-# English meaning.
-lowercase-usage: false
+# Bcp14Lowercase.yml
+lowercase-usage: true

@@ -1,0 +1,4 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/SectionTitleCase
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:3:IETF-Draft.SectionTitleCase:Use title case for this section title, or review the capitalization choice.
+test.md:3:4:IETF-Draft.SectionTitleCase:Use title case for this section title, or review the capitalization choice.

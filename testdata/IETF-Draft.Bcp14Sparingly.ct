@@ -1,0 +1,3 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/Bcp14Sparingly
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:4:19:IETF-Draft.Bcp14Sparingly:Review SHOULD here: BCP 14 keywords should not express a mere preference.

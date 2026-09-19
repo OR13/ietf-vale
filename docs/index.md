@@ -18,7 +18,7 @@ real IETF list mail showed that much of [BCP
 so three proposed checks were withdrawn instead of becoming noisy alerts. See
 [what the email style can enforce](/email-style.md#what-this-style-can-enforce).
 
-The coverage manifests currently represent 14 of 34 draft topics (41.2%) and
+The coverage manifests currently represent 18 of 34 draft topics (52.9%) and
 2 of 9 email topics (22.2%). Run `go test -v -run TestCoverage ./...` for the
 current report. To propose or implement another rule, see
 [`CONTRIBUTING.md`](https://github.com/OR13/ietf-vale/blob/main/CONTRIBUTING.md).

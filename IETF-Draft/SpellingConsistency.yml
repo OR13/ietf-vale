@@ -1,0 +1,50 @@
+extends: script
+message: "Use one spelling consistently within this document."
+link: https://www.rfc-editor.org/rfc/rfc7322.html#section-3.1
+level: suggestion
+scope: ~code
+script: |
+  text := import("text")
+  matches := []
+
+  behavior := text.re_find("(?i)\\bbehavior\\b", scope, -1)
+  behaviour := text.re_find("(?i)\\bbehaviour\\b", scope, -1)
+  if behavior != undefined && behaviour != undefined && len(behavior) > 0 && len(behaviour) > 0 {
+    for f in behavior { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+    for f in behaviour { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+  }
+
+  color := text.re_find("(?i)\\bcolor\\b", scope, -1)
+  colour := text.re_find("(?i)\\bcolour\\b", scope, -1)
+  if color != undefined && colour != undefined && len(color) > 0 && len(colour) > 0 {
+    for f in color { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+    for f in colour { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+  }
+
+  organization := text.re_find("(?i)\\borganization\\b", scope, -1)
+  organisation := text.re_find("(?i)\\borganisation\\b", scope, -1)
+  if organization != undefined && organisation != undefined && len(organization) > 0 && len(organisation) > 0 {
+    for f in organization { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+    for f in organisation { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+  }
+
+  analyze := text.re_find("(?i)\\banalyze\\b", scope, -1)
+  analyse := text.re_find("(?i)\\banalyse\\b", scope, -1)
+  if analyze != undefined && analyse != undefined && len(analyze) > 0 && len(analyse) > 0 {
+    for f in analyze { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+    for f in analyse { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+  }
+
+  center := text.re_find("(?i)\\bcenter\\b", scope, -1)
+  centre := text.re_find("(?i)\\bcentre\\b", scope, -1)
+  if center != undefined && centre != undefined && len(center) > 0 && len(centre) > 0 {
+    for f in center { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+    for f in centre { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+  }
+
+  canceled := text.re_find("(?i)\\bcanceled\\b", scope, -1)
+  cancelled := text.re_find("(?i)\\bcancelled\\b", scope, -1)
+  if canceled != undefined && cancelled != undefined && len(canceled) > 0 && len(cancelled) > 0 {
+    for f in canceled { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+    for f in cancelled { m := f[0]; matches = append(matches, {begin: m.begin, end: m.begin + len(m.text), message: "Use one spelling consistently within this document."}) }
+  }

@@ -4,6 +4,7 @@
 # Structural checks generally need Vale's `conditional`, `occurrence`, or
 # `script` extension points rather than plain `existence`.
 
+# Issue: https://github.com/OR13/ietf-vale/issues/5
 title: false
 
 # AbstractCitations.yml

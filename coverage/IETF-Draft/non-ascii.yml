@@ -3,6 +3,7 @@
 # RFC 7997 allows non-ASCII characters in RFCs under specific conditions, with
 # required ASCII alternatives in several contexts.
 
+# Issue: https://github.com/OR13/ietf-vale/issues/6
 allowed-usage: false
 
 ascii-alternatives: false

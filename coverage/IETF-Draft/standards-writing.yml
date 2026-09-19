@@ -13,13 +13,14 @@ double-negatives: true
 
 # Section 2: "It is important that multiple readers and implementers of a
 # standard have the same understanding of a document."
+# Issue: https://github.com/OR13/ietf-vale/issues/7
 unambiguous-text: false
 
 # Section 2.3: identifying the intended audience.
 target-audience: false
 
-# Section 2.11 and 2.12: requirement levels and notational conventions.
-requirement-levels: false
+# Bcp14Sparingly.yml
+requirement-levels: true
 
 # Section 4: the document checklist.
 document-checklist: false
