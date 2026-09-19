@@ -21,6 +21,9 @@ sources:
   - id: bcp25
     resource: https://www.rfc-editor.org/rfc/rfc8716.html
     title: "RFC 8716 (BCP 25): Update to the IETF Anti-Harassment Procedures"
+  - id: rpc-abbrev-json
+    resource: https://github.com/rfc-editor-drafts/common/blob/main/abbreviations.json
+    title: abbreviations.json, the RPC's machine-readable abbreviation data
 ---
 
 This specifies the `IETF-Email` Vale style: prose rules for mailing list posts,
@@ -38,6 +41,12 @@ decide whether a message is uncivil, off-topic, or made in good faith.
 
 What a linter can do is catch a small number of phrasings, before the message is
 sent, that reliably read worse than their author intended.
+
+The style also uses the RFC Production Center's machine-readable
+[`abbreviations.json`](https://github.com/rfc-editor-drafts/common/blob/main/abbreviations.json)
+mapping to recognize well-known IETF abbreviations. It does not require an
+expansion for those terms, but it prompts authors to expand unfamiliar
+uppercase abbreviations on first use.
 
 Therefore:
 
@@ -101,7 +110,7 @@ so that its absence is a decision rather than an oversight.
 
 # Rule inventory
 
-**Shipped**: `Slang` and `Idioms`. `PersonalAttacks` and `UnsupportedDismissals`
+**Shipped**: `Slang`, `Idioms`, and `Abbreviations`. `PersonalAttacks` and `UnsupportedDismissals`
 shipped in v0.1 and were withdrawn; `Incivility` was specified and will not be
 implemented. See [what this style can enforce](#what-this-style-can-enforce).
 
@@ -112,6 +121,7 @@ Each rule is one PR, subject to the evidence policy. All are `suggestion`.
 | `IETF-Email.Incivility` | This wording reads as contempt | RFC 9245 §2: "Uncivil commentary, regardless of the general subject"[^bcp45] |
 | `IETF-Email.Slang` | This term may not be understood by participants who do not have English as a first language | RFC 7154 §2: "All participants, particularly those with English as a first language, attempt to accommodate the needs of other participants by communicating clearly, including speaking slowly and limiting the use of slang"[^bcp54] |
 | `IETF-Email.Idioms` | This idiom does not survive translation | RFC 7154 §2, same sentence[^bcp54] |
+| `IETF-Email.Abbreviations` | Expand unfamiliar uppercase abbreviations on first use, except for well-known terms | RFC 7322 §3.6, with the RPC abbreviation mapping[^rpc-abbrev-json] |
 
 `IETF-Email.Slang` is the most distinctly IETF rule in this repository and the
 least contentious: BCP 54 names slang explicitly, and the guidance is addressed

@@ -22,8 +22,8 @@ The draft style checks prose in Internet-Drafts and RFC-bound documents. For
 example, it suggests a shorter form for a verbose phrase:
 
 ```diff
-- The service is able to retry in order to recover.
-+ The service can retry to recover.
+- The protocol is able to negotiate in order to select an algorithm.
++ The protocol can negotiate to select an algorithm.
 ```
 
 Read the [draft-style specification](docs/draft-style.md) for the complete
@@ -32,11 +32,12 @@ rule set and its sources.
 ## IETF-Email
 
 The email style checks mailing-list and issue-tracker prose. For example, it
-flags slang that may be difficult for international participants to interpret:
+flags slang and unfamiliar abbreviations that may be difficult for
+international participants to interpret:
 
 ```diff
-- I'm gonna review it, but the issue is kinda unclear.
-+ I am going to review it, but the issue is somewhat unclear.
+- The WG is gonna review the XYZ extension.
++ The working group (WG) is going to review the Example Working Group (XYZ) extension.
 ```
 
 Read the [email-style specification](docs/email-style.md) for its deliberately
@@ -104,7 +105,7 @@ documentation](https://vale.sh/docs/keys/packages) for package configuration
 options.
 
 For repeatable builds, replace the latest package URL with a tagged URL such as
-`https://github.com/OR13/ietf-vale/releases/download/v0.4.1/IETF-Draft.zip`.
+`https://github.com/OR13/ietf-vale/releases/download/v0.4.2/IETF-Draft.zip`.
 
 ## Repository Structure
 

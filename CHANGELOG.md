@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.3 - 2026-09-19
+
+- Add RPC-backed abbreviation awareness to `IETF-Email`.
+- Refresh the README examples with IETF-specific draft and working-group prose.
+
 ## 0.4.2 - 2026-09-19
 
 - Add section-title, spelling-consistency, and BCP 14 keyword review rules.

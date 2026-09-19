@@ -3,7 +3,7 @@ STYLES := IETF-Draft IETF-Email
 # Pinned so a linter release cannot change what CI accepts without a commit.
 OKF_LINT_VERSION ?= 0.1.0
 
-.PHONY: new test lint lint-docs update update-abbreviations package package-check clean corpus-mail check-sources
+.PHONY: new test lint lint-docs update update-abbreviations update-email-abbreviations package package-check clean corpus-mail check-sources
 
 # Scaffold a new rule, its fixture, and its .ct case:
 #   make new RULE=Ellipses               (defaults to the IETF-Draft style)
@@ -40,6 +40,9 @@ update:
 
 update-abbreviations:
 	@python3 scripts/update-abbreviations.py
+
+update-email-abbreviations:
+	@python3 scripts/update-abbreviations.py --output IETF-Email/Abbreviations.yml --level suggestion
 
 # Build the archives users install, license included. Build from a temporary
 # directory so packaging never leaves generated LICENSE files in the styles.

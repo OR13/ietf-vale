@@ -18,6 +18,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path("IETF-Draft/Abbreviations.yml"))
     parser.add_argument("--source", default=SOURCE)
     parser.add_argument("--revision", default=SOURCE_REVISION)
+    parser.add_argument("--level", default="warning", choices=("suggestion", "warning"))
     args = parser.parse_args()
 
     request = urllib.request.Request(args.source, headers={"User-Agent": "ietf-vale"})
@@ -28,7 +29,7 @@ def main() -> None:
     body = f"""extends: conditional
 message: \"Expand '%s' on first use, unless it is a well-known abbreviation.\"
 link: https://www.rfc-editor.org/rfc/rfc7322.html#section-3.6
-level: warning
+level: {args.level}
 scope: ~code
 first: '\\b[A-Z][A-Z0-9]{{1,}}\\b'
 second: '\\b[A-Za-z][A-Za-z -]+[ ]+\\(([A-Z][A-Z0-9]{{1,}})\\)'
