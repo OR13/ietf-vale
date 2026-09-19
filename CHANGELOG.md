@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add the narrow, suggestion-level `IETF-Draft.ProtocolNames` check for common
+  protocol capitalization forms.
+
 ## 0.4.4 - 2026-09-19
 
 - Publish the opt-in `IETF-Draft-Optional` package with conservative article and

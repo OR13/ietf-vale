@@ -125,7 +125,7 @@ or it does not ship. See the [tool landscape](/tool-landscape.md).
 `Concision`, `AbstractCitations`, `DraftTitleStatusWords`, `ExampleIPv4`,
 `ExampleIPv6`, `ExampleDomains`, `StaleText`, `DoubleNegatives`,
 `SectionTitleCase`, `SpellingConsistency`, `Bcp14Lowercase`, and
-`Bcp14Sparingly`. The
+`Bcp14Sparingly`, and `ProtocolNames`. The
 `Bcp14Boilerplate`, `CitationReferences`, `ExampleASN`, `ExamplePhone`, and
 `ExampleMAC` rules are also shipped. The
 inventory below records both shipped and planned rules.
@@ -149,12 +149,19 @@ than the requirement, these rules cover the requirement.
 | `IETF-Draft.InclusiveLanguage` | The full NISTIR 8366 Table 1, roughly two dozen terms, which the IESG statement points to and the RFC Editor marks RECOMMENDED[^styleguide] | DraftForge, 7 of those terms | `substitution` | suggestion |
 | `IETF-Draft.Abbreviations` | authors.ietf.org: "Abbreviations should generally be expanded in parentheses"[^authors-language]; RFC 7322 §3.6[^rfc7322] | DraftForge `abbreviations` | `conditional` | warning |
 | `IETF-Draft.RFCTerms` | RFC 7322 §3.4: "Capitalization must be consistent within the document and ideally should be consistent with related RFCs"[^rfc7322] | DraftForge `rfc-terms`, `inconsistent-capitalization` | `existence` | suggestion |
+| `IETF-Draft.ProtocolNames` | A narrow list of unambiguous protocol-name spellings, consistent with RFC 7322 §3.4[^rfc7322] | DraftForge `rfc-terms` | `substitution` | suggestion |
 | `IETF-Draft.Names` | RFC 7322 §4.12 on author names, and the RPC's recorded preferred forms[^rpc-names-json] | DraftForge `names` | `existence` | suggestion |
 
 The authoritative exception data for `IETF-Draft.Abbreviations` is
 `abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file.
 Run `make update-abbreviations` to regenerate the checked-in exceptions from
 that source.
+
+`IETF-Draft.ProtocolNames` deliberately covers only unambiguous capitalization
+forms such as `HTTP`, `TLS`, `IPv6`, and `WebSocket`. It does not attempt to
+infer whether an arbitrary word is a protocol name, or whether a document's
+chosen capitalization agrees with a related RFC. Those broader checks remain
+covered by issue [#9](https://github.com/OR13/ietf-vale/issues/9).
 
 `IETF-Draft.InclusiveLanguage` is generated from NISTIR 8366 Table 1. Its
 message names the chain of authority (RFC Editor RECOMMENDED, via the IESG

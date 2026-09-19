@@ -1,0 +1,27 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+link: https://www.rfc-editor.org/rfc/rfc7322.html#section-3.4
+level: suggestion
+scope: ~code
+ignorecase: false
+swap:
+  Http: HTTP
+  Https: HTTPS
+  Tcp: TCP
+  Udp: UDP
+  Ipv4: IPv4
+  Ipv6: IPv6
+  Dns: DNS
+  Tls: TLS
+  Quic: QUIC
+  Smtp: SMTP
+  Imap: IMAP
+  Pop3: POP3
+  Sip: SIP
+  Rtp: RTP
+  Ntp: NTP
+  Bgp: BGP
+  Ospf: OSPF
+  Ldap: LDAP
+  Coap: CoAP
+  Websocket: WebSocket

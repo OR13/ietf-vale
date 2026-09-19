@@ -131,7 +131,7 @@ boilerplate. Nothing here overlaps.
 | AS numbers, telephone numbers, MAC addresses outside the documentation ranges | **nobody** | `IETF-Draft.ExampleASN`, `IETF-Draft.ExamplePhone`, `IETF-Draft.ExampleMAC` |
 | Articles, hyphenation consistency, inclusive language, names, non-ASCII, placeholders, typos | DraftForge, in VS Code only | Parity, as a CLI usable in any editor and in CI |
 | Abbreviation expansion on first use | DraftForge (List Abbreviations) | `IETF-Draft.Abbreviations`, generated from `abbreviations.json` |
-| RFC-specific term spellings, RFC Editor RECOMMENDED guidance | RPC, at AUTH48 | The rules in the draft style |
+| RFC-specific term spellings, RFC Editor RECOMMENDED guidance | RPC, at AUTH48 | The rules in the draft style, including the narrow `ProtocolNames` check |
 | Document validity | xml2rfc, kramdown-rfc | Nothing |
 
 # Running them together
