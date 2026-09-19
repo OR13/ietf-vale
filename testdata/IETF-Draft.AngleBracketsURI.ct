@@ -1,0 +1,3 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/AngleBracketsURI
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:5:IETF-Draft.AngleBracketsURI:Enclose this URI in angle brackets.

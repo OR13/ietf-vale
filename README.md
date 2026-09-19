@@ -17,7 +17,7 @@ Each style is specified before it is built. Read the specifications in
 [evidence policy](docs/evidence-policy.md) that decides how a rule earns its
 severity level.
 
-**23 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
+**24 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
 requirement. The email style is deliberately narrow: measurement against real
 IETF list mail showed that most of what BCP 54 and BCP 45 ask for is contextual
 rather than lexical, so three rules were withdrawn rather than shipped as
@@ -108,7 +108,7 @@ revising, including the verbose phrase and the HTTP URI. The suggestions are
 prompts for review; they do not replace idnits or the RFC Editor's review.
 
 For repeatable builds, replace the latest package URL with a tagged URL such as
-`https://github.com/OR13/ietf-vale/releases/download/v0.2.0/IETF-Draft.zip`.
+`https://github.com/OR13/ietf-vale/releases/download/v0.4.1/IETF-Draft.zip`.
 
 ## Repository Structure
 

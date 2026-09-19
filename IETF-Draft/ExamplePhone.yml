@@ -6,7 +6,7 @@ scope: raw
 script: |
   text := import("text")
   matches := []
-  found := text.re_find("([0-9]{3}-555-[0-9]{4})", scope, -1)
+  found := text.re_find("(?:\\+1-)?[0-9]{3}-555-[0-9]{4}|\\+44-[0-9]{2,5}-496-[0-9]{4}", scope, -1)
   for f in found {
     m := f[0]
     start := m.begin - 30
@@ -22,12 +22,12 @@ script: |
     if example == undefined || len(example) == 0 {
       continue
     }
-    allowed := text.re_find("^[0-9]{3}-555-01[0-9]{2}$", m.text, -1)
+    allowed := text.re_find("^(?:\\+1-)?[0-9]{3}-555-01[0-9]{2}$|^\\+44-[0-9]{2,5}-496-0[0-9]{3}$", m.text, -1)
     if allowed == undefined || len(allowed) == 0 {
       matches = append(matches, {
         begin: m.begin,
         end: m.begin + len(m.text),
-        message: "Use a fictitious telephone number from the reserved 555-0100 through 555-0199 range."
+        message: "Use a fictitious telephone number from the reserved 555-0100 through 555-0199 or UK 496-0000 through 496-0999 range."
       })
     }
   }

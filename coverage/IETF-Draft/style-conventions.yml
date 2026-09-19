@@ -23,7 +23,7 @@ stale-text: true
 capitalization: true
 
 # In-text citation form, and citations in the Abstract.
-# CitationSpacing.yml, RFCCompoundHyphen.yml
+# CitationSpacing.yml, RFCCompoundHyphen.yml, AngleBracketsURI.yml
 citations: true
 
 # Expansion on first use, and the RFC Editor abbreviations list.

@@ -52,8 +52,8 @@ sources:
 
 This specifies the `IETF-Draft` Vale style: the rules it contains, the guidance each
 rule implements, and the boundaries of what it claims. Severity levels follow the
-[evidence policy](evidence-policy.md). The companion
-[email style](email-style.md) covers mailing list prose and shares no rules with
+[evidence policy](/evidence-policy.md). The companion
+[email style](/email-style.md) covers mailing list prose and shares no rules with
 this one.
 
 # Scope
@@ -73,7 +73,7 @@ worse than leaving them alone:
 Out of scope does not mean unchecked. The author's goal is to hear everything a
 reviewer familiar with IETF rules would raise, which no single tool provides:
 idnits owns the structural half, and this style owns the prose half. The
-[tool landscape](tool-landscape.md) maps who checks what, names the gaps that
+[tool landscape](/tool-landscape.md) maps who checks what, names the gaps that
 belong to nobody, and specifies `make check-draft`, which runs idnits and Vale
 over one document and prints one report.
 
@@ -94,7 +94,7 @@ Series, not IETF consensus. That is the right authority for how an RFC is
 written, and it is not the same claim as "the IETF agreed this". Where an
 IETF-stream document covers the same ground, it is cited in preference, as
 `Concision` cites BCP 22. The stream of every cited document is recorded in the
-[evidence policy](evidence-policy.md).
+[evidence policy](/evidence-policy.md).
 
 Every rule traces to one of:
 
@@ -115,11 +115,11 @@ Official IETF tooling, meaning idnits[^idnits] and DraftForge[^draftforge], is
 **not** in that list. Those tools corroborate that a requirement is enforced in practice
 and set a floor for what an author will hear from a reviewer, and their source is
 a useful implementation reference, but a rule here traces to published guidance
-or it does not ship. See the [tool landscape](tool-landscape.md).
+or it does not ship. See the [tool landscape](/tool-landscape.md).
 
 # Rule inventory
 
-**Shipped**: `Terms`, `CitationSpacing`, `RFCCompoundHyphen`,
+**Shipped**: `Terms`, `CitationSpacing`, `RFCCompoundHyphen`, `AngleBracketsURI`,
 `AbbreviationVerbs`, `Abbreviations`, `DidacticCapitalization`,
 `NonAsciiPunctuation`, `DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`,
 `Concision`, `AbstractCitations`, `DraftTitleStatusWords`, `ExampleIPv4`,
@@ -132,7 +132,7 @@ Each rule is one PR. `Level` is the target level under the evidence policy. A
 rule whose alert rate makes it unsupportable ships one level lower, or disabled
 by default; it is not dropped for being rarely triggered, since a clean corpus
 says nothing about whether the guidance exists. See the
-[validation methodology](validation.md).
+[validation methodology](/validation.md).
 
 ## Group 0: requirements that official tooling already enforces
 
@@ -166,7 +166,7 @@ These implement checks that official tooling performs but no published guidance
 states. They are useful, and an author may well hear them from a reviewer using
 DraftForge, but they are **not requirements**. Each ships disabled by default and
 says so in its own documentation, per the
-[evidence policy](evidence-policy.md).
+[evidence policy](/evidence-policy.md).
 
 | Rule | What it checks | Upstream | Why it is not a requirement |
 |---|---|---|---|
@@ -211,6 +211,7 @@ scope for matching text their sources do not describe.
 | `IETF-Draft.Terms` | Use the RFC Production Center's settled spelling of RFC-specific terms, except where the list defers to internal consistency | Terms list: `IPsec` not `IPSEC`; `email` not `e-mail`; `online` not `on-line`; `timestamp` not `time-stamp`; `ASCII` not `US-ASCII`[^rpc-terms] | `substitution` | warning |
 | `IETF-Draft.CitationSpacing` | A citation tag contains no spaces | RFC 7322 §3.5: "A citation/reference tag must not contain spaces", e.g. `[RFC2119]` not `[RFC 2119]`[^rfc7322] | `substitution` | error |
 | `IETF-Draft.CitationReferences` | Every bracketed citation has a matching reference definition | RFC 7322 §4.8, which requires cited documents to appear in the References section[^rfc7322] | `script` | error |
+| `IETF-Draft.AngleBracketsURI` | Enclose bare URIs in angle brackets | RFC 7322 §3.3: "Angle brackets are strongly recommended around URIs"[^rfc7322] | `script` | warning |
 | `IETF-Draft.RFCCompoundHyphen` | Do not form compounds by hyphenating an RFC citation | Style Guide RECOMMENDED: "Avoid forming compounds by hyphenating RFC numbers", e.g. `[RFC5011]-style rollover`[^styleguide] | `existence` | warning |
 | `IETF-Draft.AbbreviationVerbs` | Affix suffixes to abbreviations without punctuation | Style Guide RECOMMENDED: `XORed` not `XOR'ed`, `NATed` not `NAT-ed`[^styleguide] | `existence` | warning |
 | `IETF-Draft.DidacticCapitalization` | Do not capitalize mid-word to explain an abbreviation | Style Guide Author Choice: "Use of didactic capitalization is not needed", e.g. `Extensible Markup Language (XML)` not `eXtensible`[^styleguide] | `existence` | suggestion |
@@ -256,7 +257,7 @@ in the official tooling asks that question today.
 or addresses such as `0.0.0.0` and `127.0.0.1` where they carry protocol meaning.
 idnits solves the section-number problem with the lookbehind `(?<![0-9a-zA-Z]+\.)`,
 which Vale's RE2 engine cannot express; see the
-[tool landscape](tool-landscape.md) for what to do instead.
+[tool landscape](/tool-landscape.md) for what to do instead.
 
 ## Group 3: structure
 
@@ -290,7 +291,6 @@ claim of error.
 | `IETF-Draft.SectionTitleCase` | Section titles use title case | RFC 7322 §3.4, which also permits sentence-form titles[^rfc7322] | `capitalization` |
 | `IETF-Draft.HttpsUris` | Prefer HTTPS URIs | Style Guide RECOMMENDED: "HTTPS URIs should be used when possible"[^styleguide] | `existence` |
 | `IETF-Draft.DoubleNegatives` | Avoid double negatives | Style Guide RECOMMENDED: "Double negatives are discouraged"[^styleguide] | `existence` |
-| `IETF-Draft.AngleBracketsURI` | Enclose bare URIs in angle brackets | RFC 7322 §3.3: "Angle brackets are strongly recommended around URIs"[^rfc7322] | `existence` |
 | `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited ... and included as a normative reference"[^bcp14][^rfc7322] | `script` (level: warning) |
 | `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence`, **off by default** |
 | `IETF-Draft.Bcp14Sparingly` | Do not use SHOULD merely to express a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `occurrence` |

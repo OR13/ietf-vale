@@ -1,4 +1,5 @@
 $ cdf ${ROOTDIR}/fixtures/IETF-Draft/ExamplePhone
 $ vale --output=line --sort --normalize --relative --no-global --no-exit .
-test.md:3:22:IETF-Draft.ExamplePhone:Use a fictitious telephone number from the reserved 555-0100 through 555-0199 range.
-test.md:4:34:IETF-Draft.ExamplePhone:Use a fictitious telephone number from the reserved 555-0100 through 555-0199 range.
+test.md:3:19:IETF-Draft.ExamplePhone:Use a fictitious telephone number from the reserved 555-0100 through 555-0199 or UK 496-0000 through 496-0999 range.
+test.md:4:31:IETF-Draft.ExamplePhone:Use a fictitious telephone number from the reserved 555-0100 through 555-0199 or UK 496-0000 through 496-0999 range.
+test.md:5:27:IETF-Draft.ExamplePhone:Use a fictitious telephone number from the reserved 555-0100 through 555-0199 or UK 496-0000 through 496-0999 range.

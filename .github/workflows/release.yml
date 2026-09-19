@@ -18,8 +18,7 @@ jobs:
       - uses: actions/checkout@v7
 
       # The archive is what users install, so the license travels inside it.
-      - run: cp LICENSE ${{ matrix.style }}/LICENSE
-      - run: zip -r ${{ matrix.style }}.zip ${{ matrix.style }} -x "*.DS_Store"
+      - run: make package-check
 
       - name: Attach to release
         uses: svenstaro/upload-release-action@v2

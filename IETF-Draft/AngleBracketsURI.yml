@@ -1,0 +1,51 @@
+extends: script
+message: "%s"
+link: https://www.rfc-editor.org/rfc/rfc7322.html#section-3.3
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  ignored := []
+  frontmatter := text.re_find("(?ms)^---\\n.*?^---[ \\t]*$", scope, -1)
+  if frontmatter != undefined {
+    for block in frontmatter {
+      ignored = append(ignored, block[0])
+    }
+  }
+  fenced := text.re_find("(?ms)^```[^\\n]*\\n.*?^```[ \\t]*$", scope, -1)
+  if fenced != undefined {
+    for block in fenced {
+      ignored = append(ignored, block[0])
+    }
+  }
+  inline := text.re_find("`[^`\\n]+`", scope, -1)
+  if inline != undefined {
+    for block in inline {
+      ignored = append(ignored, block[0])
+    }
+  }
+  found := text.re_find("https?://[^\\s<>]+", scope, -1)
+  for f in found {
+    m := f[0]
+    before := ""
+    skip := false
+    if m.begin > 0 {
+      before = scope[m.begin-1:m.begin]
+    }
+    for block in ignored {
+      blockEnd := block.begin + len(block.text)
+      if m.begin >= block.begin && m.begin < blockEnd {
+        skip = true
+        break
+      }
+    }
+    if skip || before == "<" || before == "(" || before == "`" || before == "\"" {
+      continue
+    }
+    matches = append(matches, {
+      begin: m.begin,
+      end: m.begin + len(m.text),
+      message: "Enclose this URI in angle brackets."
+    })
+  }

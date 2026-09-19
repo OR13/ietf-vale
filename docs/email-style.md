@@ -25,8 +25,8 @@ sources:
 
 This specifies the `IETF-Email` Vale style: prose rules for mailing list posts,
 issue comments, and review notes. Severity levels follow the
-[evidence policy](evidence-policy.md). The companion
-[draft style](draft-style.md) covers Internet-Drafts and shares no rules with
+[evidence policy](/evidence-policy.md). The companion
+[draft style](/draft-style.md) covers Internet-Drafts and shares no rules with
 this one.
 
 # What this style is, and is not
@@ -137,7 +137,7 @@ Applying that test to BCP 54, BCP 45 and BCP 245:
 | "Uncivil commentary, regardless of the general subject" | how words land, given who they are about | no |
 
 The measurements behind the three "no" rows are below. The same test is now part
-of the [validation methodology](validation.md), because it applies to any rule
+of the [validation methodology](/validation.md), because it applies to any rule
 in either style.
 
 What the moderation community discusses confirms the split. Across 14,265 lines
@@ -201,7 +201,7 @@ rule that produces nothing.
 
 This is not the corpus deciding which rules exist. BCP 54 still states the
 requirement, and it is still unmet. What measurement established is narrower and
-entirely within the [validation methodology](validation.md): the implementation
+entirely within the [validation methodology](/validation.md): the implementation
 did not match the phenomenon its source describes.
 
 ## Why UnsupportedDismissals was withdrawn
@@ -260,7 +260,7 @@ What this does and does not establish:
   taken from it is de-identified, and it is used to study phrasing, never to
   characterize any participant.
 - **Nothing here may change the rule set.** Per the
-  [validation methodology](validation.md), these numbers measure the
+  [validation methodology](/validation.md), these numbers measure the
   implementation. Adding a token because it appears in the corpus would be
   fitting the style to the sample.
 
@@ -296,7 +296,7 @@ cost of inventing one is high: measured over 14,265 lines of `tls` and
 
 So a sentence-length rule would be the loudest thing in the repository by an
 order of magnitude, and its number would be the author's preference wearing an
-IETF citation. That is precisely what the [evidence policy](evidence-policy.md)
+IETF citation. That is precisely what the [evidence policy](/evidence-policy.md)
 forbids, and no measurement can fix it, because the problem is the missing
 source rather than the pattern.
 

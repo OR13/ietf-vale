@@ -3,7 +3,7 @@ STYLES := IETF-Draft IETF-Email
 # Pinned so a linter release cannot change what CI accepts without a commit.
 OKF_LINT_VERSION ?= 0.1.0
 
-.PHONY: new test lint lint-docs update package clean corpus-mail check-sources
+.PHONY: new test lint lint-docs update package package-check clean corpus-mail check-sources
 
 # Scaffold a new rule, its fixture, and its .ct case:
 #   make new RULE=Ellipses               (defaults to the IETF-Draft style)
@@ -38,12 +38,25 @@ corpus-mail:
 update:
 	go test ./... -update
 
-# Build the archives users install, license included.
+# Build the archives users install, license included. Build from a temporary
+# directory so packaging never leaves generated LICENSE files in the styles.
 package:
-	@for s in $(STYLES); do \
-		cp LICENSE $$s/LICENSE; \
-		zip -qr $$s.zip $$s -x "*.DS_Store"; \
+	@tmp=$$(mktemp -d); \
+	trap 'rm -rf "$$tmp"' EXIT; \
+	for s in $(STYLES); do \
+		cp -R $$s "$$tmp/$$s"; \
+		cp LICENSE "$$tmp/$$s/LICENSE"; \
+		(cd "$$tmp" && zip -qr "$(CURDIR)/$$s.zip" "$$s" -x "*.DS_Store"); \
 		echo "built $$s.zip"; \
+	done
+
+# Validate the files that will be uploaded by the release workflow.
+package-check: package
+	@for s in $(STYLES); do \
+		unzip -t $$s.zip >/dev/null; \
+		unzip -l $$s.zip | grep -q "$$s/meta.json"; \
+		unzip -l $$s.zip | grep -q "$$s/LICENSE"; \
+		echo "checked $$s.zip"; \
 	done
 
 clean:
