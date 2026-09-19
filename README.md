@@ -3,45 +3,64 @@
 > **NOTE**: This project is neither maintained nor endorsed by the IETF or the RFC Editor.
 
 This repository contains [Vale](https://vale.sh)-compatible implementations of
-published IETF editorial guidance. It provides two independent styles because
-Internet-Drafts and IETF discussion posts follow different guidance:
-
-- [`IETF-Draft`](IETF-Draft/) lints Internet-Draft and RFC-bound prose. Its
-  sources include [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html), the
-  [RFC Editor Style Guide](https://www.rfc-editor.org/styleguide/),
-  [authors.ietf.org](https://authors.ietf.org/), and
-  [BCP 14](https://www.rfc-editor.org/info/bcp14).
-- [`IETF-Email`](IETF-Email/) lints mailing-list and issue-tracker prose. Its
-  sources include [BCP 54](https://www.rfc-editor.org/info/bcp54),
-  [BCP 45](https://www.rfc-editor.org/info/bcp45), and
-  [BCP 245](https://www.rfc-editor.org/info/bcp245).
+published IETF editorial guidance. The specifications in [`docs/`](docs/)
+describe each style's scope, sources, rules, and limitations.
 
 ## IETF-Draft
 
-The draft style checks prose in Internet-Drafts and RFC-bound documents. For
-example, it suggests a shorter form for a verbose phrase:
+The draft style checks Internet-Draft and RFC-bound prose. Its rules cover
+terminology, abbreviations, citations, BCP 14 keywords, example values, URIs,
+and several writing conventions. For example, one review can catch protocol
+capitalization, a preference incorrectly expressed as a BCP 14 keyword, and an
+HTTP URI that should be secure:
 
 ```diff
-- The protocol is able to negotiate in order to select an algorithm.
-+ The protocol can negotiate to select an algorithm.
+- The Http client SHOULD use http://example.com to select an algorithm.
++ The HTTP client should use <https://example.com> to select an algorithm.
+```
+
+It also checks that example addresses use documentation ranges and that
+unfamiliar abbreviations are expanded:
+
+```diff
+- The XYZ sends a request from 10.0.0.1.
++ The Example Extension (XYZ) sends a request from 192.0.2.1.
 ```
 
 Read the [draft-style specification](docs/draft-style.md) for the complete
-rule set and its sources.
+rule set, sources, and boundaries.
 
 ## IETF-Email
 
-The email style checks mailing-list and issue-tracker prose. For example, it
-flags slang and unfamiliar abbreviations that may be difficult for
-international participants to interpret:
+The email style checks mailing-list and issue-tracker prose. It offers
+suggestions for slang, idioms, and unfamiliar abbreviations that may be
+difficult for international participants to interpret:
 
 ```diff
-- The WG is gonna review the XYZ extension.
-+ The working group (WG) is going to review the Example Working Group (XYZ) extension.
+- The XYZ WG is gonna punt on this; let's boil the ocean.
++ The Example Working Group (XYZ) is going to defer this; let's solve the problem incrementally.
 ```
 
 Read the [email-style specification](docs/email-style.md) for its deliberately
 narrow scope and the guidance it can enforce.
+
+## IETF-Draft-Optional
+
+[`IETF-Draft-Optional`](IETF-Draft-Optional/) contains editorial prompts that
+are useful during drafting but are not default IETF requirements. It currently
+checks repeated words and a conservative set of common `a`/`an` errors:
+
+```diff
+- The the client sends sends a request.
++ The client sends a request.
+
+- Use a abstract in the draft.
++ Use an abstract in the draft.
+```
+
+These rules run at suggestion level and are packaged separately, so existing
+users do not receive them unless they opt in. Their rationale is documented in
+the [draft-style specification](docs/draft-style.md#group-0b-tooling-conventions-with-no-documented-requirement).
 
 ## Installation
 
@@ -104,12 +123,8 @@ files use `IETF-Draft`. See Vale's [Packages
 documentation](https://vale.sh/docs/keys/packages) for package configuration
 options.
 
-### Optional draft checks
-
-The repository also publishes [`IETF-Draft-Optional`](IETF-Draft-Optional/),
-which contains checks that are useful but are not default IETF requirements:
-repeated words and a conservative set of article errors. Install it only when
-you want those prompts:
+To opt into the optional draft checks, add their package alongside the default
+draft package and list the style in `BasedOnStyles`:
 
 ```ini
 Packages = https://github.com/OR13/ietf-vale/releases/latest/download/IETF-Draft.zip, \
@@ -123,7 +138,7 @@ Because it is a separate package, the optional rules never appear when a user
 installs only `IETF-Draft`.
 
 For repeatable builds, replace the latest package URL with a tagged URL such as
-`https://github.com/OR13/ietf-vale/releases/download/v0.4.3/IETF-Draft.zip`.
+`https://github.com/OR13/ietf-vale/releases/download/v0.4.4/IETF-Draft.zip`.
 
 ## Repository Structure
 
