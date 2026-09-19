@@ -136,10 +136,11 @@ boilerplate. Nothing here overlaps.
 
 # Running them together
 
-The point of the coverage map is that an author runs **both**. A planned
-`make check-draft` runs idnits and Vale over the same document and prints one
-report, so the structural and prose halves arrive together. Vale alone is not a
-submission check, and the draft style's README says so.
+The point of the coverage map is that an author runs **both**. The repository's
+`make check-draft FILE=draft.txt` command runs idnits and Vale over the same
+plaintext draft and prints one report, so the structural and prose halves arrive
+together. Vale alone is not a submission check, and the draft style's README
+says so.
 
 # Implementation constraint: the patterns cannot be copied
 

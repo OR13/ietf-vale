@@ -3,7 +3,7 @@ STYLES := IETF-Draft IETF-Email IETF-Draft-Optional
 # Pinned so a linter release cannot change what CI accepts without a commit.
 OKF_LINT_VERSION ?= 0.1.0
 
-.PHONY: new test lint lint-docs update update-abbreviations update-email-abbreviations package package-check clean corpus-mail check-sources
+.PHONY: new test lint lint-docs update update-abbreviations update-email-abbreviations package package-check clean corpus-mail check-sources check-draft
 
 # Scaffold a new rule, its fixture, and its .ct case:
 #   make new RULE=Ellipses               (defaults to the IETF-Draft style)
@@ -28,6 +28,10 @@ lint-docs:
 # Fail if a rule cites an RFC that has since been obsoleted.
 check-sources:
 	@python3 scripts/check-sources.py
+
+# Run the prose and submission checks over one plaintext Internet-Draft.
+check-draft:
+	@./scripts/check-draft.sh "$(FILE)" "$(IDNITS)"
 
 # Measure IETF-Email against real list mail from the IETF's anonymous IMAP
 # archive. Measures behavior; never decides which rules exist.

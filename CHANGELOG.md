@@ -1,9 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.4.5 - 2026-09-19
 
+- Add `make check-draft FILE=...` to run Vale and idnits together over a
+  plaintext Internet-Draft.
 - Add the narrow, suggestion-level `IETF-Draft.ProtocolNames` check for common
   protocol capitalization forms.
+- Improve README examples and document the optional draft style.
 
 ## 0.4.4 - 2026-09-19
 

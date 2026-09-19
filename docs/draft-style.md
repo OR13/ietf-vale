@@ -74,8 +74,8 @@ Out of scope does not mean unchecked. The author's goal is to hear everything a
 reviewer familiar with IETF rules would raise, which no single tool provides:
 idnits owns the structural half, and this style owns the prose half. The
 [tool landscape](/tool-landscape.md) maps who checks what, names the gaps that
-belong to nobody, and specifies `make check-draft`, which runs idnits and Vale
-over one document and prints one report.
+belong to nobody, and documents `make check-draft FILE=draft.txt`, which runs
+idnits and Vale over one plaintext draft and prints one report.
 
 # Conformance
 

@@ -138,7 +138,7 @@ Because it is a separate package, the optional rules never appear when a user
 installs only `IETF-Draft`.
 
 For repeatable builds, replace the latest package URL with a tagged URL such as
-`https://github.com/OR13/ietf-vale/releases/download/v0.4.4/IETF-Draft.zip`.
+`https://github.com/OR13/ietf-vale/releases/download/v0.4.5/IETF-Draft.zip`.
 
 ## Repository Structure
 
@@ -169,12 +169,17 @@ make test                            # fixture snapshots, rule contracts, covera
 make lint                            # yamllint over the styles, vale over our prose
 make lint-docs                       # okf-lint over the specification bundle
 make update                          # regenerate testdata/*.ct from current behavior
+make check-draft FILE=draft.txt      # run Vale and idnits over one draft
 make package                         # build all style ZIP archives
 ```
 
 `make lint` checks the YAML rules and runs Vale over the repository's
 documentation. `make test` runs the rule fixtures and requires Vale on your
-`PATH`.
+`PATH`. `make check-draft` expects the idnits v3 command to be installed; run
+`npm install -g @ietf-tools/idnits` first. It is intended for plaintext
+Internet-Drafts, which is the input format idnits validates. Build Markdown or
+RFCXML sources to the format required by your document toolchain before running
+the combined check.
 
 ## License
 
