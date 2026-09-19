@@ -1,4 +1,4 @@
-# Non-ASCII characters — https://www.rfc-editor.org/rfc/rfc7997.html
+# Non-ASCII characters: https://www.rfc-editor.org/rfc/rfc7997.html
 #
 # RFC 7997 allows non-ASCII characters in RFCs under specific conditions, with
 # required ASCII alternatives in several contexts.

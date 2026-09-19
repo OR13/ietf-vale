@@ -76,6 +76,33 @@ A corollary: **a rule that finds nothing in a corpus has not been disproven.** A
 low hit rate says the sampled documents were clean, which affects how urgent a
 rule is, never whether it is correct.
 
+# Is the requirement enforceable at all?
+
+Before measuring a rule, ask what its source sentence names.
+
+> **A rule is enforceable when its source names a property of the words. It is
+> not enforceable when its source names a property of the relationship between
+> the words and their context.**
+
+"Use HTTPS URIs where possible" names a property of the words. "Dispute ideas
+rather than attacking people" names a relationship: the same sentence is an
+attack or a question depending on who it is about and what came before. A token
+list for the second kind produces alerts that correlate with nothing, and the
+email style withdrew two rules and abandoned a third on exactly this ground.
+
+An unenforceable requirement is recorded as uncovered in the coverage manifest,
+with the measurement that showed it, rather than being papered over by a rule
+that fires rarely and means nothing when it does. This keeps the requirement
+visible: something a reviewer still has to do by reading.
+
+Two signs a rule is on the wrong side of the line:
+
+1. **The detectable signal is in somebody else's message.** If the phenomenon
+   shows up as a reply objecting, the rule is looking at the wrong text.
+2. **The source itself says the judgment is subjective.** RFC 9945 says
+   moderation "consists of subjective judgment calls"; a source that disclaims
+   mechanical application is telling you not to mechanize it.
+
 # The three evidence classes
 
 Every rule PR shows all three. Only the first establishes correctness; the other

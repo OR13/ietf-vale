@@ -1,4 +1,4 @@
-# Guidance a linter cannot implement — https://www.rfc-editor.org/rfc/rfc9245.html
+# Guidance a linter cannot implement: https://www.rfc-editor.org/rfc/rfc9245.html
 #                                      https://www.rfc-editor.org/rfc/rfc9945.html
 #
 # Tracked as permanently false with a reason, so the topics are visibly
@@ -11,6 +11,19 @@
 # objected-to text has no lexical signature, so a line-based linter cannot
 # reach it. See docs/email-style.md.
 personal-attacks: false
+
+# BCP 54, Section 2: "Try to provide data and facts for your standpoints". Being
+# unsupported is a property of the whole message, not of any phrase in it.
+# Measured over 102 messages in threads where participants demanded evidence:
+# the v0.1 tokens fired 3 times in 19,014 lines, while the phenomenon appeared
+# as others asking for support ("any evidence" 69 times, "unsubstantiated" 19).
+# The signal is in the reply, not in the message at fault.
+unsupported-dismissals: false
+
+# BCP 45 (RFC 9245), Section 2: "Uncivil commentary, regardless of the general
+# subject". RFC 9945 states that judging this "consists of subjective judgment
+# calls"; the same words are civil or uncivil depending on who they are about.
+incivility: false
 
 # RFC 9245, Section 2: whether a post belongs on this list or another venue.
 venue-and-topicality: false

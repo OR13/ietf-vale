@@ -17,9 +17,14 @@ Each style is specified before it is built. Read the specifications in
 [evidence policy](docs/evidence-policy.md) that decides how a rule earns its
 severity level.
 
-**v0.1 ships 9 rules in `IETF-Draft` and 4 in `IETF-Email`**, each tracing to a
-published requirement. Coverage of the specified rule set is 18% for the draft
-style and 44% for the email style; `go test -v -run TestCoverage ./...` prints
+**9 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
+requirement. The email style is deliberately narrow: measurement against real
+IETF list mail showed that most of what BCP 54 and BCP 45 ask for is contextual
+rather than lexical, so three rules were withdrawn rather than shipped as
+alerts that mean nothing. See
+[what this style can enforce](docs/email-style.md#what-this-style-can-enforce).
+Coverage of the specified rule set is 18% for the draft style and 22% for the
+email style; `go test -v -run TestCoverage ./...` prints
 the current figures. See [CONTRIBUTING.md](CONTRIBUTING.md) to add one.
 
 `IETF-Draft` is **not a submission check**. It lints prose; idnits owns

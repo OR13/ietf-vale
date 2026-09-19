@@ -1,4 +1,4 @@
-# Structure of an RFC — https://www.rfc-editor.org/rfc/rfc7322.html
+# Structure of an RFC: https://www.rfc-editor.org/rfc/rfc7322.html
 #
 # The sections an RFC must or may contain, in the order the RFC Editor expects.
 # Structural checks generally need Vale's `conditional`, `occurrence`, or

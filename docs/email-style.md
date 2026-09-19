@@ -101,9 +101,9 @@ so that its absence is a decision rather than an oversight.
 
 # Rule inventory
 
-**Shipped**: `Slang`, `Idioms`, `UnsupportedDismissals`. `Incivility` is
-specified and not yet implemented. `PersonalAttacks` shipped in v0.1 and was
-**withdrawn in v0.1.1**; see below.
+**Shipped**: `Slang` and `Idioms`. `PersonalAttacks` and `UnsupportedDismissals`
+shipped in v0.1 and were withdrawn; `Incivility` was specified and will not be
+implemented. See [what this style can enforce](#what-this-style-can-enforce).
 
 Each rule is one PR, subject to the evidence policy. All are `suggestion`.
 
@@ -112,17 +112,44 @@ Each rule is one PR, subject to the evidence policy. All are `suggestion`.
 | `IETF-Email.Incivility` | This wording reads as contempt | RFC 9245 §2: "Uncivil commentary, regardless of the general subject"[^bcp45] |
 | `IETF-Email.Slang` | This term may not be understood by participants who do not have English as a first language | RFC 7154 §2: "All participants, particularly those with English as a first language, attempt to accommodate the needs of other participants by communicating clearly, including speaking slowly and limiting the use of slang"[^bcp54] |
 | `IETF-Email.Idioms` | This idiom does not survive translation | RFC 7154 §2, same sentence[^bcp54] |
-| `IETF-Email.UnsupportedDismissals` | This dismisses a position without offering data | RFC 7154 §2: "Try to provide data and facts for your standpoints so the rest of the participants who are sitting on the sidelines watching the discussion can form an opinion"[^bcp54] |
 
 `IETF-Email.Slang` is the most distinctly IETF rule in this repository and the
 least contentious: BCP 54 names slang explicitly, and the guidance is addressed
 to native English speakers writing for an international audience.
 
-`IETF-Email.Incivility` carries the highest false positive risk in the
-repository, because the same words are civil or uncivil depending on who they
-are about. It keeps a deliberately short token list, and it fails the evidence
-policy's overreach check if its message asserts that the text *is* uncivil
-rather than asking the author to look again.
+## What this style can enforce
+
+Three of the five rules originally specified here were withdrawn or abandoned
+after measurement. They failed for one reason, and the reason generalizes:
+
+> **A rule is enforceable when its source names a property of the words. It is
+> not enforceable when its source names a property of the relationship between
+> the words and their context.**
+
+Applying that test to BCP 54, BCP 45 and BCP 245:
+
+| Requirement | What the source names | Enforceable |
+|---|---|---|
+| "limiting the use of slang" | a vocabulary category | **yes**: `Slang` |
+| "communicating clearly" for participants without English as a first language | fixed expressions that do not translate | **yes**: `Idioms` |
+| "dispute ideas ... rather than through intimidation or personal attack" | whether an argument addresses a person or a position | no |
+| "provide data and facts for your standpoints" | whether the message contains support | no |
+| "Uncivil commentary, regardless of the general subject" | how words land, given who they are about | no |
+
+The measurements behind the three "no" rows are below. The same test is now part
+of the [validation methodology](/validation.md), because it applies to any rule
+in either style.
+
+What the moderation community discusses confirms the split. Across 14,265 lines
+of `mod-discuss`, the recurring subjects are disruption (188 mentions), threads
+(55), tone (23), bad faith (14), and repetition, volume and frequency. Word
+choice barely appears: two mentions of insults, one of name calling, one of
+swearing, and no mention of slang, idiom or jargon at all. The IETF's moderation
+problems are structural, and a line-based linter does not see structure.
+
+This is a narrow style by design. It catches two courtesies an author can check
+before sending. It does not catch what moderators deal with, and nothing here
+should be mistaken for a conduct tool.
 
 ## Why PersonalAttacks was withdrawn
 
@@ -154,7 +181,29 @@ requirement, and it is still unmet. What measurement established is narrower and
 entirely within the [validation methodology](/validation.md): the implementation
 did not match the phenomenon its source describes.
 
-# Measured behavior, v0.1
+## Why UnsupportedDismissals was withdrawn
+
+BCP 54 asks participants to "provide data and facts for your standpoints so the
+rest of the participants ... can form an opinion"[^bcp54]. Being unsupported is a
+property of the whole message: a linter would have to judge whether the evidence
+offered is sufficient for the claim made.
+
+The archive was searched for threads where participants asked each other for
+support. In 102 such messages, 19,014 lines, the v0.1 tokens fired **three**
+times, all from one token. The phenomenon itself was plainly present, in the
+replies rather than in the messages at fault: "any evidence" appears 69 times,
+"unsubstantiated" 19 times, "citation needed" 8 times.
+
+That is the diagnosis. The detectable signal is somebody else objecting, which
+arrives in a different message, written by a different author, after the fact.
+The rule was looking in the wrong place, and no token list fixes that.
+
+`Incivility` was never implemented, for the same reason. RFC 9245 asks that
+commentary not be uncivil, and RFC 9945 says judging that "consists of
+subjective judgment calls"[^bcp245]. Both requirements are recorded as
+uncovered in `coverage/IETF-Email/out-of-scope.yml`.
+
+# Measured behavior
 
 Measured over 1,428 messages fetched from the IETF's anonymous IMAP archive
 (`imap.ietf.org:993`) across eleven lists, including `mod-discuss`, `ietf` and
@@ -165,16 +214,23 @@ Measured over 1,428 messages fetched from the IETF's anonymous IMAP archive
 |---|---|---|
 | `Slang` | 18 | 0.35 |
 | `Idioms` | 2 | 0.04 |
-| `UnsupportedDismissals` | 1 | 0.02 |
+| `UnsupportedDismissals` (withdrawn) | 1 | 0.02 |
 | `PersonalAttacks` (withdrawn) | **0** | 0.00 |
 
 What this does and does not establish:
 
 - **No noise problem.** Roughly 0.4 alerts per 1000 lines across the whole
   style. Nothing here would make a participant turn the style off.
-- **`PersonalAttacks` was withdrawn**, on the evidence described below. It never
+- **`PersonalAttacks` was withdrawn**, on the evidence described above. It never
   fired on any real message measured, including 158 messages in which a
   participant claimed a personal attack.
+- **A token list is a sample, not a closure.** Six of ten `Slang` tokens and one
+  of ten `Idioms` tokens ever fired. Silence from either rule means nothing,
+  since it can only flag what it lists.
+- **Both `Idioms` alerts were `bikeshed`.** It is a term of art here, and it is
+  also exactly what BCP 54 describes: an expression a participant without
+  English as a first language cannot decode from its parts. It is treated as a
+  true positive.
 - **The general sample is civil by construction.** It is the most recent traffic
   on technical lists, so a quiet result there says little. The targeted search
   described below was chosen because it contains the phenomenon; everything
