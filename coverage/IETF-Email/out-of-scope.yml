@@ -5,6 +5,13 @@
 # considered rather than silently missing. Each requires thread context or
 # intent that a line-based linter does not have.
 
+# BCP 54, Section 2: "dispute ideas by using reasoned argument rather than
+# through intimidation or personal attack". Measured against 158 messages in
+# which a participant explicitly claimed a personal attack or ad hominem: the
+# objected-to text has no lexical signature, so a line-based linter cannot
+# reach it. See docs/email-style.md.
+personal-attacks: false
+
 # RFC 9245, Section 2: whether a post belongs on this list or another venue.
 venue-and-topicality: false
 

@@ -44,6 +44,17 @@ maps those tiers, plus IETF document status, onto Vale levels.
 | C | RFC Editor **Author Choice**, an IESG statement, or guidance the IETF points to but did not produce | `suggestion` |
 | D | Guidance about participant **behavior**, which a linter can only approximate | `suggestion`, opt-in |
 
+# Stream matters, not just RFC number
+
+An RFC is not automatically IETF consensus. The Independent Submission stream and
+the IAB stream publish RFCs that no IETF consensus process approved, and their
+boilerplate says so. A rule cites a document from the **IETF stream**, or an RFC
+Editor tier, or an IESG statement. Anything else is recorded as considered and
+excluded, with the stream named, so the omission is visible.
+
+RFC 7704 is the worked example: it describes conduct in terms a rule could almost
+use, and it is an Independent Submission, so the email style does not draw on it.
+
 # Official tooling is not a source
 
 idnits and DraftForge implement checks; they do not define requirements. A check

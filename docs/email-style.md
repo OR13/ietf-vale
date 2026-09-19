@@ -90,16 +90,25 @@ Cite RFC 9245 and RFC 9945, never RFC 3005 or RFC 3934; both were obsoleted, and
 RFC 3005's "Unprofessional commentary" became "Uncivil commentary" in the
 current text.
 
+## Sources considered and excluded
+
+**RFC 7704, "An IETF with Much Diversity and Professional Conduct"**, describes
+harassment and bullying in terms close to what this style would want: name
+calling, belittling or disrespectful comments, and language of condescension.
+It is an **Independent Submission, Informational**, so it does not carry IETF
+consensus, and this style draws only on consensus documents. It is recorded here
+so that its absence is a decision rather than an oversight.
+
 # Rule inventory
 
-**Shipped in v0.1**: `Slang`, `Idioms`, `PersonalAttacks`,
-`UnsupportedDismissals`. `Incivility` is specified and not yet implemented.
+**Shipped**: `Slang`, `Idioms`, `UnsupportedDismissals`. `Incivility` is
+specified and not yet implemented. `PersonalAttacks` shipped in v0.1 and was
+**withdrawn in v0.1.1**; see below.
 
 Each rule is one PR, subject to the evidence policy. All are `suggestion`.
 
 | Rule | Prompt | Basis |
 |---|---|---|
-| `IETF-Email.PersonalAttacks` | This sentence judges a person rather than an argument | RFC 7154 §2: "We dispute ideas by using reasoned argument rather than through intimidation or personal attack"[^bcp54] |
 | `IETF-Email.Incivility` | This wording reads as contempt | RFC 9245 §2: "Uncivil commentary, regardless of the general subject"[^bcp45] |
 | `IETF-Email.Slang` | This term may not be understood by participants who do not have English as a first language | RFC 7154 §2: "All participants, particularly those with English as a first language, attempt to accommodate the needs of other participants by communicating clearly, including speaking slowly and limiting the use of slang"[^bcp54] |
 | `IETF-Email.Idioms` | This idiom does not survive translation | RFC 7154 §2, same sentence[^bcp54] |
@@ -109,11 +118,41 @@ Each rule is one PR, subject to the evidence policy. All are `suggestion`.
 least contentious: BCP 54 names slang explicitly, and the guidance is addressed
 to native English speakers writing for an international audience.
 
-`IETF-Email.PersonalAttacks` and `IETF-Email.Incivility` carry the highest false
-positive risk in the repository, because the same words are civil or uncivil
-depending on who they are about. Both keep deliberately short token lists, and
-both fail the evidence policy's overreach check if their message asserts that the
-text *is* uncivil rather than asking the author to look again.
+`IETF-Email.Incivility` carries the highest false positive risk in the
+repository, because the same words are civil or uncivil depending on who they
+are about. It keeps a deliberately short token list, and it fails the evidence
+policy's overreach check if its message asserts that the text *is* uncivil
+rather than asking the author to look again.
+
+## Why PersonalAttacks was withdrawn
+
+BCP 54 asks that participants "dispute ideas by using reasoned argument rather
+than through intimidation or personal attack"[^bcp54], and v0.1 implemented that
+as a short list of phrasings. The list was written from the guidance and observed
+from nothing, and measurement showed it detects nothing.
+
+The archive was searched for messages in which a participant **themselves**
+claimed a personal attack or an ad hominem: 158 such messages on the `tls` and
+`mod-discuss` lists, containing 5,491 quoted lines of the material being objected
+to. The v0.1 token list matched **once** in all of it.
+
+Reading what the complainants actually said explains why. They describe
+attribution, not vocabulary: the clearest formulation in the sample is that
+someone "argues about a person's motives rather than the correctness of that
+person's position". The most frequent second-person phrases in the objected-to
+material are ordinary discussion, such as "you look at the" and "your point is
+here". There is no phrase to match, because the same words are an attack or a
+question depending on who they are about and what was said before.
+
+A line-based linter cannot make that judgment. The requirement is therefore
+recorded in `coverage/IETF-Email/out-of-scope.yml` as something this style does
+not reach, alongside sealioning and topicality, rather than being covered by a
+rule that produces nothing.
+
+This is not the corpus deciding which rules exist. BCP 54 still states the
+requirement, and it is still unmet. What measurement established is narrower and
+entirely within the [validation methodology](/validation.md): the implementation
+did not match the phenomenon its source describes.
 
 # Measured behavior, v0.1
 
@@ -127,22 +166,20 @@ Measured over 1,428 messages fetched from the IETF's anonymous IMAP archive
 | `Slang` | 18 | 0.35 |
 | `Idioms` | 2 | 0.04 |
 | `UnsupportedDismissals` | 1 | 0.02 |
-| `PersonalAttacks` | **0** | 0.00 |
+| `PersonalAttacks` (withdrawn) | **0** | 0.00 |
 
 What this does and does not establish:
 
 - **No noise problem.** Roughly 0.4 alerts per 1000 lines across the whole
   style. Nothing here would make a participant turn the style off.
-- **`PersonalAttacks` is unvalidated.** It has never fired on any real IETF
-  message we have measured. That is not evidence the rule is wrong, since the
-  sample may simply be civil, and it is not evidence the rule works either. Its
-  token list was written from the guidance rather than observed from anything,
-  and it should be treated as untested until an alert is seen and adjudicated.
-- **The sample is civil by construction.** It is the most recent traffic on
-  technical lists. Testing the conduct rules against the behavior BCP 245
-  describes would need a sample chosen because it contains that behavior, which
-  is a decision about people, not about text. This project does not make that
-  decision casually, and any such sample would be de-identified before use.
+- **`PersonalAttacks` was withdrawn**, on the evidence described below. It never
+  fired on any real message measured, including 158 messages in which a
+  participant claimed a personal attack.
+- **The general sample is civil by construction.** It is the most recent traffic
+  on technical lists, so a quiet result there says little. The targeted search
+  described below was chosen because it contains the phenomenon; everything
+  taken from it is de-identified, and it is used to study phrasing, never to
+  characterize any participant.
 - **Nothing here may change the rule set.** Per the
   [validation methodology](/validation.md), these numbers measure the
   implementation. Adding a token because it appears in the corpus would be

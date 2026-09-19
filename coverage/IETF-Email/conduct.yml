@@ -7,11 +7,6 @@
 # means only that a rule surfaces candidate phrasings for the author to
 # reconsider -- never that the linter has judged a message.
 
-# BCP 54, Section 2: "dispute ideas by using reasoned argument rather than
-# through intimidation or personal attack".
-# PersonalAttacks.yml
-personal-attacks: true
-
 # BCP 45 (RFC 9245), Section 2: "Uncivil commentary, regardless of the general
 # subject".
 incivility: false

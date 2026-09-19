@@ -1,5 +1,0 @@
-$ cdf ${ROOTDIR}/fixtures/IETF-Email/PersonalAttacks
-$ vale --output=line --sort --normalize --relative --no-global --no-exit .
-test.md:3:38:IETF-Email.PersonalAttacks:This judges a person rather than an argument; BCP 54 asks that we dispute ideas by reasoned argument.
-test.md:4:1:IETF-Email.PersonalAttacks:This judges a person rather than an argument; BCP 54 asks that we dispute ideas by reasoned argument.
-test.md:4:34:IETF-Email.PersonalAttacks:This judges a person rather than an argument; BCP 54 asks that we dispute ideas by reasoned argument.
