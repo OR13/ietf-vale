@@ -1,0 +1,22 @@
+# RFC style conventions — https://www.rfc-editor.org/rfc/rfc7322.html
+#
+# The editorial conventions the RFC Editor applies to every published RFC:
+# language, punctuation, tense, capitalization, citations, and abbreviations.
+
+# US English spelling and usage.
+language: false
+
+# Serial commas, quotation marks, hyphenation, spacing.
+punctuation: false
+
+# Tense and voice.
+tense: false
+
+# Capitalization of terms, headings, and protocol names.
+capitalization: false
+
+# In-text citation form, and citations in the Abstract.
+citations: false
+
+# Expansion on first use, and the RFC Editor abbreviations list.
+abbreviations: false

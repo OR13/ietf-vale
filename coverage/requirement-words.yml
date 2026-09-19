@@ -1,0 +1,16 @@
+# Requirement words — https://www.rfc-editor.org/rfc/rfc2119.html
+#                     https://www.rfc-editor.org/rfc/rfc8174.html
+#
+# RFC 8174 narrows RFC 2119: the key words carry their special meaning only when
+# they appear in all uppercase, which makes lowercase use a reviewable signal.
+
+# The key words themselves: MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD,
+# SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, OPTIONAL.
+key-words: false
+
+# The RFC 8174 boilerplate paragraph and its reference to both RFCs.
+boilerplate: false
+
+# Lowercase uses of the key words, which RFC 8174 says have their ordinary
+# English meaning.
+lowercase-usage: false

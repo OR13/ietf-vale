@@ -1,0 +1,14 @@
+# Terminology — https://www.rfc-editor.org/styleguide/part2/
+#
+# The RFC Editor's web portion of the style guide: the terms list, common
+# expansions, and preferred spellings that change more often than RFC 7322.
+
+terms-list: false
+
+expansions: false
+
+protocol-names: false
+
+example-values: false
+
+inclusive-language: false

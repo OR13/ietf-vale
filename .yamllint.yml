@@ -1,0 +1,9 @@
+rules:
+  # Rules are single documents without directives, so the markers are noise.
+  document-start: disable
+  # Most rules carry a `link` key pointing at the source guidance, which is
+  # often longer than any sensible column limit.
+  line-length: disable
+  truthy:
+    # Vale rule files use YES/NO in scope and token keys.
+    check-keys: false

@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # Pinned so a Vale release can never silently change what our recorded
+  # expectations mean. Bump it in its own PR, with the resulting testdata diff.
+  VALE_VERSION: "3.21.0"
+  GO_VERSION: "1.21"
+
+jobs:
+  lint:
+    name: Lint YAML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install yamllint
+
+      - run: yamllint -c .yamllint.yml IETF/ coverage/
+
+  test:
+    name: Rules + fixtures
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Install Vale
+        run: |
+          wget -q "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz"
+          mkdir -p bin && tar -xzf "vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -C bin
+          echo "$PWD/bin" >> "$GITHUB_PATH"
+
+      - name: Vale version
+        run: vale --version
+
+      - name: Test
+        run: go test ./...
+
+      - name: Coverage report
+        run: |
+          {
+            echo '## Style guide coverage'
+            echo '```'
+            go test -v -run TestCoverage ./... 2>&1 | sed -n '/style guide coverage/,/^--- \|^ok \|^PASS/p'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  integration:
+    name: Vale runs clean
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vale
+        run: |
+          wget -q "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz"
+          mkdir -p bin && tar -xzf "vale_${VALE_VERSION}_Linux_64-bit.tar.gz" -C bin
+          echo "$PWD/bin" >> "$GITHUB_PATH"
+
+      # Catches malformed rules that the fixtures don't reach: Vale refuses to
+      # build a config it can't parse.
+      - name: Load the style
+        run: vale ls-config > /dev/null
+
+      # The style has to be clean against our own prose, or we're shipping
+      # guidance we don't follow.
+      - name: Lint this repository
+        run: vale README.md CONTRIBUTING.md
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # The archive is what users install, so the license travels inside it.
+      - run: cp LICENSE IETF/LICENSE
+      - run: zip -r IETF.zip IETF -x "*.DS_Store"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: IETF.zip
+          path: IETF.zip
+          if-no-files-found: error

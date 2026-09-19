@@ -1,0 +1,16 @@
+# Build output
+*.zip
+
+# Vale
+styles/
+.vale-cache/
+
+# Go
+*.test
+coverage.out
+
+# Editors / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/

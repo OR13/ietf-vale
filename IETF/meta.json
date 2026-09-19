@@ -1,0 +1,7 @@
+{
+  "feed": "https://github.com/OR13/ietf-vale/releases.atom",
+  "vale_version": ">=3.0.0",
+  "license_files": [
+    "LICENSE"
+  ]
+}
