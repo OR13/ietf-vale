@@ -3,7 +3,7 @@ STYLES := IETF-Draft IETF-Email
 # Pinned so a linter release cannot change what CI accepts without a commit.
 OKF_LINT_VERSION ?= 0.1.0
 
-.PHONY: new test lint lint-docs update package clean corpus-mail
+.PHONY: new test lint lint-docs update package clean corpus-mail check-sources
 
 # Scaffold a new rule, its fixture, and its .ct case:
 #   make new RULE=Ellipses               (defaults to the IETF-Draft style)
@@ -24,6 +24,10 @@ lint:
 # bundle has no log.md because git already records the history.
 lint-docs:
 	npx --yes @thisismydesign/okf-lint@$(OKF_LINT_VERSION) docs --max-warnings 2
+
+# Fail if a rule cites an RFC that has since been obsoleted.
+check-sources:
+	@python3 scripts/check-sources.py
 
 # Measure IETF-Email against real list mail from the IETF's anonymous IMAP
 # archive. Measures behavior; never decides which rules exist.

@@ -264,6 +264,46 @@ What this does and does not establish:
   implementation. Adding a token because it appears in the corpus would be
   fitting the style to the sample.
 
+# What Vale offers that this style does not use
+
+The withdrawn rules failed because their requirements were contextual. That
+raises the opposite question: Vale has extension points that measure properties
+of the words directly, and those pass the enforceability test. They were
+evaluated and deliberately not adopted, for a different reason.
+
+| Vale mechanism | What it would measure | Works on list mail |
+|---|---|---|
+| `readability` | Flesch-Kincaid, Gunning Fog, Coleman-Liau, SMOG, Automated Readability | **no** |
+| `occurrence` with `scope: sentence` | sentence length in words | yes |
+| `conditional` | an abbreviation used before it is expanded | yes |
+| `spelling`, `repetition` | misspellings, repeated words | yes |
+
+Two findings, both measured against the corpus:
+
+**`readability` does not work on plain text.** The same paragraph scores grade
+41.82 as Markdown and produces no alert at all as `.txt`. Mailing list mail is
+plain text, so the mechanism that most directly matches "communicating clearly"
+is unavailable exactly where this style runs. It would work for an author who
+drafts a long message in Markdown first.
+
+**Sentence length works, and has no source.** BCP 54 asks participants to
+accommodate others by communicating clearly. It does not say how long a sentence
+may be, and neither does BCP 45 or BCP 245. Any threshold is invented, and the
+cost of inventing one is high: measured over 14,265 lines of `tls` and
+`mod-discuss`, a 30-word limit fires 34 times per 1000 lines, a 40-word limit
+17, and even a 60-word limit 5.8. The entire shipped style fires 0.4 times per
+1000 lines.
+
+So a sentence-length rule would be the loudest thing in the repository by an
+order of magnitude, and its number would be the author's preference wearing an
+IETF citation. That is precisely what the [evidence policy](/evidence-policy.md)
+forbids, and no measurement can fix it, because the problem is the missing
+source rather than the pattern.
+
+A participant who wants these checks should enable them in their own
+configuration, where a personal threshold is honest. This style will not ship
+one.
+
 # Rules deliberately not proposed
 
 - **Profanity lists beyond contempt markers.** Swearing about a protocol is not

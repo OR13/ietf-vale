@@ -83,6 +83,18 @@ jobs:
       - name: Lint this repository
         run: vale README.md CONTRIBUTING.md docs/
 
+  sources:
+    name: Cited RFCs are current
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      # A rule that cites a superseded document loses its argument on contact
+      # with a reviewer, so this is checked rather than remembered.
+      - run: python3 scripts/check-sources.py
+
   docs:
     name: Specifications
     runs-on: ubuntu-latest
