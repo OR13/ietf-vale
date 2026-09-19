@@ -16,29 +16,31 @@ Internet-Drafts and IETF discussion posts follow different guidance:
   [BCP 45](https://www.rfc-editor.org/info/bcp45), and
   [BCP 245](https://www.rfc-editor.org/info/bcp245).
 
-Each style is specified before it is implemented. Start with the
-[documentation index](docs/index.md), then read the [draft-style
-specification](docs/draft-style.md), the [email-style
-specification](docs/email-style.md), and the shared [evidence
-policy](docs/evidence-policy.md), which explains how each rule earns its
-severity level.
+## IETF-Draft
 
-The repository currently ships 24 draft rules and 2 email rules. Every rule
-traces to published guidance. The email style is intentionally narrow: testing
-against real IETF list mail showed that much of [BCP
-54](https://www.rfc-editor.org/info/bcp54) and [BCP
-45](https://www.rfc-editor.org/info/bcp45) concerns context rather than words,
-so three proposed checks were withdrawn instead of becoming noisy alerts. See
-[what the email style can enforce](docs/email-style.md#what-this-style-can-enforce).
+The draft style checks prose in Internet-Drafts and RFC-bound documents. For
+example, it suggests a shorter form for a verbose phrase:
 
-The coverage manifests currently represent 14 of 34 draft topics (41.2%) and
-2 of 9 email topics (22.2%). Run `go test -v -run TestCoverage ./...` for the
-current report. To propose or implement another rule, see
-[CONTRIBUTING.md](CONTRIBUTING.md).
+```diff
+- The service is able to retry in order to recover.
++ The service can retry to recover.
+```
 
-`IETF-Draft` is **not a submission check**. It lints prose; [idnits](https://github.com/ietf-tools/idnits)
-owns structure, boilerplate, and references. Run both tools: the [tool
-landscape](docs/tool-landscape.md) explains which checks belong to which tool.
+Read the [draft-style specification](docs/draft-style.md) for the complete
+rule set and its sources.
+
+## IETF-Email
+
+The email style checks mailing-list and issue-tracker prose. For example, it
+flags slang that may be difficult for international participants to interpret:
+
+```diff
+- I'm gonna review it, but the issue is kinda unclear.
++ I am going to review it, but the issue is somewhat unclear.
+```
+
+Read the [email-style specification](docs/email-style.md) for its deliberately
+narrow scope and the guidance it can enforce.
 
 ## Installation
 
@@ -100,21 +102,6 @@ Now `vale posts/` uses `IETF-Email` for matching text files, while Markdown
 files use `IETF-Draft`. See Vale's [Packages
 documentation](https://vale.sh/docs/keys/packages) for package configuration
 options.
-
-### A complete example
-
-With the first configuration above, save this as `draft.md`:
-
-```markdown
-# Example
-
-This document is written in order to explain an HTTP service.
-The service is available at http://example.com.
-```
-
-Run `vale draft.md`. Vale reports the phrases that the draft style recommends
-revising, including the verbose phrase and the HTTP URI. The suggestions are
-prompts for review; they do not replace idnits or the RFC Editor's review.
 
 For repeatable builds, replace the latest package URL with a tagged URL such as
 `https://github.com/OR13/ietf-vale/releases/download/v0.4.1/IETF-Draft.zip`.
