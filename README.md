@@ -2,34 +2,43 @@
 
 > **NOTE**: This project is neither maintained nor endorsed by the IETF or the RFC Editor.
 
-This repository contains [Vale-compatible](https://vale.sh) implementations of
-published IETF editorial guidance. It ships **two styles**, because drafts and
-mailing list posts are governed by different documents and share no rules:
+This repository contains [Vale](https://vale.sh)-compatible implementations of
+published IETF editorial guidance. It provides two independent styles because
+Internet-Drafts and IETF discussion posts follow different guidance:
 
-| Style | Lints | Governed by |
-|---|---|---|
-| `IETF-Draft` | Internet-Drafts and RFC-bound prose | [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html), the [RFC Editor Style Guide](https://www.rfc-editor.org/styleguide/), [authors.ietf.org](https://authors.ietf.org/), BCP 14 |
-| `IETF-Email` | Mailing list and issue-tracker prose | BCP 54, BCP 45, BCP 245 |
+- [`IETF-Draft`](IETF-Draft/) lints Internet-Draft and RFC-bound prose. Its
+  sources include [RFC 7322](https://www.rfc-editor.org/rfc/rfc7322.html), the
+  [RFC Editor Style Guide](https://www.rfc-editor.org/styleguide/),
+  [authors.ietf.org](https://authors.ietf.org/), and
+  [BCP 14](https://www.rfc-editor.org/info/bcp14).
+- [`IETF-Email`](IETF-Email/) lints mailing-list and issue-tracker prose. Its
+  sources include [BCP 54](https://www.rfc-editor.org/info/bcp54),
+  [BCP 45](https://www.rfc-editor.org/info/bcp45), and
+  [BCP 245](https://www.rfc-editor.org/info/bcp245).
 
-Each style is specified before it is built. Read the specifications in
-[`docs/`](docs/index.md): the [draft style](docs/draft-style.md), the
-[email style](docs/email-style.md), and the shared
-[evidence policy](docs/evidence-policy.md) that decides how a rule earns its
+Each style is specified before it is implemented. Start with the
+[documentation index](docs/index.md), then read the [draft-style
+specification](docs/draft-style.md), the [email-style
+specification](docs/email-style.md), and the shared [evidence
+policy](docs/evidence-policy.md), which explains how each rule earns its
 severity level.
 
-**24 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
-requirement. The email style is deliberately narrow: measurement against real
-IETF list mail showed that most of what BCP 54 and BCP 45 ask for is contextual
-rather than lexical, so three rules were withdrawn rather than shipped as
-alerts that mean nothing. See
-[what this style can enforce](docs/email-style.md#what-this-style-can-enforce).
-Coverage of the specified rule set is 18% for the draft style and 22% for the
-email style; `go test -v -run TestCoverage ./...` prints
-the current figures. See [CONTRIBUTING.md](CONTRIBUTING.md) to add one.
+The repository currently ships 24 draft rules and 2 email rules. Every rule
+traces to published guidance. The email style is intentionally narrow: testing
+against real IETF list mail showed that much of [BCP
+54](https://www.rfc-editor.org/info/bcp54) and [BCP
+45](https://www.rfc-editor.org/info/bcp45) concerns context rather than words,
+so three proposed checks were withdrawn instead of becoming noisy alerts. See
+[what the email style can enforce](docs/email-style.md#what-this-style-can-enforce).
 
-`IETF-Draft` is **not a submission check**. It lints prose; idnits owns
-structure, boilerplate and references. Run both; the
-[tool landscape](docs/tool-landscape.md) maps who checks what.
+The coverage manifests currently represent 14 of 34 draft topics (41.2%) and
+2 of 9 email topics (22.2%). Run `go test -v -run TestCoverage ./...` for the
+current report. To propose or implement another rule, see
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
+`IETF-Draft` is **not a submission check**. It lints prose; [idnits](https://github.com/ietf-tools/idnits)
+owns structure, boilerplate, and references. Run both tools: the [tool
+landscape](docs/tool-landscape.md) explains which checks belong to which tool.
 
 ## Installation
 
@@ -112,22 +121,19 @@ For repeatable builds, replace the latest package URL with a tagged URL such as
 
 ## Repository Structure
 
-<dl>
-  <dt><code>/IETF-Draft</code>, <code>/IETF-Email</code></dt>
-  <dd>The <a href="https://yaml.org/">YAML</a>-based rule implementations, plus each style's <code>meta.json</code>. These directories are what get packaged and released.</dd>
-
-  <dt><code>/docs</code></dt>
-  <dd>The specifications, as an <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md">OKF</a> bundle. A rule is specified here before it is implemented. The bundle deliberately omits OKF's optional <code>log.md</code>: git already records what changed and when.</dd>
-
-  <dt><code>/fixtures</code></dt>
-  <dd>The individual unit tests, one directory per rule at <code>fixtures/&lt;Style&gt;/&lt;Rule&gt;/</code>, each with a <code>.vale.ini</code> that enables only that rule.</dd>
-
-  <dt><code>/testdata</code></dt>
-  <dd>The expected Vale output for each fixture, one <code>&lt;Style&gt;.&lt;Rule&gt;.ct</code> file per fixture. We use <a href="https://github.com/google/go-cmdtest">go-cmdtest</a> to run Vale against each fixture and compare its output. Run the suite with <code>go test ./...</code>; regenerate expectations after an intentional change with <code>go test ./... -update</code>.</dd>
-
-  <dt><code>/coverage</code></dt>
-  <dd>How much of the source guidance each style implements, tracked topic by topic under <code>coverage/&lt;Style&gt;/</code>. Each key is a subtopic set to <code>true</code> or <code>false</code>, optionally followed by a comment naming the rules that implement it. Run <code>go test -v -run TestCoverage ./...</code> to print the figures; the same test fails if a named rule no longer exists, so a topic can't silently claim coverage it has lost.</dd>
-</dl>
+- [`IETF-Draft/`](IETF-Draft/) and [`IETF-Email/`](IETF-Email/) contain the
+  YAML rules and each style's `meta.json`. These directories are packaged for
+  release.
+- [`docs/`](docs/) contains the [OKF](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+  specifications. A rule is specified here before it is implemented.
+- [`fixtures/`](fixtures/) contains one isolated Vale fixture per rule, with
+  examples that should alert and near-misses that should remain clean.
+- [`testdata/`](testdata/) contains the expected output for every fixture. The
+  tests use [go-cmdtest](https://github.com/google/go-cmdtest); regenerate the
+  snapshots with `go test ./... -update` after an intentional rule change.
+- [`coverage/`](coverage/) records which topics from each source document are
+  implemented. The coverage test also prevents comments from referring to
+  rules that no longer exist.
 
 ## Local Development
 
