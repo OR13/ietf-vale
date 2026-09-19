@@ -6,9 +6,9 @@ ignorecase: false
 # A specification quoting a wrong spelling puts it in a code span.
 scope: ~code
 # The RFC Production Center's RFC-Specific Terms list. Entries that the list
-# defers to the document -- Acknowledgments, where it says "If consistent (with
-# or without the 'e'), leave it" -- are deliberately absent: that is a
-# consistency question, not a settled spelling.
+# defers to the document are deliberately absent. Acknowledgments is the clearest
+# case: the list says "If consistent (with or without the 'e'), leave it", which
+# is a consistency question, not a settled spelling.
 swap:
   'US-ASCII': ASCII
   'IPSEC': IPsec

@@ -1,5 +1,5 @@
 extends: existence
-message: "Use the ASCII equivalent of this punctuation character."
+message: "Replace this non-ASCII punctuation character. Prefer rephrasing with a comma, colon, semicolon or parentheses over substituting hyphens."
 link: https://www.rfc-editor.org/styleguide/
 level: warning
 nonword: true

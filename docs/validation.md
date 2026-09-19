@@ -33,7 +33,7 @@ authority comes from.
 **Rules come from policies, procedures, and official tools. A rule MUST NOT be
 derived from, added because of, or removed because of the corpus.**
 
-The corpus exists to demonstrate that a rule works -- that it fires on text a
+The corpus exists to demonstrate that a rule works: that it fires on text a
 human reviewer would accept as a genuine finding, and stays quiet elsewhere. It
 cannot tell us whether the style guide contains the right rules, because it is a
 sample of what people wrote, not a statement of what the guidance says. A rule's
@@ -127,7 +127,7 @@ Two further findings from the first corpus run illustrate the same point:
   RFC 5737, and the rule must require address-shaped context before it ships.
 - A naive substitution of "Acknowledgements" to "Acknowledgments" is a **rule
   defect** too, but the proof is in the Terms list, which says to leave either
-  spelling alone when the document is internally consistent[^rpc-terms] -- not in
+  spelling alone when the document is internally consistent[^rpc-terms], not in
   the fact that the spelling appears in published RFCs.
 
 ## 3. Human adjudication and noise budget -- establishes whether it is supportable
@@ -138,7 +138,7 @@ Two numbers, measured over the pinned corpus and reported in the PR.
 reading as an IETF reviewer would, who marks each one as a finding they would
 raise or one they would wave through. This is the closest thing to proof that the
 tool works for its purpose: an alert a reviewer would dismiss is noise, whatever
-its provenance. A high dismissal rate sends the rule back to be narrowed -- the
+its provenance. A high dismissal rate sends the rule back to be narrowed: the
 rule stays, its pattern changes.
 
 **Alerts per 1000 lines**, per rule. A correct rule that fires on every third
@@ -160,7 +160,7 @@ It samples three populations, for three different purposes:
 | Population | Purpose | What it cannot show |
 |---|---|---|
 | Active Internet-Drafts, early versions | The target user's text. Accept/dismiss adjudication, noise budget, and the most realistic source of rule defects | Nothing about authority, and nothing about which rules should exist |
-| Published RFCs | Text that survived the full process. Useful for finding rule defects, since a match here deserves scrutiny | Whether a surviving pattern is permitted -- read the source to decide |
+| Published RFCs | Text that survived the full process. Useful for finding rule defects, since a match here deserves scrutiny | Whether a surviving pattern is permitted; read the source to decide |
 | Final draft version against its published RFC | The narrow window in which the RFC Production Center actually edits | What the rules require; only what was enforced in those cases |
 
 The third population is the only one where a change is attributable to the RFC
@@ -182,6 +182,6 @@ report.
 
 The report is regenerated per PR for the rules that PR touches. It is not a gate:
 no threshold automatically passes or fails a rule, because the judgment that
-matters -- deviation, defect, or exception -- is made by reading the source.
+matters, meaning deviation, defect, or exception, is made by reading the source.
 
 [^rpc-terms]: [RFC-Specific Terms list](https://rpc-wiki.rfc-editor.org/doku.php?id=terms), which states for Acknowledgments: "If consistent (with or without the 'e'), leave it. If inconsistent, delete the 'e'."

@@ -12,7 +12,7 @@ mailing list posts are governed by different documents and share no rules:
 | `IETF-Email` | Mailing list and issue-tracker prose | BCP 54, BCP 45, BCP 245 |
 
 Each style is specified before it is built. Read the specifications in
-[`docs/`](docs/index.md) -- [draft style](docs/draft-style.md),
+[`docs/`](docs/index.md): the [draft style](docs/draft-style.md), the
 [email style](docs/email-style.md), and the shared
 [evidence policy](docs/evidence-policy.md) that decides how a rule earns its
 severity level.
@@ -23,8 +23,8 @@ style and 44% for the email style; `go test -v -run TestCoverage ./...` prints
 the current figures. See [CONTRIBUTING.md](CONTRIBUTING.md) to add one.
 
 `IETF-Draft` is **not a submission check**. It lints prose; idnits owns
-structure, boilerplate and references. Run both -- see the
-[tool landscape](docs/tool-landscape.md).
+structure, boilerplate and references. Run both; the
+[tool landscape](docs/tool-landscape.md) maps who checks what.
 
 ## Getting Started
 

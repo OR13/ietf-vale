@@ -100,8 +100,8 @@ Every rule traces to one of:
   rules are generated from, and the machine-readable
   `abbreviations.json`[^rpc-abbrev-json] and `names.json`[^rpc-names-json] that
   the RPC's own tooling runs on.
-Official IETF tooling -- idnits[^idnits] and DraftForge[^draftforge] -- is **not**
-in that list. Those tools corroborate that a requirement is enforced in practice
+Official IETF tooling, meaning idnits[^idnits] and DraftForge[^draftforge], is
+**not** in that list. Those tools corroborate that a requirement is enforced in practice
 and set a floor for what an author will hear from a reviewer, and their source is
 a useful implementation reference, but a rule here traces to published guidance
 or it does not ship. See the [tool landscape](/tool-landscape.md).
@@ -124,7 +124,7 @@ says nothing about whether the guidance exists. See the
 Every rule below implements a **documented requirement**. The tooling column
 records whether idnits or DraftForge also checks it, because a requirement an
 IETF-aware reviewer's tools already flag is one an author will certainly hear
-about -- but the tool is corroboration, not the source. Where a tool covers less
+about. The tool is corroboration, not the source. Where a tool covers less
 than the requirement, these rules cover the requirement.
 
 | Rule | Requirement and source | Also checked by | Extends | Level |
@@ -137,12 +137,12 @@ than the requirement, these rules cover the requirement.
 The exception list for `IETF-Draft.Abbreviations` is **generated** from
 `abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file:
 3277 entries of `{term, full, wellknown?, note?}`, of which 279 are marked
-well-known. This supersedes scraping the wiki page -- same data, versioned, with
+well-known. This supersedes scraping the wiki page: same data, versioned, with
 the well-known flag readable rather than inferred from an asterisk.
 
 `IETF-Draft.InclusiveLanguage` is generated from NISTIR 8366 Table 1. Its
-message names the chain of authority -- RFC Editor RECOMMENDED, via the IESG
-statement, via NIST -- so a reader can see at a glance that it is encouragement,
+message names the chain of authority (RFC Editor RECOMMENDED, via the IESG
+statement, via NIST) so a reader can see at a glance that it is encouragement,
 not IETF consensus.
 
 ## Group 0b: tooling conventions with no documented requirement
@@ -185,8 +185,8 @@ scope for matching text their sources do not describe.
 `IETF-Draft.Terms` is generated from the Terms list, and the generator must drop
 the entries that defer to the document rather than settle the spelling. The
 clearest case is Acknowledgments, where the list says "If consistent (with or
-without the 'e'), leave it. If inconsistent, delete the 'e'."[^rpc-terms] -- a
-`consistency` check, not a substitution.
+without the 'e'), leave it. If inconsistent, delete the 'e'."[^rpc-terms] That is
+a `consistency` check, not a substitution.
 
 `IETF-Draft.NonAsciiPunctuation` excludes the `code` scope, and must not flag non-ASCII
 characters used as examples, which RFC 7997 §3.1 permits.
@@ -295,7 +295,7 @@ Verified against Vale 3.21.0 rather than taken from documentation:
   `[RFC 2119]` is parsed as a link reference and `http://example.com` is
   autolinked, so neither reaches a rule scoped to prose. `CitationSpacing`,
   `RFCCompoundHyphen` and `HttpsUris` use `scope: raw` for this reason, which
-  also means they see fenced code -- a trade-off recorded in each rule.
+  also means they see fenced code, a trade-off recorded in each rule.
 
 - `conditional` correctly flags an abbreviation used with no prior
   `Expansion (ABBR)`, which is the mechanism `IETF-Draft.Abbreviations` depends on.
@@ -314,7 +314,7 @@ Verified against Vale 3.21.0 rather than taken from documentation:
 [^styleguide]: [Updates to the RFC Style Guide](https://www.rfc-editor.org/styleguide/).
 [^authors-language]: [Language and style](https://authors.ietf.org/language-and-style), Internet-Draft Author Resources.
 [^authors-examples]: [Example addresses](https://authors.ietf.org/example-addresses), Internet-Draft Author Resources.
-[^bcp14]: [BCP 14](https://www.rfc-editor.org/info/bcp14) -- RFC 2119 and RFC 8174.
+[^bcp14]: [BCP 14](https://www.rfc-editor.org/info/bcp14), which is RFC 2119 and RFC 8174.
 [^rpc-terms]: [RFC-Specific Terms list](https://rpc-wiki.rfc-editor.org/doku.php?id=terms).
 [^rpc-abbrev]: [Abbreviations list](https://rpc-wiki.rfc-editor.org/doku.php?id=abbrev_list).
 [^iesg-bcp14]: [IESG Statement on clarifying the use of BCP 14 key words](https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/), 17 March 2025.
