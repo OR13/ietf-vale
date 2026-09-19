@@ -1,0 +1,30 @@
+extends: script
+message: "%s"
+link: https://github.com/ietf-tools/draftforge
+level: suggestion
+scope: ~code
+script: |
+  text := import("text")
+  matches := []
+  badA := text.re_find("(?i)\\ba[ \\t]+(?:abstract|address|algorithm|example|extension|implementation|interface|option|operation|update)\\b", scope, -1)
+  badAn := text.re_find("(?i)\\ban[ \\t]+(?:draft|document|protocol|request|response|server|working)\\b", scope, -1)
+  if badA != undefined {
+    for f in badA {
+      m := f[0]
+      matches = append(matches, {
+        begin: m.begin,
+        end: m.begin + len(m.text),
+        message: "Use 'an' before this vowel sound."
+      })
+    }
+  }
+  if badAn != undefined {
+    for f in badAn {
+      m := f[0]
+      matches = append(matches, {
+        begin: m.begin,
+        end: m.begin + len(m.text),
+        message: "Use 'a' before this consonant sound."
+      })
+    }
+  }

@@ -165,15 +165,16 @@ not IETF consensus.
 
 These implement checks that official tooling performs but no published guidance
 states. They are useful, and an author may well hear them from a reviewer using
-DraftForge, but they are **not requirements**. Each ships disabled by default and
-says so in its own documentation, per the
+DraftForge, but they are **not requirements**. The shipped optional checks live
+in `IETF-Draft-Optional`, a separate package that users must add explicitly;
+the remaining entries are not shipped. See the
 [evidence policy](/evidence-policy.md).
 
 | Rule | What it checks | Upstream | Why it is not a requirement |
 |---|---|---|---|
 | `IETF-Draft.Typos` | 62 dictionary entries covering 79 observed misspellings | DraftForge `typos.js` | A list of mistakes people made, not guidance anyone published |
-| `IETF-Draft.Articles` | `a` before a vowel, `an` before a consonant, with exception lists | DraftForge `articles.js` | General English grammar; RFC 7322 says only that the publication language is English |
-| `IETF-Draft.RepeatedWords` | A word repeated across a line break | DraftForge `repeated-words.js` | Same |
+| `IETF-Draft-Optional.Articles` | A conservative set of `a`/`an` article errors | DraftForge `articles.js` | General English grammar; RFC 7322 says only that the publication language is English; opt-in package |
+| `IETF-Draft-Optional.RepeatedWords` | A word repeated across a line break | DraftForge `repeated-words.js` | Same; opt-in package |
 
 **`Placeholders` is deliberately absent.** DraftForge flags `RFCXXXX`, `RFCTBD`
 and similar because it is used during final review, where such a placeholder must

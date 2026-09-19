@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        style: [IETF-Draft, IETF-Email]
+        style: [IETF-Draft, IETF-Email, IETF-Draft-Optional]
     steps:
       - uses: actions/checkout@v7
 

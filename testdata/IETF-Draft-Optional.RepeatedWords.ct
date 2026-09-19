@@ -1,0 +1,4 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft-Optional/RepeatedWords
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:1:IETF-Draft-Optional.RepeatedWords:Review this repeated word: 'the'.
+test.md:3:44:IETF-Draft-Optional.RepeatedWords:Review this repeated word: 'sends'.

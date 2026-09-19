@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.4 - 2026-09-19
+
+- Publish the opt-in `IETF-Draft-Optional` package with conservative article and
+  repeated-word checks.
+- Ignore inline code and fenced code blocks when checking citation references.
+- Document the optional package and its installation workflow.
+
 ## 0.4.3 - 2026-09-19
 
 - Add RPC-backed abbreviation awareness to `IETF-Email`.

@@ -104,14 +104,32 @@ files use `IETF-Draft`. See Vale's [Packages
 documentation](https://vale.sh/docs/keys/packages) for package configuration
 options.
 
+### Optional draft checks
+
+The repository also publishes [`IETF-Draft-Optional`](IETF-Draft-Optional/),
+which contains checks that are useful but are not default IETF requirements:
+repeated words and a conservative set of article errors. Install it only when
+you want those prompts:
+
+```ini
+Packages = https://github.com/OR13/ietf-vale/releases/latest/download/IETF-Draft.zip, \
+           https://github.com/OR13/ietf-vale/releases/latest/download/IETF-Draft-Optional.zip
+
+[*.md]
+BasedOnStyles = Vale, IETF-Draft, IETF-Draft-Optional
+```
+
+Because it is a separate package, the optional rules never appear when a user
+installs only `IETF-Draft`.
+
 For repeatable builds, replace the latest package URL with a tagged URL such as
 `https://github.com/OR13/ietf-vale/releases/download/v0.4.3/IETF-Draft.zip`.
 
 ## Repository Structure
 
-- [`IETF-Draft/`](IETF-Draft/) and [`IETF-Email/`](IETF-Email/) contain the
-  YAML rules and each style's `meta.json`. These directories are packaged for
-  release.
+- [`IETF-Draft/`](IETF-Draft/), [`IETF-Email/`](IETF-Email/), and
+  [`IETF-Draft-Optional/`](IETF-Draft-Optional/) contain the YAML rules and
+  each style's `meta.json`. These directories are packaged for release.
 - [`docs/`](docs/) contains the [OKF](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
   specifications. A rule is specified here before it is implemented.
 - [`fixtures/`](fixtures/) contains one isolated Vale fixture per rule, with
@@ -136,7 +154,7 @@ make test                            # fixture snapshots, rule contracts, covera
 make lint                            # yamllint over the styles, vale over our prose
 make lint-docs                       # okf-lint over the specification bundle
 make update                          # regenerate testdata/*.ct from current behavior
-make package                         # build IETF-Draft.zip and IETF-Email.zip
+make package                         # build all style ZIP archives
 ```
 
 `make lint` checks the YAML rules and runs Vale over the repository's

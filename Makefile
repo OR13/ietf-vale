@@ -1,4 +1,4 @@
-STYLES := IETF-Draft IETF-Email
+STYLES := IETF-Draft IETF-Email IETF-Draft-Optional
 
 # Pinned so a linter release cannot change what CI accepts without a commit.
 OKF_LINT_VERSION ?= 0.1.0
