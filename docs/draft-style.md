@@ -33,6 +33,9 @@ sources:
   - id: iesg-bcp14
     resource: https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/
     title: IESG Statement on clarifying the use of BCP 14 key words (2025-03-17)
+  - id: bcp22
+    resource: https://www.rfc-editor.org/rfc/rfc2360.html
+    title: "RFC 2360 (BCP 22): Guide for Internet Standards Writers"
   - id: idnits
     resource: https://github.com/ietf-tools/idnits
     title: idnits, the Internet-Draft nits checker
@@ -85,6 +88,14 @@ contains none of the specific, cited defects enumerated below.
 
 # Normative basis
 
+**A note on standing.** Most of this style rests on RFC Editor guidance, and
+RFC 7322 and RFC 7997 are **IAB stream** documents: editorial policy for the RFC
+Series, not IETF consensus. That is the right authority for how an RFC is
+written, and it is not the same claim as "the IETF agreed this". Where an
+IETF-stream document covers the same ground, it is cited in preference, as
+`Concision` cites BCP 22. The stream of every cited document is recorded in the
+[evidence policy](/evidence-policy.md).
+
 Every rule traces to one of:
 
 - **RFC 7322**[^rfc7322], the RFC Style Guide, still current and updated by
@@ -108,10 +119,10 @@ or it does not ship. See the [tool landscape](/tool-landscape.md).
 
 # Rule inventory
 
-**Shipped in v0.1**: `Terms`, `CitationSpacing`, `RFCCompoundHyphen`,
+**Shipped**: `Terms`, `CitationSpacing`, `RFCCompoundHyphen`,
 `AbbreviationVerbs`, `DidacticCapitalization`, `NonAsciiPunctuation`,
-`DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`. Everything else below is
-specified and not yet implemented.
+`DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`, `Concision`. Everything
+else below is specified and not yet implemented.
 
 Each rule is one PR. `Level` is the target level under the evidence policy. A
 rule whose alert rate makes it unsupportable ships one level lower, or disabled
@@ -167,6 +178,24 @@ check belongs to a workflow stage this style does not lint, and adopting it woul
 turn correct text into an error. If it is ever added, it belongs with the
 draft-stage rules in Group 4, inverted: flag a placeholder that has **no**
 accompanying RFC Editor note.
+
+## Group 0c: writing quality, from consensus guidance
+
+Most of this style rests on RFC Editor guidance, which is **IAB stream**
+editorial policy rather than IETF consensus. One rule rests on an IETF-stream
+BCP, which makes it the easiest rule here to defend.
+
+| Rule | Requirement and source | Extends | Level |
+|---|---|---|---|
+| `IETF-Draft.Concision` | RFC 2360 (**BCP 22**, IETF stream) §2.4: "Concise text has several advantages. It makes the document easier to read. Such text reduces the chance for conflict between different portions of the specification."[^bcp22] Reinforced by the RFC Editor: "authors should focus on using clear, concise language", pointing at Richard Lanham's Paramedic Method "for information on revising verbose text"[^styleguide] | `substitution` | suggestion |
+
+The rule lists only fixed phrases with an unambiguous shorter form, and it never
+claims a passage is too long. BCP 22 §2.4 is explicit that the trade-off runs
+both ways: "Longer descriptions may be necessary to explain purpose, background",
+and a rule that flagged length would be taking a side the source does not take.
+
+Measured over 60 Internet-Drafts at `-00`, wordy constructions appear roughly
+2.2 times per 1000 lines.
 
 ## Group 1: mechanical
 
@@ -287,6 +316,13 @@ preference that this style must not copy.
 
 Verified against Vale 3.21.0 rather than taken from documentation:
 
+- **Vale does not match a phrase across a line break.** `due to the fact that`
+  is found when it sits on one line and missed when the text wraps between
+  `due to` and `the fact that`, in Markdown and plain text alike. Internet-Drafts are
+  hard-wrapped, so every multi-word rule loses some recall: measured over 60
+  drafts at `-00`, 110 of 119 multi-word phrases sat on one line, a recall of
+  92%. Authors who write one sentence per line, or who let their editor soft-wrap,
+  lose nothing.
 - **Vale wraps `existence` and `substitution` tokens in `\b`.** A pattern that
   begins or ends with a non-word character, such as a `[RFC1234]` citation tag,
   can therefore never match without `nonword: true`. This cost two rules a
@@ -318,6 +354,7 @@ Verified against Vale 3.21.0 rather than taken from documentation:
 [^rpc-terms]: [RFC-Specific Terms list](https://rpc-wiki.rfc-editor.org/doku.php?id=terms).
 [^rpc-abbrev]: [Abbreviations list](https://rpc-wiki.rfc-editor.org/doku.php?id=abbrev_list).
 [^iesg-bcp14]: [IESG Statement on clarifying the use of BCP 14 key words](https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/), 17 March 2025.
+[^bcp22]: [RFC 2360](https://www.rfc-editor.org/rfc/rfc2360.html), BCP 22, Guide for Internet Standards Writers. IETF stream, never obsoleted or updated.
 [^idnits]: [idnits](https://github.com/ietf-tools/idnits), v3 branch.
 [^draftforge]: [ietf-tools/draftforge](https://github.com/ietf-tools/draftforge), whose checks are documented at [draftforge.ietf.org/checks](https://draftforge.ietf.org/checks/).
 [^rpc-abbrev-json]: [abbreviations.json](https://github.com/rfc-editor-drafts/common/blob/main/abbreviations.json).

@@ -1,0 +1,32 @@
+extends: substitution
+message: "Consider '%s' instead of '%s'."
+link: https://www.rfc-editor.org/rfc/rfc2360.html#section-2.4
+level: suggestion
+ignorecase: true
+scope: ~code
+# RFC 2360 (BCP 22, IETF stream), Section 2.4: "Concise text has several
+# advantages.  It makes the document easier to read.  Such text reduces the
+# chance for conflict between different portions of the specification."
+#
+# The RFC Editor points authors at Richard Lanham's Paramedic Method "for
+# information on revising verbose text", which targets slow wind-ups and
+# prepositional strings. Only fixed phrases with an unambiguous shorter form are
+# listed: BCP 22 also warns that "Longer descriptions may be necessary to
+# explain purpose, background", so this rule never claims text is too long.
+swap:
+  'in order to': to
+  'for the purpose of': to
+  'prior to': before
+  'subsequent to': after
+  'due to the fact that': because
+  'in spite of the fact that': although
+  'in the event that': if
+  'in the case (?:that|where)': if
+  'at this point in time': now
+  'make use of': use
+  'has the ability to': can
+  'is able to': can
+  'a large number of': many
+  'it is important to note that': note that
+  'it should be noted that': note that
+  'it is worth noting that': note that

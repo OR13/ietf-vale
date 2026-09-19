@@ -1,0 +1,22 @@
+# Guide for Internet Standards Writers: https://www.rfc-editor.org/rfc/rfc2360.html
+#
+# RFC 2360 is BCP 22, IETF stream, never obsoleted or updated. It is the only
+# IETF-consensus document this style draws on for writing quality; the rest of
+# the guidance is RFC Editor editorial policy from the IAB stream.
+
+# Section 2.4: "Concise text has several advantages."
+# Concision.yml
+concise-text: true
+
+# Section 2: "It is important that multiple readers and implementers of a
+# standard have the same understanding of a document."
+unambiguous-text: false
+
+# Section 2.3: identifying the intended audience.
+target-audience: false
+
+# Section 2.11 and 2.12: requirement levels and notational conventions.
+requirement-levels: false
+
+# Section 4: the document checklist.
+document-checklist: false

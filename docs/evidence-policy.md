@@ -55,6 +55,26 @@ excluded, with the stream named, so the omission is visible.
 RFC 7704 is the worked example: it describes conduct in terms a rule could almost
 use, and it is an Independent Submission, so the email style does not draw on it.
 
+The stream of every document this project cites, so the claim each rule makes is
+visible:
+
+| Document | Stream | Standing |
+|---|---|---|
+| RFC 2119, RFC 8174 (BCP 14) | IETF | consensus |
+| RFC 2360 (BCP 22) | IETF | consensus |
+| RFC 7154 (BCP 54), RFC 9245 (BCP 45), RFC 9945 (BCP 245), RFC 8716 (BCP 25) | IETF | consensus |
+| RFC 5737, RFC 3849, RFC 9637, RFC 5398, RFC 9542 (BCP 141) | IETF | consensus |
+| **RFC 7322, RFC 7997** | **IAB** | RFC Series editorial policy, not IETF consensus |
+| RFC Editor Style Guide updates, Terms and Abbreviations lists | RFC Production Center | editorial policy |
+| IESG statements | IESG | not a community consensus process |
+| NISTIR 8366 | NIST | not an IETF document at all |
+| RFC 7704 | Independent | not IETF consensus; excluded |
+
+RFC 7322 being IAB stream matters for how a rule is defended. It is the right
+authority for how an RFC is written, and citing it is not the same claim as "the
+IETF agreed this". Where an IETF-stream document covers the same ground, cite it
+in preference.
+
 # Official tooling is not a source
 
 idnits and DraftForge implement checks; they do not define requirements. A check
