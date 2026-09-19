@@ -28,7 +28,7 @@ jobs:
 
       - run: pip install yamllint
 
-      - run: yamllint -c .yamllint.yml IETF/ coverage/
+      - run: yamllint -c .yamllint.yml IETF-Draft/ IETF-Email/ coverage/
 
   test:
     name: Rules + fixtures
@@ -81,20 +81,43 @@ jobs:
       # The style has to be clean against our own prose, or we're shipping
       # guidance we don't follow.
       - name: Lint this repository
-        run: vale README.md CONTRIBUTING.md
+        run: vale README.md CONTRIBUTING.md docs/
 
-  package:
-    name: Package
+  docs:
+    name: Specifications
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      # docs/ is an OKF bundle. Errors fail the build. Exactly two warnings are
+      # expected and deliberate:
+      #   okf-version-supported -- we target OKF v0.2; the linter implements v0.1
+      #   recommended-log       -- the bundle has no log.md; git is the history
+      # A third warning means something new broke.
+      - name: Lint the OKF bundle
+        run: npx --yes @thisismydesign/okf-lint@${OKF_LINT_VERSION} docs --max-warnings 2
+        env:
+          OKF_LINT_VERSION: "0.1.0"
+
+  package:
+    name: Package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        style: [IETF-Draft, IETF-Email]
+    steps:
+      - uses: actions/checkout@v7
+
       # The archive is what users install, so the license travels inside it.
-      - run: cp LICENSE IETF/LICENSE
-      - run: zip -r IETF.zip IETF -x "*.DS_Store"
+      - run: cp LICENSE ${{ matrix.style }}/LICENSE
+      - run: zip -r ${{ matrix.style }}.zip ${{ matrix.style }} -x "*.DS_Store"
 
       - uses: actions/upload-artifact@v7
         with:
-          name: IETF.zip
-          path: IETF.zip
+          name: ${{ matrix.style }}.zip
+          path: ${{ matrix.style }}.zip
           if-no-files-found: error

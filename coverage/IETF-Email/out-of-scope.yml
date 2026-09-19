@@ -1,0 +1,19 @@
+# Guidance a linter cannot implement — https://www.rfc-editor.org/rfc/rfc9245.html
+#                                      https://www.rfc-editor.org/rfc/rfc9945.html
+#
+# Tracked as permanently false with a reason, so the topics are visibly
+# considered rather than silently missing. Each requires thread context or
+# intent that a line-based linter does not have.
+
+# RFC 9245, Section 2: whether a post belongs on this list or another venue.
+venue-and-topicality: false
+
+# RFC 9245, Section 2: advertising and unsolicited bulk email.
+advertising: false
+
+# RFC 9945, Appendix B: "Sealioning", which is defined by persistence across a
+# thread, not by any one message.
+sealioning: false
+
+# RFC 9945, Appendix B: arguing counter to an approved WG charter.
+charter-arguments: false

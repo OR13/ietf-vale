@@ -11,9 +11,10 @@ import (
 )
 
 // The coverage/ directory tracks, topic by topic, which parts of the IETF's
-// published editorial guidance this style implements. Each file mirrors one
-// source document or top-level section; each key is a subtopic set to true or
-// false, optionally followed by a comment naming the rules that implement it.
+// published editorial guidance each style implements. It holds one directory
+// per style; each file inside mirrors one source document or top-level section,
+// and each key is a subtopic set to true or false, optionally followed by a
+// comment naming the rules that implement it.
 //
 // This test reports the resulting metric and enforces the invariants that keep
 // it honest: values must be canonical booleans, and every rule named in a
@@ -31,7 +32,7 @@ func (t tally) pct() float64 {
 	return 100 * float64(t.covered) / float64(t.total)
 }
 
-func parseManifest(t *testing.T, path string) tally {
+func parseManifest(t *testing.T, style, path string) tally {
 	t.Helper()
 
 	data, err := os.ReadFile(path)
@@ -46,7 +47,7 @@ func parseManifest(t *testing.T, path string) tally {
 		// A comment names the implementing rules; check they still exist.
 		if idx := strings.Index(line, "#"); idx >= 0 {
 			for _, m := range ruleRef.FindAllStringSubmatch(line[idx:], -1) {
-				rule := filepath.Join(styleName, m[1]+".yml")
+				rule := filepath.Join(style, m[1]+".yml")
 				if _, err := os.Stat(rule); err != nil {
 					t.Errorf("%s:%d: names %s.yml, which doesn't exist", path, lineNo, m[1])
 				}
@@ -81,36 +82,39 @@ func parseManifest(t *testing.T, path string) tally {
 }
 
 func TestCoverage(t *testing.T) {
-	paths, err := filepath.Glob(filepath.Join("coverage", "*.yml"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(paths) == 0 {
-		t.Skip("no coverage manifests yet")
-	}
-	sort.Strings(paths)
-
-	var total tally
-	var report []string
-
-	width := 0
-	for _, p := range paths {
-		if n := len(filepath.Base(p)); n > width {
-			width = n
+	for _, style := range styles(t) {
+		paths, err := filepath.Glob(filepath.Join("coverage", style, "*.yml"))
+		if err != nil {
+			t.Fatal(err)
 		}
+		if len(paths) == 0 {
+			t.Logf("%s: no coverage manifests yet", style)
+			continue
+		}
+		sort.Strings(paths)
+
+		var total tally
+		var report []string
+
+		width := 0
+		for _, p := range paths {
+			if n := len(filepath.Base(p)); n > width {
+				width = n
+			}
+		}
+
+		for _, p := range paths {
+			got := parseManifest(t, style, p)
+			report = append(report, fmt.Sprintf("  %-*s  %3d/%-3d  %5.1f%%",
+				width, filepath.Base(p), got.covered, got.total, got.pct()))
+
+			total.covered += got.covered
+			total.total += got.total
+		}
+
+		summary := fmt.Sprintf("\n\n  %s overall:  %d/%d (%.1f%%)",
+			style, total.covered, total.total, total.pct())
+
+		t.Log(style + " coverage\n" + strings.Join(report, "\n") + summary)
 	}
-
-	for _, p := range paths {
-		got := parseManifest(t, p)
-		report = append(report, fmt.Sprintf("  %-*s  %3d/%-3d  %5.1f%%",
-			width, filepath.Base(p), got.covered, got.total, got.pct()))
-
-		total.covered += got.covered
-		total.total += got.total
-	}
-
-	summary := fmt.Sprintf("\n\n  overall:  %d/%d (%.1f%%)",
-		total.covered, total.total, total.pct())
-
-	t.Log("style guide coverage\n" + strings.Join(report, "\n") + summary)
 }

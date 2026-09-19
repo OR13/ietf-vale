@@ -1,16 +1,17 @@
 # RFC style conventions — https://www.rfc-editor.org/rfc/rfc7322.html
 #
-# The editorial conventions the RFC Editor applies to every published RFC:
-# language, punctuation, tense, capitalization, citations, and abbreviations.
+# RFC 7322 Section 3: language, punctuation, DNS names and URIs,
+# capitalization, citations, and abbreviation rules.
 
-# US English spelling and usage.
+# Either American or British spelling, as long as the document is
+# internally consistent (Section 3.1).
 language: false
 
 # Serial commas, quotation marks, hyphenation, spacing.
 punctuation: false
 
-# Tense and voice.
-tense: false
+# Example DNS names and URIs, per BCP 32.
+dns-names-and-uris: false
 
 # Capitalization of terms, headings, and protocol names.
 capitalization: false

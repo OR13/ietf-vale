@@ -1,0 +1,25 @@
+# Conduct guidance for IETF discussion — https://www.rfc-editor.org/info/bcp54
+#                                        https://www.rfc-editor.org/info/bcp45
+#                                        https://www.rfc-editor.org/rfc/rfc9945.html
+#
+# These documents govern behavior, not vocabulary, and moderation of them is
+# explicitly a human judgment call (RFC 9945, Appendix B). A key set to true
+# means only that a rule surfaces candidate phrasings for the author to
+# reconsider -- never that the linter has judged a message.
+
+# BCP 54, Section 2: "dispute ideas by using reasoned argument rather than
+# through intimidation or personal attack".
+personal-attacks: false
+
+# BCP 45 (RFC 9245), Section 2: "Uncivil commentary, regardless of the general
+# subject".
+incivility: false
+
+# BCP 54, Section 2: "limiting the use of slang".
+slang: false
+
+# BCP 54, Section 2: idioms that do not survive translation.
+idioms: false
+
+# BCP 54, Section 2: "Try to provide data and facts for your standpoints".
+unsupported-dismissals: false

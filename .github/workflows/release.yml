@@ -9,18 +9,21 @@ permissions:
 
 jobs:
   release:
-    name: Publish IETF.zip
+    name: Publish ${{ matrix.style }}.zip
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        style: [IETF-Draft, IETF-Email]
     steps:
       - uses: actions/checkout@v7
 
       # The archive is what users install, so the license travels inside it.
-      - run: cp LICENSE IETF/LICENSE
-      - run: zip -r IETF.zip IETF -x "*.DS_Store"
+      - run: cp LICENSE ${{ matrix.style }}/LICENSE
+      - run: zip -r ${{ matrix.style }}.zip ${{ matrix.style }} -x "*.DS_Store"
 
       - name: Attach to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: IETF.zip
+          file: ${{ matrix.style }}.zip
           tag: ${{ github.ref }}
