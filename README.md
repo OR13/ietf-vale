@@ -105,7 +105,7 @@ documentation](https://vale.sh/docs/keys/packages) for package configuration
 options.
 
 For repeatable builds, replace the latest package URL with a tagged URL such as
-`https://github.com/OR13/ietf-vale/releases/download/v0.4.2/IETF-Draft.zip`.
+`https://github.com/OR13/ietf-vale/releases/download/v0.4.3/IETF-Draft.zip`.
 
 ## Repository Structure
 
