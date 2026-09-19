@@ -144,8 +144,31 @@ What the moderation community discusses confirms the split. Across 14,265 lines
 of `mod-discuss`, the recurring subjects are disruption (188 mentions), threads
 (55), tone (23), bad faith (14), and repetition, volume and frequency. Word
 choice barely appears: two mentions of insults, one of name calling, one of
-swearing, and no mention of slang, idiom or jargon at all. The IETF's moderation
-problems are structural, and a line-based linter does not see structure.
+swearing, and no mention of slang, idiom or jargon at all.
+
+The strongest evidence is what the IESG itself cites when it acts. Every
+announcement of a posting-rights action, 24 in total, was read for the behavior
+given as the reason:
+
+| Cited reason | Mentions | Visible to a linter |
+|---|---|---|
+| Disruption of the consensus process | 29 | no |
+| Volume, repetition, persistence | 25 | no |
+| Off-topic or out of scope | 22 | no |
+| Personal attacks or insults | 3 | only lexically, and cited as part of a pattern |
+| Tone or civility | 2 | no |
+| Accusations or bad faith | 2 | no |
+
+Posting rights are removed for **patterns across many messages**, described as
+behavior that "has repeatedly been warned" about, or as a "denial-of-service
+attack to disrupt the consensus-driven process". Even where personal attacks are
+named, they are named alongside repetition and prior warnings. Every one of the
+top three reasons requires seeing the archive, the thread, or the charter.
+
+The IETF's moderation problems are structural. A line-based linter does not see
+structure, and a per-message linter cannot see a pattern across messages at all.
+Nothing in this style addresses what actually gets acted on, and that limit is
+not a gap to be closed later: it is the shape of the problem.
 
 This is a narrow style by design. It catches two courtesies an author can check
 before sending. It does not catch what moderators deal with, and nothing here
