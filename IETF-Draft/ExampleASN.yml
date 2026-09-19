@@ -1,0 +1,33 @@
+extends: script
+message: "%s"
+link: https://www.rfc-editor.org/rfc/rfc5398.html
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  found := text.re_find("\\b(?:AS|ASN)[ -]?[0-9]{1,10}\\b", scope, -1)
+  for f in found {
+    m := f[0]
+    start := m.begin - 20
+    if start < 0 {
+      start = 0
+    }
+    finish := m.begin + len(m.text) + 20
+    if finish > len(scope) {
+      finish = len(scope)
+    }
+    context := scope[start:finish]
+    example := text.re_find("(?i)(example|e\\.g\\.|for example|documentation|sample|autonomous system)", context, -1)
+    if example == undefined || len(example) == 0 {
+      continue
+    }
+    allowed := text.re_find("^(?:AS|ASN)[ -]?(?:6449[6-9]|6450[0-9]|6451[01]|6553[6-9]|6554[0-9]|6555[01])$", m.text, -1)
+    if allowed == undefined || len(allowed) == 0 {
+      matches = append(matches, {
+        begin: m.begin,
+        end: m.begin + len(m.text),
+        message: "Use an RFC 5398 documentation AS number for this example."
+      })
+    }
+  }

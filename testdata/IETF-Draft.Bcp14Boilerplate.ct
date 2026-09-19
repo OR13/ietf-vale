@@ -1,0 +1,3 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/Bcp14Boilerplate
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+bad.md:3:14:IETF-Draft.Bcp14Boilerplate:Add the BCP 14 boilerplate and cite RFC 2119 and RFC 8174 before using uppercase requirement words.

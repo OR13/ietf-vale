@@ -9,7 +9,8 @@
 key-words: false
 
 # The RFC 8174 boilerplate paragraph and its reference to both RFCs.
-boilerplate: false
+# Bcp14Boilerplate.yml
+boilerplate: true
 
 # Lowercase uses of the key words, which RFC 8174 says have their ordinary
 # English meaning.

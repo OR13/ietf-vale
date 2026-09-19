@@ -124,6 +124,8 @@ or it does not ship. See the [tool landscape](tool-landscape.md).
 `NonAsciiPunctuation`, `DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`,
 `Concision`, `AbstractCitations`, `DraftTitleStatusWords`, `ExampleIPv4`,
 `ExampleIPv6`, `ExampleDomains`, `StaleText`, and `DoubleNegatives`. The
+`Bcp14Boilerplate`, `CitationReferences`, `ExampleASN`, `ExamplePhone`, and
+`ExampleMAC` rules are also shipped. The
 inventory below records both shipped and planned rules.
 
 Each rule is one PR. `Level` is the target level under the evidence policy. A
@@ -208,6 +210,7 @@ scope for matching text their sources do not describe.
 |---|---|---|---|---|
 | `IETF-Draft.Terms` | Use the RFC Production Center's settled spelling of RFC-specific terms, except where the list defers to internal consistency | Terms list: `IPsec` not `IPSEC`; `email` not `e-mail`; `online` not `on-line`; `timestamp` not `time-stamp`; `ASCII` not `US-ASCII`[^rpc-terms] | `substitution` | warning |
 | `IETF-Draft.CitationSpacing` | A citation tag contains no spaces | RFC 7322 §3.5: "A citation/reference tag must not contain spaces", e.g. `[RFC2119]` not `[RFC 2119]`[^rfc7322] | `substitution` | error |
+| `IETF-Draft.CitationReferences` | Every bracketed citation has a matching reference definition | RFC 7322 §4.8, which requires cited documents to appear in the References section[^rfc7322] | `script` | error |
 | `IETF-Draft.RFCCompoundHyphen` | Do not form compounds by hyphenating an RFC citation | Style Guide RECOMMENDED: "Avoid forming compounds by hyphenating RFC numbers", e.g. `[RFC5011]-style rollover`[^styleguide] | `existence` | warning |
 | `IETF-Draft.AbbreviationVerbs` | Affix suffixes to abbreviations without punctuation | Style Guide RECOMMENDED: `XORed` not `XOR'ed`, `NATed` not `NAT-ed`[^styleguide] | `existence` | warning |
 | `IETF-Draft.DidacticCapitalization` | Do not capitalize mid-word to explain an abbreviation | Style Guide Author Choice: "Use of didactic capitalization is not needed", e.g. `Extensible Markup Language (XML)` not `eXtensible`[^styleguide] | `existence` | suggestion |
@@ -288,7 +291,7 @@ claim of error.
 | `IETF-Draft.HttpsUris` | Prefer HTTPS URIs | Style Guide RECOMMENDED: "HTTPS URIs should be used when possible"[^styleguide] | `existence` |
 | `IETF-Draft.DoubleNegatives` | Avoid double negatives | Style Guide RECOMMENDED: "Double negatives are discouraged"[^styleguide] | `existence` |
 | `IETF-Draft.AngleBracketsURI` | Enclose bare URIs in angle brackets | RFC 7322 §3.3: "Angle brackets are strongly recommended around URIs"[^rfc7322] | `existence` |
-| `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited ... and included as a normative reference"[^bcp14][^rfc7322] | `conditional` (level: warning) |
+| `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited ... and included as a normative reference"[^bcp14][^rfc7322] | `script` (level: warning) |
 | `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence`, **off by default** |
 | `IETF-Draft.Bcp14Sparingly` | Do not use SHOULD merely to express a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `occurrence` |
 | `IETF-Draft.StaleText` | Avoid text that dates the document | authors.ietf.org "Stale text": non-permanent URLs, "send comments to" a named list, assigning future work to a named WG[^authors-language] | `existence` |

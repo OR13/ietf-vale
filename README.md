@@ -17,7 +17,7 @@ Each style is specified before it is built. Read the specifications in
 [evidence policy](docs/evidence-policy.md) that decides how a rule earns its
 severity level.
 
-**18 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
+**23 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
 requirement. The email style is deliberately narrow: measurement against real
 IETF list mail showed that most of what BCP 54 and BCP 45 ask for is contextual
 rather than lexical, so three rules were withdrawn rather than shipped as

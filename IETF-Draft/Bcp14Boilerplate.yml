@@ -1,0 +1,51 @@
+extends: script
+message: "%s"
+link: https://www.rfc-editor.org/rfc/rfc8174.html#section-2
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  boilerplate := text.re_find("(?is)The key words.*(?:BCP[ ]?14).*RFC[ ]?2119.*RFC[ ]?8174.*when,?[ ]+and only when,?[ ]+they appear in all capitals", scope, -1)
+  if boilerplate == undefined || len(boilerplate) == 0 {
+    keywords := text.re_find("(\\b(?:MUST(?: NOT)?|REQUIRED|SHALL(?: NOT)?|SHOULD(?: NOT)?|RECOMMENDED|NOT RECOMMENDED|MAY|OPTIONAL)\\b)", scope, -1)
+    if keywords != undefined {
+      for k in keywords {
+        m := k[0]
+        ignored := false
+
+        fenced := text.re_find("((?ms)^```[^\\n]*\\n.*?^```[ \\t]*$)", scope, -1)
+        if fenced != undefined {
+          for block in fenced {
+            b := block[0]
+            blockEnd := b.begin + len(b.text)
+            if m.begin >= b.begin && m.begin < blockEnd {
+              ignored = true
+              break
+            }
+          }
+        }
+
+        quoted := text.re_find("((?m)^>[ \\t]*[^\\n]*$)", scope, -1)
+        if !ignored && quoted != undefined {
+          for line in quoted {
+            q := line[0]
+            lineEnd := q.begin + len(q.text)
+            if m.begin >= q.begin && m.begin < lineEnd {
+              ignored = true
+              break
+            }
+          }
+        }
+
+        if !ignored {
+          matches = append(matches, {
+            begin: m.begin,
+            end: m.begin + len(m.text),
+            message: "Add the BCP 14 boilerplate and cite RFC 2119 and RFC 8174 before using uppercase requirement words."
+          })
+          break
+        }
+      }
+    }
+  }

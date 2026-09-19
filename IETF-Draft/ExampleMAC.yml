@@ -1,0 +1,34 @@
+extends: script
+message: "%s"
+link: https://www.rfc-editor.org/rfc/rfc9542.html
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  found := text.re_find("\\b(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}\\b", scope, -1)
+  for f in found {
+    m := f[0]
+    start := m.begin - 20
+    if start < 0 {
+      start = 0
+    }
+    finish := m.begin + len(m.text) + 20
+    if finish > len(scope) {
+      finish = len(scope)
+    }
+    context := scope[start:finish]
+    example := text.re_find("(?i)(example|e\\.g\\.|for example|documentation|sample)", context, -1)
+    if example == undefined || len(example) == 0 {
+      continue
+    }
+    allowedHyphen := text.re_find("^00-00-5[eE]-00-53-[0-9A-Fa-f]{2}$", m.text, -1)
+    allowedColon := text.re_find("^00:00:5[eE]:00:53:[0-9A-Fa-f]{2}$", m.text, -1)
+    if (allowedHyphen == undefined || len(allowedHyphen) == 0) && (allowedColon == undefined || len(allowedColon) == 0) {
+      matches = append(matches, {
+        begin: m.begin,
+        end: m.begin + len(m.text),
+        message: "Use the RFC 9542 documentation MAC range 00-00-5E-00-53-xx for this example."
+      })
+    }
+  }

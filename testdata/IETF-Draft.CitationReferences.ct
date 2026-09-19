@@ -1,0 +1,3 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/CitationReferences
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:4:14:IETF-Draft.CitationReferences:Add a matching reference definition for this citation.

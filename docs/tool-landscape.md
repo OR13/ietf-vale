@@ -128,7 +128,7 @@ boilerplate. Nothing here overlaps.
 | BCP 14 boilerplate presence, key word spelling | idnits | A prose-level prompt only where idnits is silent, such as the IESG guidance on using SHOULD merely as a preference |
 | Reserved example domains | idnits | Authoring-time placeholders in Markdown, before submission |
 | IP addresses outside the documentation ranges | **nobody** | `IETF-Draft.ExampleIPv4`, `IETF-Draft.ExampleIPv6` |
-| AS numbers, telephone numbers, MAC addresses outside the documentation ranges | **nobody** | The remaining example-value rules |
+| AS numbers, telephone numbers, MAC addresses outside the documentation ranges | **nobody** | `IETF-Draft.ExampleASN`, `IETF-Draft.ExamplePhone`, `IETF-Draft.ExampleMAC` |
 | Articles, hyphenation consistency, inclusive language, names, non-ASCII, placeholders, typos | DraftForge, in VS Code only | Parity, as a CLI usable in any editor and in CI |
 | Abbreviation expansion on first use | DraftForge (List Abbreviations) | `IETF-Draft.Abbreviations`, generated from `abbreviations.json` |
 | RFC-specific term spellings, RFC Editor RECOMMENDED guidance | RPC, at AUTH48 | The rules in the draft style |

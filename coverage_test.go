@@ -21,7 +21,7 @@ import (
 // comment must still exist. A rule that gets renamed or merged away otherwise
 // leaves the manifest silently claiming coverage it no longer has.
 
-var ruleRef = regexp.MustCompile(`([A-Za-z]+)\.yml`)
+var ruleRef = regexp.MustCompile(`([A-Za-z][A-Za-z0-9]*)\.yml`)
 
 type tally struct{ covered, total int }
 
