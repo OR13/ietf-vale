@@ -12,7 +12,11 @@ language: false
 punctuation: true
 
 # Example DNS names and URIs, per BCP 32.
-dns-names-and-uris: false
+# ExampleDomains.yml
+dns-names-and-uris: true
+
+# StaleText.yml
+stale-text: true
 
 # Capitalization of terms, headings, and protocol names.
 # DidacticCapitalization.yml
@@ -24,4 +28,5 @@ citations: true
 
 # Expansion on first use, and the RFC Editor abbreviations list.
 # AbbreviationVerbs.yml -- expansion on first use is not yet implemented.
-abbreviations: false
+# Abbreviations.yml
+abbreviations: true

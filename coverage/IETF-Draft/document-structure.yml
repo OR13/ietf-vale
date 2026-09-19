@@ -6,7 +6,8 @@
 
 title: false
 
-abstract: false
+# AbstractCitations.yml
+abstract: true
 
 table-of-contents: false
 

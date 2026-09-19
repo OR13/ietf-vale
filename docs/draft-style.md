@@ -52,8 +52,8 @@ sources:
 
 This specifies the `IETF-Draft` Vale style: the rules it contains, the guidance each
 rule implements, and the boundaries of what it claims. Severity levels follow the
-[evidence policy](/evidence-policy.md). The companion
-[email style](/email-style.md) covers mailing list prose and shares no rules with
+[evidence policy](evidence-policy.md). The companion
+[email style](email-style.md) covers mailing list prose and shares no rules with
 this one.
 
 # Scope
@@ -73,7 +73,7 @@ worse than leaving them alone:
 Out of scope does not mean unchecked. The author's goal is to hear everything a
 reviewer familiar with IETF rules would raise, which no single tool provides:
 idnits owns the structural half, and this style owns the prose half. The
-[tool landscape](/tool-landscape.md) maps who checks what, names the gaps that
+[tool landscape](tool-landscape.md) maps who checks what, names the gaps that
 belong to nobody, and specifies `make check-draft`, which runs idnits and Vale
 over one document and prints one report.
 
@@ -94,7 +94,7 @@ Series, not IETF consensus. That is the right authority for how an RFC is
 written, and it is not the same claim as "the IETF agreed this". Where an
 IETF-stream document covers the same ground, it is cited in preference, as
 `Concision` cites BCP 22. The stream of every cited document is recorded in the
-[evidence policy](/evidence-policy.md).
+[evidence policy](evidence-policy.md).
 
 Every rule traces to one of:
 
@@ -115,20 +115,22 @@ Official IETF tooling, meaning idnits[^idnits] and DraftForge[^draftforge], is
 **not** in that list. Those tools corroborate that a requirement is enforced in practice
 and set a floor for what an author will hear from a reviewer, and their source is
 a useful implementation reference, but a rule here traces to published guidance
-or it does not ship. See the [tool landscape](/tool-landscape.md).
+or it does not ship. See the [tool landscape](tool-landscape.md).
 
 # Rule inventory
 
 **Shipped**: `Terms`, `CitationSpacing`, `RFCCompoundHyphen`,
-`AbbreviationVerbs`, `DidacticCapitalization`, `NonAsciiPunctuation`,
-`DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`, `Concision`. Everything
-else below is specified and not yet implemented.
+`AbbreviationVerbs`, `Abbreviations`, `DidacticCapitalization`,
+`NonAsciiPunctuation`, `DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`,
+`Concision`, `AbstractCitations`, `DraftTitleStatusWords`, `ExampleIPv4`,
+`ExampleIPv6`, `ExampleDomains`, `StaleText`, and `DoubleNegatives`. The
+inventory below records both shipped and planned rules.
 
 Each rule is one PR. `Level` is the target level under the evidence policy. A
 rule whose alert rate makes it unsupportable ships one level lower, or disabled
 by default; it is not dropped for being rarely triggered, since a clean corpus
 says nothing about whether the guidance exists. See the
-[validation methodology](/validation.md).
+[validation methodology](validation.md).
 
 ## Group 0: requirements that official tooling already enforces
 
@@ -145,11 +147,11 @@ than the requirement, these rules cover the requirement.
 | `IETF-Draft.RFCTerms` | RFC 7322 §3.4: "Capitalization must be consistent within the document and ideally should be consistent with related RFCs"[^rfc7322] | DraftForge `rfc-terms`, `inconsistent-capitalization` | `existence` | suggestion |
 | `IETF-Draft.Names` | RFC 7322 §4.12 on author names, and the RPC's recorded preferred forms[^rpc-names-json] | DraftForge `names` | `existence` | suggestion |
 
-The exception list for `IETF-Draft.Abbreviations` is **generated** from
-`abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file:
-3277 entries of `{term, full, wellknown?, note?}`, of which 279 are marked
-well-known. This supersedes scraping the wiki page: same data, versioned, with
-the well-known flag readable rather than inferred from an asterisk.
+The authoritative exception data for `IETF-Draft.Abbreviations` is
+`abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file.
+The current rule ships a conservative built-in list of common abbreviations;
+the next data-refresh task should generate its exceptions from that file rather
+than maintaining the list by hand.
 
 `IETF-Draft.InclusiveLanguage` is generated from NISTIR 8366 Table 1. Its
 message names the chain of authority (RFC Editor RECOMMENDED, via the IESG
@@ -162,7 +164,7 @@ These implement checks that official tooling performs but no published guidance
 states. They are useful, and an author may well hear them from a reviewer using
 DraftForge, but they are **not requirements**. Each ships disabled by default and
 says so in its own documentation, per the
-[evidence policy](/evidence-policy.md).
+[evidence policy](evidence-policy.md).
 
 | Rule | What it checks | Upstream | Why it is not a requirement |
 |---|---|---|---|
@@ -251,13 +253,13 @@ in the official tooling asks that question today.
 or addresses such as `0.0.0.0` and `127.0.0.1` where they carry protocol meaning.
 idnits solves the section-number problem with the lookbehind `(?<![0-9a-zA-Z]+\.)`,
 which Vale's RE2 engine cannot express; see the
-[tool landscape](/tool-landscape.md) for what to do instead.
+[tool landscape](tool-landscape.md) for what to do instead.
 
 ## Group 3: structure
 
 | Rule | Requirement | Basis | Extends | Level |
 |---|---|---|---|---|
-| `IETF-Draft.AbstractCitations` | The Abstract contains no citations | RFC 7322 §4.3: "the Abstract must not contain citations"[^rfc7322] | `existence`, section-scoped | error |
+| `IETF-Draft.AbstractCitations` | The Abstract contains no citations | RFC 7322 §4.3: "the Abstract must not contain citations"[^rfc7322] | `script`, section-scoped | error |
 
 ## Group 4: draft-stage only
 
@@ -290,6 +292,10 @@ claim of error.
 | `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence`, **off by default** |
 | `IETF-Draft.Bcp14Sparingly` | Do not use SHOULD merely to express a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `occurrence` |
 | `IETF-Draft.StaleText` | Avoid text that dates the document | authors.ietf.org "Stale text": non-permanent URLs, "send comments to" a named list, assigning future work to a named WG[^authors-language] | `existence` |
+
+`IETF-Draft.Abbreviations` uses Vale's `conditional` extension. It checks for an
+expansion in the same lint block, which keeps the rule predictable across Vale's
+supported input formats. It does not claim full document-wide first-use analysis.
 
 `IETF-Draft.Bcp14Lowercase` ships disabled because lowercase key words are explicitly
 legitimate under RFC 8174; the rule exists for authors who want to audit them,
@@ -333,8 +339,10 @@ Verified against Vale 3.21.0 rather than taken from documentation:
   `RFCCompoundHyphen` and `HttpsUris` use `scope: raw` for this reason, which
   also means they see fenced code, a trade-off recorded in each rule.
 
-- `conditional` correctly flags an abbreviation used with no prior
-  `Expansion (ABBR)`, which is the mechanism `IETF-Draft.Abbreviations` depends on.
+- `conditional` correctly flags an abbreviation when its lint block has no
+  matching `Expansion (ABBR)`, which is the mechanism
+  `IETF-Draft.Abbreviations` depends on. The rule deliberately documents this
+  block-level boundary rather than claiming document-wide first-use analysis.
 - `script` (Tengo) works with `scope: raw` and `text.re_find`, appending
   `{begin, end}` matches. Its regular expressions are Go's RE2: no backreferences
   and no lookaround. The example-range rules therefore use `script` rather than a

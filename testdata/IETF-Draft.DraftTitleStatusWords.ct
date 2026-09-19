@@ -1,0 +1,3 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/DraftTitleStatusWords
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:3:IETF-Draft.DraftTitleStatusWords:Avoid implying standards status in an Internet-Draft title: 'Experimental'.

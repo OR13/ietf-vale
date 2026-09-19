@@ -25,7 +25,7 @@ sources:
 ---
 
 This governs how a rule in either style is shown to be correct. It applies on top
-of the [evidence policy](/evidence-policy.md), which governs where a rule's
+of the [evidence policy](evidence-policy.md), which governs where a rule's
 authority comes from.
 
 # The rule that governs everything here
@@ -37,7 +37,7 @@ The corpus exists to demonstrate that a rule works: that it fires on text a
 human reviewer would accept as a genuine finding, and stays quiet elsewhere. It
 cannot tell us whether the style guide contains the right rules, because it is a
 sample of what people wrote, not a statement of what the guidance says. A rule's
-source is the [evidence policy](/evidence-policy.md) chain: an RFC, an RFC Editor
+source is the [evidence policy](evidence-policy.md) chain: an RFC, an RFC Editor
 tier, an IESG statement, or a check that official tooling implements. Corpus
 behavior may send us back to read a source more carefully. It is never itself the
 source.
@@ -45,7 +45,7 @@ source.
 # What the styles are accountable to
 
 **A rule is accountable to documented guidance, not to observed editor
-behavior.** The [draft style](/draft-style.md) exists to catch deviations from
+behavior.** The [draft style](draft-style.md) exists to catch deviations from
 what the RFC Editor, the IESG, and authors.ietf.org have written down. Whether
 any particular deviation was caught, argued about, or fixed in any particular
 document is a separate question, and not one this project answers.

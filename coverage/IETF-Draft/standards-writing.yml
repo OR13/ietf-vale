@@ -8,6 +8,9 @@
 # Concision.yml
 concise-text: true
 
+# DoubleNegatives.yml
+double-negatives: true
+
 # Section 2: "It is important that multiple readers and implementers of a
 # standard have the same understanding of a document."
 unambiguous-text: false

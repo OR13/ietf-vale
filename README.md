@@ -17,7 +17,7 @@ Each style is specified before it is built. Read the specifications in
 [evidence policy](docs/evidence-policy.md) that decides how a rule earns its
 severity level.
 
-**10 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
+**18 rules in `IETF-Draft` and 2 in `IETF-Email`**, each tracing to a published
 requirement. The email style is deliberately narrow: measurement against real
 IETF list mail showed that most of what BCP 54 and BCP 45 ask for is contextual
 rather than lexical, so three rules were withdrawn rather than shipped as
@@ -31,9 +31,25 @@ the current figures. See [CONTRIBUTING.md](CONTRIBUTING.md) to add one.
 structure, boilerplate and references. Run both; the
 [tool landscape](docs/tool-landscape.md) maps who checks what.
 
-## Getting Started
+## Installation
 
-Add the package you want to your configuration file and run `vale sync`:
+Install [Vale](https://vale.sh/docs/install) with the package manager for your
+platform. For example, macOS users with Homebrew can run:
+
+```bash
+brew install vale
+```
+
+Other platforms and installation methods are listed in Vale's [installation
+guide](https://vale.sh/docs/install). Confirm that Vale is available:
+
+```bash
+vale --version
+```
+
+Then create a `.vale.ini` file in the root of the project you want to lint.
+The following configuration installs the draft style into `styles/` and enables
+it for Markdown files:
 
 ```ini
 StylesPath = styles
@@ -45,9 +61,20 @@ Packages = https://github.com/OR13/ietf-vale/releases/latest/download/IETF-Draft
 BasedOnStyles = Vale, IETF-Draft
 ```
 
-To lint mail alongside drafts, install both packages and scope them separately.
-Vale has no rule-name wildcards, and a section's `BasedOnStyles` replaces rather
-than extends earlier ones, so name every style you want in each section:
+Install the style package and lint a document:
+
+```bash
+vale sync
+vale draft.md
+```
+
+The first command downloads the package into `styles/`. The second command
+prints any matching alerts with their file, line, column, severity, and message.
+Replace `draft.md` with a file or directory in your project.
+
+To lint mailing list or issue tracker prose, install both packages and scope
+them separately. Vale does not support rule-name wildcards, and each section's
+`BasedOnStyles` value lists the styles enabled for that section:
 
 ```ini
 Packages = https://github.com/OR13/ietf-vale/releases/latest/download/IETF-Draft.zip, \
@@ -60,7 +87,28 @@ BasedOnStyles = IETF-Draft
 BasedOnStyles = IETF-Email
 ```
 
-See [Packages](https://vale.sh/docs/keys/packages) for more information.
+Now `vale posts/` uses `IETF-Email` for matching text files, while Markdown
+files use `IETF-Draft`. See Vale's [Packages
+documentation](https://vale.sh/docs/keys/packages) for package configuration
+options.
+
+### A complete example
+
+With the first configuration above, save this as `draft.md`:
+
+```markdown
+# Example
+
+This document is written in order to explain an HTTP service.
+The service is available at http://example.com.
+```
+
+Run `vale draft.md`. Vale reports the phrases that the draft style recommends
+revising, including the verbose phrase and the HTTP URI. The suggestions are
+prompts for review; they do not replace idnits or the RFC Editor's review.
+
+For repeatable builds, replace the latest package URL with a tagged URL such as
+`https://github.com/OR13/ietf-vale/releases/download/v0.2.0/IETF-Draft.zip`.
 
 ## Repository Structure
 
@@ -83,8 +131,9 @@ See [Packages](https://vale.sh/docs/keys/packages) for more information.
 
 ## Local Development
 
-Requires [Vale](https://vale.sh/docs/install), Go 1.21+, and Node (for the
-specification linter).
+Requires [Vale](https://vale.sh/docs/install), Go 1.21+, Python with
+`yamllint`, and Node.js (for the specification linter). To install the Python
+lint dependency, run `python3 -m pip install yamllint`.
 
 ```bash
 make new RULE=Ellipses               # scaffold a rule in IETF-Draft
@@ -95,6 +144,10 @@ make lint-docs                       # okf-lint over the specification bundle
 make update                          # regenerate testdata/*.ct from current behavior
 make package                         # build IETF-Draft.zip and IETF-Email.zip
 ```
+
+`make lint` checks the YAML rules and runs Vale over the repository's
+documentation. `make test` runs the rule fixtures and requires Vale on your
+`PATH`.
 
 ## License
 

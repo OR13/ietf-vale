@@ -1,0 +1,9 @@
+extends: existence
+message: "Review this possible double negative and make the intended requirement explicit."
+link: https://www.rfc-editor.org/authors/rfc-style-guide/
+level: suggestion
+ignorecase: true
+scope: sentence
+tokens:
+  - '\bnot\b[^,;.!?]{0,60}\b(?:no|never|without)\b'
+  - '\b(?:no|never)\b[^,;.!?]{0,60}\bnot\b'

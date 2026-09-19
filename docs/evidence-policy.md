@@ -24,9 +24,9 @@ sources:
     title: IESG Statement on Inclusive Language (2021-05-11)
 ---
 
-This policy applies to both the [draft style](/draft-style.md) and the
-[email style](/email-style.md), and pairs with the
-[validation methodology](/validation.md), which governs what evidence shows a
+This policy applies to both the [draft style](draft-style.md) and the
+[email style](email-style.md), and pairs with the
+[validation methodology](validation.md), which governs what evidence shows a
 rule is correct. It exists to answer one question before any rule
 merges: when a participant asks "who says so?", what do we point at?
 
@@ -156,7 +156,7 @@ This extends the checklist in `CONTRIBUTING.md`. A rule PR shows:
 6. **Behavior in real text**: a sample of corpus alerts classified as deviation,
    rule defect, or legitimate exception, plus the alert rate per 1000 lines and
    the near-misses in the fixture that pin the boundary. See the
-   [validation methodology](/validation.md), which also records the two corpus
+   [validation methodology](validation.md), which also records the two corpus
    inferences that are not admissible.
 7. **Overreach check**: one sentence naming what the rule does *not* claim.
 

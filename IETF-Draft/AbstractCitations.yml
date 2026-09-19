@@ -1,0 +1,42 @@
+extends: script
+message: "%s"
+link: https://www.rfc-editor.org/rfc/rfc7322.html#section-4.3
+level: error
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  abstracts := text.re_find("(?mi)^#{1,6}[ \\t]+abstract[ \\t]*#*[ \\t]*$", scope, -1)
+  if abstracts != undefined && len(abstracts) > 0 {
+    start := 0
+    for a in abstracts {
+      m := a[0]
+      start = m.begin + len(m.text)
+      break
+    }
+    end := len(scope)
+    headings := text.re_find("(?m)^#{1,6}[ \\t]+", scope, -1)
+    for h in headings {
+      m := h[0]
+      if m.begin > start {
+        end = m.begin
+        break
+      }
+    }
+
+    citations := text.re_find("\\[[A-Z][A-Z0-9.-]{1,}\\]", scope, -1)
+    for c in citations {
+      m := c[0]
+      next := m.begin + len(m.text)
+      if m.begin >= start && next <= end {
+        is_link := next < len(scope) && scope[next:next+1] == "("
+        if !is_link {
+          matches = append(matches, {
+            begin: m.begin,
+            end: next,
+            message: "Remove the citation from the Abstract; citations belong in the body of the document."
+          })
+        }
+      }
+    }
+  }

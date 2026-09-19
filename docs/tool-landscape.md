@@ -27,7 +27,7 @@ sources:
     title: names.json (author names with preferred forms)
 ---
 
-The goal of the [draft style](/draft-style.md) is that running it over a draft
+The goal of the [draft style](draft-style.md) is that running it over a draft
 warns the author about what a reviewer familiar with IETF rules would raise.
 That reviewer is increasingly backed by tooling, so this concept records what the
 official tools check, what they do not, and where this style fits.

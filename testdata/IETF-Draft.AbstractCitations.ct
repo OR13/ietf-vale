@@ -1,0 +1,3 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/AbstractCitations
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:5:47:IETF-Draft.AbstractCitations:Remove the citation from the Abstract; citations belong in the body of the document.

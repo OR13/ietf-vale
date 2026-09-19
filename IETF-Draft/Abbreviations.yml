@@ -1,0 +1,25 @@
+extends: conditional
+message: "Expand '%s' on first use, unless it is a well-known abbreviation."
+link: https://www.rfc-editor.org/rfc/rfc7322.html#section-3.6
+level: warning
+scope: ~code
+first: '\b[A-Z][A-Z0-9]{1,}\b'
+second: '\b[A-Za-z][A-Za-z -]+[ ]+\(([A-Z][A-Z0-9]{1,})\)'
+exceptions:
+  - ASCII
+  - DNS
+  - HTTP
+  - HTTPS
+  - IANA
+  - IETF
+  - IP
+  - JSON
+  - MAC
+  - RFC
+  - SNMP
+  - TCP
+  - TLS
+  - UDP
+  - URI
+  - URL
+  - XML

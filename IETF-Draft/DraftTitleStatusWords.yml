@@ -1,0 +1,22 @@
+extends: script
+message: "%s"
+link: https://authors.ietf.org/language-and-style
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  headings := text.re_find("(?m)^(#[ \\t]+[^\\n]+)$", scope, -1)
+  for h in headings {
+    title := h[0]
+    words := text.re_find("(?i)(\\b(?:standard|proposed|draft|experimental|historic|required|recommended|elective|restricted)\\b)", title.text, -1)
+    for w in words {
+      m := w[0]
+      matches = append(matches, {
+        begin: title.begin + m.begin,
+        end: title.begin + m.begin + len(m.text),
+        message: "Avoid implying standards status in an Internet-Draft title: '" + m.text + "'."
+      })
+    }
+    break
+  }

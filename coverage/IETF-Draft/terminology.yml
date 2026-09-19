@@ -6,11 +6,13 @@
 # Terms.yml
 terms-list: true
 
-expansions: false
+# Abbreviations.yml
+expansions: true
 
 protocol-names: false
 
-example-values: false
+# ExampleIPv4.yml, ExampleIPv6.yml, ExampleDomains.yml
+example-values: true
 
 # InclusiveLanguage.yml
 inclusive-language: true

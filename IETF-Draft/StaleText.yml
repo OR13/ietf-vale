@@ -1,0 +1,10 @@
+extends: existence
+message: "Avoid instructions that may become stale after publication; describe the durable responsibility instead."
+link: https://authors.ietf.org/language-and-style
+level: suggestion
+ignorecase: true
+scope: ~code
+tokens:
+  - '\bsend comments to\b'
+  - '\bcomments (?:should|may) be sent to\b'
+  - '\bmail comments to\b'

@@ -1,0 +1,34 @@
+extends: script
+message: "%s"
+link: https://www.rfc-editor.org/rfc/rfc5737.html
+level: warning
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  found := text.re_find("\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b", scope, -1)
+  for f in found {
+    m := f[0]
+    start := m.begin - 20
+    if start < 0 {
+      start = 0
+    }
+    finish := m.begin + len(m.text) + 20
+    if finish > len(scope) {
+      finish = len(scope)
+    }
+    context := scope[start:finish]
+    example := text.re_find("(?i)(example|e\\.g\\.|for example|documentation|test-net|sample)", context, -1)
+    if example == undefined || len(example) == 0 {
+      continue
+    }
+    allowed := text.re_find("^(?:192\\.0\\.2|198\\.51\\.100|203\\.0\\.113)\\.[0-9]{1,3}$", m.text, -1)
+    special := text.re_find("^(?:0\\.0\\.0\\.0|127\\.0\\.0\\.1|255\\.255\\.255\\.255)$", m.text, -1)
+    if (allowed == undefined || len(allowed) == 0) && (special == undefined || len(special) == 0) {
+      matches = append(matches, {
+        begin: m.begin,
+        end: m.begin + len(m.text),
+        message: "Use an RFC 5737 documentation range for this example IPv4 address."
+      })
+    }
+  }
