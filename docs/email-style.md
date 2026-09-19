@@ -46,7 +46,9 @@ The style also uses the RFC Production Center's machine-readable
 [`abbreviations.json`](https://github.com/rfc-editor-drafts/common/blob/main/abbreviations.json)
 mapping to recognize well-known IETF abbreviations. It does not require an
 expansion for those terms, but it prompts authors to expand unfamiliar
-uppercase abbreviations on first use.
+uppercase abbreviations on first use. The check ignores abbreviations inside
+URLs and does not treat BCP 14 keywords such as `MUST`, `SHOULD`, or `MAY` as
+abbreviations.
 
 Therefore:
 

@@ -1,0 +1,4 @@
+The project is documented at https://github.com/OR13/ietf-vale.
+The client MUST retry after a timeout.
+The PR review is scheduled for tomorrow.
+The Example Extension (XYZ) is ready for review.
