@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.4.6 - 2026-09-19
 
 - Replace the noisy lowercase BCP 14 keyword prompt with mixed-case and
   context-aware checks based on RFC 8174 and current IESG guidance.

@@ -138,7 +138,7 @@ Because it is a separate package, the optional rules never appear when a user
 installs only `IETF-Draft`.
 
 For repeatable builds, replace the latest package URL with a tagged URL such as
-`https://github.com/OR13/ietf-vale/releases/download/v0.4.5/IETF-Draft.zip`.
+`https://github.com/OR13/ietf-vale/releases/download/v0.4.6/IETF-Draft.zip`.
 
 ## Repository Structure
 
