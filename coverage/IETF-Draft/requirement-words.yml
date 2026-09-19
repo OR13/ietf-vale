@@ -2,7 +2,8 @@
 #                     https://www.rfc-editor.org/rfc/rfc8174.html
 #
 # RFC 8174 narrows RFC 2119: the key words carry their special meaning only when
-# they appear in all uppercase, which makes lowercase use a reviewable signal.
+# they appear in all uppercase. Lowercase words retain their ordinary English
+# meanings and are not errors.
 
 # The key words themselves: MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD,
 # SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, OPTIONAL.
@@ -13,5 +14,5 @@ key-words: true
 # Bcp14Boilerplate.yml
 boilerplate: true
 
-# Bcp14Lowercase.yml
-lowercase-usage: true
+# Bcp14MixedCase.yml and Bcp14Context.yml
+keyword-use: true

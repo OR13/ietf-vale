@@ -1,0 +1,63 @@
+extends: script
+message: "%s"
+link: https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/
+level: suggestion
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+  keywords := "\\b(?:MUST(?: NOT)?|REQUIRED|SHALL(?: NOT)?|SHOULD(?: NOT)?|RECOMMENDED|NOT RECOMMENDED|MAY|OPTIONAL)\\b"
+  headings := text.re_find("(?mi)^#{1,6}[ \\t]+[^\\n]+$", scope, -1)
+  fenced := text.re_find("(?ms)^```[^\\n]*\\n.*?^```[ \\t]*$", scope, -1)
+  inline := text.re_find("`[^`\\n]+`", scope, -1)
+
+  for h in headings {
+    heading := h[0]
+    title := text.re_find("(?i)\\b(?:abstract|iana[ \\t]+considerations?|appendix|appendices|example|examples|figure|figures|diagram|diagrams)\\b", heading.text, -1)
+    if title == undefined || len(title) == 0 {
+      continue
+    }
+
+    start := heading.begin + len(heading.text)
+    end := len(scope)
+    for next in headings {
+      candidate := next[0]
+      if candidate.begin > start {
+        end = candidate.begin
+        break
+      }
+    }
+    section := scope[start:end]
+    found := text.re_find(keywords, section, -1)
+    if found == undefined {
+      continue
+    }
+    for f in found {
+      m := f[0]
+      begin := start + m.begin
+      ignored := false
+      for block in fenced {
+        b := block[0]
+        if begin >= b.begin && begin < b.begin + len(b.text) {
+          ignored = true
+          break
+        }
+      }
+      if !ignored {
+        for code in inline {
+          c := code[0]
+          if begin >= c.begin && begin < c.begin + len(c.text) {
+            ignored = true
+            break
+          }
+        }
+      }
+      if !ignored {
+        matches = append(matches, {
+          begin: begin,
+          end: begin + len(m.text),
+          message: "Review this BCP 14 keyword in a section where the IESG advises against using it; put the normative requirement in the main prose instead."
+        })
+      }
+    }
+  }

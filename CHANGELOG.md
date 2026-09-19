@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Replace the noisy lowercase BCP 14 keyword prompt with mixed-case and
+  context-aware checks based on RFC 8174 and current IESG guidance.
+
 ## 0.4.5 - 2026-09-19
 
 - Add `make check-draft FILE=...` to run Vale and idnits together over a

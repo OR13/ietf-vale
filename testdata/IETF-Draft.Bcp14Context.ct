@@ -1,0 +1,5 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/Bcp14Context
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:5:12:IETF-Draft.Bcp14Context:Review this BCP 14 keyword in a section where the IESG advises against using it; put the normative requirement in the main prose instead.
+test.md:13:6:IETF-Draft.Bcp14Context:Review this BCP 14 keyword in a section where the IESG advises against using it; put the normative requirement in the main prose instead.
+test.md:17:19:IETF-Draft.Bcp14Context:Review this BCP 14 keyword in a section where the IESG advises against using it; put the normative requirement in the main prose instead.

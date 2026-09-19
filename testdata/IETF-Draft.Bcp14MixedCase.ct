@@ -1,0 +1,6 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/Bcp14MixedCase
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:20:IETF-Draft.Bcp14MixedCase:If this is a BCP 14 keyword, write it in all capitals; otherwise use ordinary prose.
+test.md:3:57:IETF-Draft.Bcp14MixedCase:If this is a BCP 14 keyword, write it in all capitals; otherwise use ordinary prose.
+test.md:4:18:IETF-Draft.Bcp14MixedCase:If this is a BCP 14 keyword, write it in all capitals; otherwise use ordinary prose.
+test.md:4:60:IETF-Draft.Bcp14MixedCase:If this is a BCP 14 keyword, write it in all capitals; otherwise use ordinary prose.

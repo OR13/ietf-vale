@@ -1,0 +1,15 @@
+extends: existence
+message: "If this is a BCP 14 keyword, write it in all capitals; otherwise use ordinary prose."
+link: https://www.rfc-editor.org/rfc/rfc8174.html#section-2
+level: suggestion
+ignorecase: false
+scope: ~code & ~heading & ~table
+tokens:
+  - '\bMust(?: Not)?\b'
+  - '\bShould(?: Not)?\b'
+  - '\bRequired\b'
+  - '\bShall(?: Not)?\b'
+  - '\bRecommended\b'
+  - '\bNot Recommended\b'
+  - '\bMay\b'
+  - '\bOptional\b'

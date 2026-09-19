@@ -124,7 +124,7 @@ or it does not ship. See the [tool landscape](/tool-landscape.md).
 `NonAsciiPunctuation`, `DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`,
 `Concision`, `AbstractCitations`, `DraftTitleStatusWords`, `ExampleIPv4`,
 `ExampleIPv6`, `ExampleDomains`, `StaleText`, `DoubleNegatives`,
-`SectionTitleCase`, `SpellingConsistency`, `Bcp14Lowercase`, and
+`SectionTitleCase`, `SpellingConsistency`, `Bcp14MixedCase`, `Bcp14Context`,
 `Bcp14Sparingly`, and `ProtocolNames`. The
 `Bcp14Boilerplate`, `CitationReferences`, `ExampleASN`, `ExamplePhone`, and
 `ExampleMAC` rules are also shipped. The
@@ -301,7 +301,8 @@ claim of error.
 | `IETF-Draft.HttpsUris` | Prefer HTTPS URIs | Style Guide RECOMMENDED: "HTTPS URIs should be used when possible"[^styleguide] | `existence` |
 | `IETF-Draft.DoubleNegatives` | Avoid double negatives | Style Guide RECOMMENDED: "Double negatives are discouraged"[^styleguide] | `existence` |
 | `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited ... and included as a normative reference"[^bcp14][^rfc7322] | `script` (level: warning) |
-| `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence` |
+| `IETF-Draft.Bcp14MixedCase` | Review title- or mixed-case forms that could be mistaken for BCP 14 keywords | RFC 8174: the special meanings apply only when the words appear in all capitals[^bcp14] | `existence` |
+| `IETF-Draft.Bcp14Context` | Review uppercase keywords in abstracts, IANA Considerations, examples, appendices, figures, and diagrams | IESG guidance on inappropriate uses of BCP 14 keywords[^iesg-bcp14] | `script` |
 | `IETF-Draft.Bcp14Sparingly` | Review SHOULD when nearby wording indicates a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `existence` |
 | `IETF-Draft.StaleText` | Avoid text that dates the document | authors.ietf.org "Stale text": non-permanent URLs, "send comments to" a named list, assigning future work to a named WG[^authors-language] | `existence` |
 
@@ -309,9 +310,12 @@ claim of error.
 expansion in the same lint block, which keeps the rule predictable across Vale's
 supported input formats. It does not claim full document-wide first-use analysis.
 
-`IETF-Draft.Bcp14Lowercase` is a suggestion because lowercase key words are
-explicitly legitimate under RFC 8174. The alert asks authors to review intent;
-it does not claim that lowercase usage is an error.
+`IETF-Draft.Bcp14MixedCase` does not flag ordinary lowercase `must`, `should`,
+or `may`: RFC 8174 explicitly says those words retain their normal English
+meanings. It only prompts review when capitalization creates ambiguity. The
+context rule is also a suggestion: the IESG guidance identifies these locations
+as generally inappropriate for BCP 14 keywords, while allowing document-specific
+exceptions such as normative tables in appendices.
 
 # Excluded checks
 
