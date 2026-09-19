@@ -28,6 +28,20 @@ This governs how a rule in either style is shown to be correct. It applies on to
 of the [evidence policy](/evidence-policy.md), which governs where a rule's
 authority comes from.
 
+# The rule that governs everything here
+
+**Rules come from policies, procedures, and official tools. A rule MUST NOT be
+derived from, added because of, or removed because of the corpus.**
+
+The corpus exists to demonstrate that a rule works — that it fires on text a
+human reviewer would accept as a genuine finding, and stays quiet elsewhere. It
+cannot tell us whether the style guide contains the right rules, because it is a
+sample of what people wrote, not a statement of what the guidance says. A rule's
+source is the [evidence policy](/evidence-policy.md) chain: an RFC, an RFC Editor
+tier, an IESG statement, or a check that official tooling implements. Corpus
+behavior may send us back to read a source more carefully. It is never itself the
+source.
+
 # What the styles are accountable to
 
 **A rule is accountable to documented guidance, not to observed editor
@@ -64,7 +78,8 @@ rule is, never whether it is correct.
 
 # The three evidence classes
 
-Every rule PR shows all three. Only the first establishes correctness.
+Every rule PR shows all three. Only the first establishes correctness; the other
+two establish that the rule is implemented well and is supportable.
 
 ## 1. Source fidelity — establishes correctness
 
@@ -101,15 +116,23 @@ did. Two findings from the first corpus run illustrate the difference:
   spelling alone when the document is internally consistent[^rpc-terms] — not in
   the fact that the spelling appears in published RFCs.
 
-## 3. Noise budget — establishes whether it is supportable
+## 3. Human adjudication and noise budget — establishes whether it is supportable
 
-Measured over the pinned corpus and reported in the PR as **alerts per 1000
-lines**, per rule. This answers a different question from correctness: whether a
-correct rule is tolerable to run. A rule that fires on every third line will be
-disabled by its users no matter how well grounded it is.
+Two numbers, measured over the pinned corpus and reported in the PR.
 
-A high rate is a reason to narrow the scope, lower the level, or ship the rule
-disabled by default. It is not, by itself, a reason to reject the rule.
+**Accepted or dismissed.** A sample of the rule's alerts is shown to someone
+reading as an IETF reviewer would, who marks each one as a finding they would
+raise or one they would wave through. This is the closest thing to proof that the
+tool works for its purpose: an alert a reviewer would dismiss is noise, whatever
+its provenance. A high dismissal rate sends the rule back to be narrowed — the
+rule stays, its pattern changes.
+
+**Alerts per 1000 lines**, per rule. A correct rule that fires on every third
+line will be disabled by its users no matter how well grounded it is.
+
+Neither number can add a rule, and neither can delete one. A high rate is a
+reason to narrow the scope, lower the level, or ship the rule disabled by
+default. A zero rate is not a reason to do anything at all.
 
 # The corpus
 
@@ -122,7 +145,7 @@ It samples three populations, for three different purposes:
 
 | Population | Purpose | What it cannot show |
 |---|---|---|
-| Active Internet-Drafts, early versions | The target user's text. Noise budget, and the most realistic source of rule defects | Nothing about authority |
+| Active Internet-Drafts, early versions | The target user's text. Accept/dismiss adjudication, noise budget, and the most realistic source of rule defects | Nothing about authority, and nothing about which rules should exist |
 | Published RFCs | Text that survived the full process. Useful for finding rule defects, since a match here deserves scrutiny | Whether a surviving pattern is permitted — read the source to decide |
 | Final draft version against its published RFC | The narrow window in which the RFC Production Center actually edits | What the rules require; only what was enforced in those cases |
 
@@ -136,8 +159,12 @@ RPC left a pattern alone.
 
 `make corpus-report` fetches the pinned corpus, runs each style over it, and
 reports per rule: alerts per 1000 lines for each population, and a sample of
-alerts for classification. The sample is what a reviewer reads; the rate is what
-they budget against.
+alerts for classification and accept/dismiss adjudication. The sample is what a
+reviewer reads; the rate is what they budget against.
+
+The report never proposes a rule. A gap it reveals is a prompt to go read the
+guidance and the official tools, and any rule that results cites those, not the
+report.
 
 The report is regenerated per PR for the rules that PR touches. It is not a gate:
 no threshold automatically passes or fails a rule, because the judgment that

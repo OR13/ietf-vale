@@ -36,6 +36,15 @@ sources:
   - id: idnits
     resource: https://github.com/ietf-tools/idnits
     title: idnits, the Internet-Draft nits checker
+  - id: draftforge
+    resource: https://github.com/ietf-tools/draftforge
+    title: "IETF DraftForge: VS Code extension to write, review, refine and submit Internet-Drafts"
+  - id: rpc-abbrev-json
+    resource: https://github.com/rfc-editor-drafts/common/blob/main/abbreviations.json
+    title: abbreviations.json, the RPC's machine-readable abbreviation data
+  - id: rpc-names-json
+    resource: https://github.com/rfc-editor-drafts/common/blob/main/names.json
+    title: names.json, author names with preferred forms
 ---
 
 This specifies the `IETF-Draft` Vale style: the rules it contains, the guidance each
@@ -49,14 +58,21 @@ this one.
 **In scope**: prose in Internet-Drafts and in documents heading for RFC
 publication, in Markdown (including kramdown-rfc), RFCXML, and plain text.
 
-**Out of scope**, because tools already own these and duplicating them badly is
+**Out of scope**, because another tool owns them and duplicating them badly is
 worse than leaving them alone:
 
 | Concern | Owner |
 |---|---|
-| IPR and copyright boilerplate, expiry statement, required-section presence, outdated references, version and date nits | idnits[^idnits] and datatracker submission checks |
+| IPR and copyright boilerplate, expiry statement, required-section presence, outdated references, downrefs, line and page length | idnits[^idnits] and datatracker submission checks |
 | RFCXML validity, reference resolution, generated boilerplate | xml2rfc, kramdown-rfc |
 | Reference entry formatting, title-page header, "Status of This Memo" text | the RFC Production Center at publication |
+
+Out of scope does not mean unchecked. The author's goal is to hear everything a
+reviewer familiar with IETF rules would raise, which no single tool provides:
+idnits owns the structural half, and this style owns the prose half. The
+[tool landscape](/tool-landscape.md) maps who checks what, names the gaps that
+belong to nobody, and specifies `make check-draft`, which runs idnits and Vale
+over one document and prints one report.
 
 # Conformance
 
@@ -81,7 +97,11 @@ Every rule traces to one of:
 - **BCP 14**[^bcp14] and the IESG statement on its key words[^iesg-bcp14].
 - The RFC Production Center's **Terms**[^rpc-terms] and
   **Abbreviations**[^rpc-abbrev] lists, both of which expose a raw export that
-  rules are generated from.
+  rules are generated from, and the machine-readable
+  `abbreviations.json`[^rpc-abbrev-json] and `names.json`[^rpc-names-json] that
+  the RPC's own tooling runs on.
+- **Official IETF tooling** — idnits[^idnits] and DraftForge[^draftforge] — whose
+  check definitions live in git and state what the tools flag today.
 
 # Rule inventory
 
@@ -90,6 +110,39 @@ rule whose alert rate makes it unsupportable ships one level lower, or disabled
 by default; it is not dropped for being rarely triggered, since a clean corpus
 says nothing about whether the guidance exists. See the
 [validation methodology](/validation.md).
+
+## Group 0: parity with official tooling
+
+DraftForge[^draftforge] is the RFC Production Center's VS Code extension, and its
+validation checks are the closest published statement of which prose issues IETF
+tooling flags today. It is an editor extension only: an author who does not use
+VS Code, or who wants these checks in CI, cannot run them. Parity is therefore
+this style's first priority.
+
+These rules take their definitions from DraftForge's source, and the PR cites the
+command file and commit it was generated from.
+
+| Rule | Requirement | Upstream | Extends | Level |
+|---|---|---|---|---|
+| `IETF-Draft.Placeholders` | No unresolved placeholders | `placeholders.js`: `TBD`, `TBA`, `XX`, `YY`, `NN`, `MM`, `0000`, `TODO`, matched adjacent to `RFC` | `existence` | error |
+| `IETF-Draft.Typos` | Common misspellings, including invalid BCP 14 terms | `typos.js`, 62 entries covering 79 terms | `substitution` | warning |
+| `IETF-Draft.InclusiveLanguage` | Potentially biased terminology | `inclusive-language.js`: whitelist, blacklist, master, slave, native, grandfather, he/she — with the alternates it suggests | `substitution` | suggestion |
+| `IETF-Draft.RepeatedWords` | No word repeated across a line break | `repeated-words.js` | `repetition` | warning |
+| `IETF-Draft.RFCTerms` | IETF terms used and capitalized as the series uses them | `rfc-terms.js`: `RFC series`, `working group`, `standards track`, `last call`, `area director`, `chair`, `shepherd`, `internet draft`, stream names | `existence` | suggestion |
+| `IETF-Draft.Articles` | Correct indefinite article before vowels, consonants, and initialisms | `articles.js`, including its exception lists and the `an LF` case | `script` | warning |
+| `IETF-Draft.Names` | Author names in the form the author prefers | `names.json`[^rpc-names-json] | `existence` | suggestion |
+| `IETF-Draft.InconsistentCapitalization` | One capitalization of a term per document | `inconsistent-capitalization.js` | `consistency` | suggestion |
+
+Levels follow the upstream tools' own framing. DraftForge says of inclusive
+language that "It's up to the draft authors and RPC staff to determine whether a
+term should be left as-is", and of names that "A match doesn't automatically
+signify an error" — both are `suggestion` here for that reason. `Placeholders` is
+the exception: an unresolved `RFCXXXX` in a submitted draft is unambiguous.
+
+`IETF-Draft.InclusiveLanguage` supersedes the Group 5 entry of the same name.
+Taking the term list from IETF tooling rather than from NISTIR 8366 directly
+shortens the chain of authority, and the NIST guidance remains its ultimate
+source through the IESG statement.
 
 ## Group 1: mechanical
 
@@ -129,23 +182,36 @@ these use Vale's Tengo `script` extension point.
 | `IETF-Draft.ExampleMAC` | MAC and EUI values in examples come from the documentation range | RFC 9542 (BCP 141), which reserves `00-00-5E-00-53-xx` for documentation | warning |
 | `IETF-Draft.ExampleDomains` | Example domain names use the reserved names | RFC 7322 §3.3: "DNS names … used as generic examples in RFCs should use the particular examples defined in 'Reserved Top Level DNS Names' [BCP32]"[^rfc7322] | warning |
 
-`IETF-Draft.ExampleDomains` flags a **curated list of placeholder domains**
-(`foo.com`, `mydomain.com`, `test.com`, `company.com` and similar), never "any
-domain outside the reserved set". Drafts legitimately cite real sites, and a rule
-that flags them would be withdrawn within a week.
+`IETF-Draft.ExampleDomains` duplicates idnits, which already enforces reserved
+example domains through `FQDN_EXAMPLE_RE` and raises `INVALID_DOMAIN_TLD`. It
+earns its place only by running at authoring time, in Markdown, before a draft is
+submitted. It flags a **curated list of placeholder domains** (`foo.com`,
+`mydomain.com`, `test.com`, `company.com` and similar), never "any domain outside
+the reserved set". Drafts legitimately cite real sites, and a rule that flags
+them would be withdrawn within a week.
 
-`IETF-Draft.ExampleIPv4` must not flag version strings, netmasks, or addresses such as
-`0.0.0.0` and `127.0.0.1` where they carry protocol meaning.
+The IP rules fill a genuine gap: **idnits checks whether an address is
+syntactically valid, not whether it comes from a documentation range.** Nothing
+in the official tooling asks that question today.
+
+`IETF-Draft.ExampleIPv4` must not flag version strings, section numbers, netmasks,
+or addresses such as `0.0.0.0` and `127.0.0.1` where they carry protocol meaning.
+idnits solves the section-number problem with the lookbehind `(?<![0-9a-zA-Z]+\.)`,
+which Vale's RE2 engine cannot express; see the
+[tool landscape](/tool-landscape.md) for what to do instead.
 
 ## Group 3: abbreviations and structure
 
 | Rule | Requirement | Basis | Extends | Level |
 |---|---|---|---|---|
-| `IETF-Draft.Abbreviations` | Expand an abbreviation on first use, unless it is on the RFC Production Center's well-known list | authors.ietf.org: "Abbreviations should generally be expanded in parentheses. The RFC Production Center maintains a list of approved abbreviations that do not need to be expanded"[^authors-language]; RFC 7322 §3.6[^rfc7322] | `conditional` | warning |
+| `IETF-Draft.Abbreviations` | Expand an abbreviation on first use, unless it is marked well-known | authors.ietf.org: "Abbreviations should generally be expanded in parentheses. The RFC Production Center maintains a list of approved abbreviations that do not need to be expanded"[^authors-language]; RFC 7322 §3.6[^rfc7322] | `conditional` | warning |
 | `IETF-Draft.AbstractCitations` | The Abstract contains no citations | RFC 7322 §4.3: "the Abstract must not contain citations"[^rfc7322] | `existence`, section-scoped | error |
 
-The exception list for `IETF-Draft.Abbreviations` is **generated** from the entries
-marked `*` in the Abbreviations list[^rpc-abbrev], per the evidence policy.
+The exception list for `IETF-Draft.Abbreviations` is **generated** from
+`abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file:
+3277 entries of `{term, full, wellknown?, note?}`, of which 279 are marked
+well-known. This supersedes scraping the wiki page — same data, versioned, with
+the well-known flag readable rather than inferred from an asterisk.
 
 ## Group 4: draft-stage only
 
@@ -226,4 +292,7 @@ Verified against Vale 3.21.0 rather than taken from documentation:
 [^rpc-terms]: [RFC-Specific Terms list](https://rpc-wiki.rfc-editor.org/doku.php?id=terms).
 [^rpc-abbrev]: [Abbreviations list](https://rpc-wiki.rfc-editor.org/doku.php?id=abbrev_list).
 [^iesg-bcp14]: [IESG Statement on clarifying the use of BCP 14 key words](https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/), 17 March 2025.
-[^idnits]: [idnits](https://github.com/ietf-tools/idnits).
+[^idnits]: [idnits](https://github.com/ietf-tools/idnits), v3 branch.
+[^draftforge]: [ietf-tools/draftforge](https://github.com/ietf-tools/draftforge), whose checks are documented at [draftforge.ietf.org/checks](https://draftforge.ietf.org/checks/).
+[^rpc-abbrev-json]: [abbreviations.json](https://github.com/rfc-editor-drafts/common/blob/main/abbreviations.json).
+[^rpc-names-json]: [names.json](https://github.com/rfc-editor-drafts/common/blob/main/names.json).

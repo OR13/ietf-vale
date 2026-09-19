@@ -40,9 +40,15 @@ maps those tiers, plus IETF document status, onto Vale levels.
 | Tier | Source class | Vale level |
 |---|---|---|
 | A | IETF consensus (BCP or Standards Track), or an RFC Editor **MUST**, mechanically checkable in prose | `error` |
-| B | RFC Editor **RECOMMENDED**, or an authors.ietf.org "must"/"should" for Internet-Drafts | `warning` |
+| B | RFC Editor **RECOMMENDED**, an authors.ietf.org "must"/"should" for Internet-Drafts, or a check implemented by official IETF tooling (idnits, DraftForge) | `warning` |
 | C | RFC Editor **Author Choice**, an IESG statement, or guidance the IETF points to but did not produce | `suggestion` |
 | D | Guidance about participant **behavior**, which a linter can only approximate | `suggestion`, opt-in |
+
+A check that official tooling implements is a source in its own right: it is what
+an IETF-aware reviewer's tools report today, and its definition is in git where a
+reviewer can read it. Where such a tool states its own confidence, that wins over
+the table — DraftForge calls its inclusive-language and names matches advisory,
+so those ship as `suggestion` regardless of tier.
 
 Two constraints override the table:
 
