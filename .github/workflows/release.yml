@@ -12,7 +12,7 @@ jobs:
     name: Publish IETF.zip
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # The archive is what users install, so the license travels inside it.
       - run: cp LICENSE IETF/LICENSE
