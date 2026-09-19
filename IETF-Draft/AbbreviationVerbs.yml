@@ -1,0 +1,14 @@
+extends: existence
+message: "Affix the suffix to the abbreviation without punctuation: '%s' should be one word, as in 'XORed' and 'NATed'."
+link: https://www.rfc-editor.org/styleguide/
+level: warning
+ignorecase: false
+scope: ~code
+# Updates to the RFC Style Guide, RECOMMENDED: "suffixes should be affixed
+# without punctuation, for example, 'XORed' (not XOR'ed) and 'NATed' (not
+# NAT-ed)".
+# Only verb suffixes. A possessive such as "the RPC's list" is correct English
+# and must not be flagged.
+tokens:
+  - "\\b[A-Z]{2,}'(?:ed|ing)\\b"
+  - '\b[A-Z]{2,}-(?:ed|ing)\b'

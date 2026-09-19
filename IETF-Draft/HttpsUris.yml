@@ -1,0 +1,20 @@
+extends: existence
+message: "Use an HTTPS URI where one is available."
+link: https://www.rfc-editor.org/styleguide/
+level: suggestion
+ignorecase: false
+# Markdown autolinks a bare URI and drops it from the text scope, so this rule
+# reads the source. That includes fenced code, which is why it stays a
+# suggestion: an example HTTP exchange is not a defect.
+scope: raw
+# Updates to the RFC Style Guide, RECOMMENDED: "HTTPS URIs should be used when
+# possible." Namespace and schema identifiers are excluded: they are opaque
+# strings whose scheme is fixed by the specification that defines them.
+tokens:
+  - 'http://\S+'
+exceptions:
+  - 'http://www\.w3\.org\S*'
+  - 'http://www\.iana\.org\S*'
+  - 'http://purl\.org\S*'
+  - 'http://xmlns\.\S*'
+  - 'http://docs\.oasis-open\.org\S*'

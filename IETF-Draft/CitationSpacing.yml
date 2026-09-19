@@ -1,0 +1,29 @@
+extends: script
+message: "%s"
+link: https://www.rfc-editor.org/rfc/rfc7322.html#section-3.5
+level: error
+scope: raw
+# RFC 7322, Section 3.5: "A citation/reference tag must not contain spaces,
+# e.g., [RFC2119] not [RFC 2119]."
+#
+# Markdown parses a citation tag as a link reference and hides it from the text
+# scope, so this rule reads the source. It must then distinguish a citation tag
+# from an inline link, [RFC 2119](https://...), where the bracketed text is link
+# text and the space is correct. That needs a negative lookahead, which Vale's
+# RE2 engine does not have, so candidates are filtered here instead.
+script: |
+  text := import("text")
+  matches := []
+  found := text.re_find("\\[RFC ([0-9]{3,5})\\]", scope, -1)
+  for f in found {
+    m := f[0]
+    next := m.begin + len(m.text)
+    is_link := next < len(scope) && scope[next:next+1] == "("
+    if !is_link {
+      matches = append(matches, {
+        begin: m.begin,
+        end: next,
+        message: "Remove the space from the citation tag: write \"" + text.replace(m.text, "RFC ", "RFC", 1) + "\"."
+      })
+    }
+  }

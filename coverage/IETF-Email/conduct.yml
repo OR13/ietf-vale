@@ -9,17 +9,21 @@
 
 # BCP 54, Section 2: "dispute ideas by using reasoned argument rather than
 # through intimidation or personal attack".
-personal-attacks: false
+# PersonalAttacks.yml
+personal-attacks: true
 
 # BCP 45 (RFC 9245), Section 2: "Uncivil commentary, regardless of the general
 # subject".
 incivility: false
 
 # BCP 54, Section 2: "limiting the use of slang".
-slang: false
+# Slang.yml
+slang: true
 
 # BCP 54, Section 2: idioms that do not survive translation.
-idioms: false
+# Idioms.yml
+idioms: true
 
 # BCP 54, Section 2: "Try to provide data and facts for your standpoints".
-unsupported-dismissals: false
+# UnsupportedDismissals.yml
+unsupported-dismissals: true

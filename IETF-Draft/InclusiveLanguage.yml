@@ -1,0 +1,27 @@
+extends: substitution
+message: "Consider '%s' instead of '%s' (NISTIR 8366, via the IESG statement on inclusive language)."
+link: https://datatracker.ietf.org/doc/statement-iesg-iesg-statement-on-inclusive-language-20210511
+level: suggestion
+ignorecase: true
+scope: ~code
+# The RFC Editor marks inclusive language RECOMMENDED because each stream has
+# chosen to follow the IESG statement, which encourages NISTIR 8366. This is
+# encouragement, not IETF consensus, so every alert is a suggestion. Terms that
+# NISTIR 8366 marks "no edit" are not included.
+swap:
+  'white[- ]?list(s|ed|ing)?': allowlist
+  'black[- ]?list(s|ed|ing)?': denylist
+  'master/slave': primary/secondary
+  'grandfathered': exempted
+  'grandfather(s|ing)?': exempt
+  'he/she': they
+  'he / she': they
+  'he or she': they
+  'man[- ]?made': caused by humans
+  'firemen': firefighters
+  'cripple(s|d)?': impair
+  'handicapped': impeded
+  'male/female connectors?': plug and socket
+  'totem pole': priority order
+  'black sheep': outlier
+  'jumping off point': starting point

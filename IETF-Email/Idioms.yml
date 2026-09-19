@@ -1,0 +1,19 @@
+extends: substitution
+message: "Consider '%s' instead of the idiom '%s', which may not translate."
+link: https://www.rfc-editor.org/rfc/rfc7154.html#section-2
+level: suggestion
+ignorecase: true
+scope: ~code
+# RFC 7154 (BCP 54), Section 2, same sentence as Slang: communicate clearly for
+# participants who do not have English as a first language.
+swap:
+  'low[- ]hanging fruit': the easy cases
+  'boil the ocean': solve everything at once
+  'beat(ing)? a dead horse': revisiting a settled question
+  'out of left field': unexpected
+  'ducks in a row': the details settled
+  'elephant in the room': the unaddressed issue
+  'ballpark figure': rough estimate
+  'punt on': defer
+  'bikeshed(ding)?': argue over details
+  'open a can of worms': raise a complicated problem

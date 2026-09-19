@@ -8,16 +8,20 @@
 language: false
 
 # Serial commas, quotation marks, hyphenation, spacing.
-punctuation: false
+# NonAsciiPunctuation.yml
+punctuation: true
 
 # Example DNS names and URIs, per BCP 32.
 dns-names-and-uris: false
 
 # Capitalization of terms, headings, and protocol names.
-capitalization: false
+# DidacticCapitalization.yml
+capitalization: true
 
 # In-text citation form, and citations in the Abstract.
-citations: false
+# CitationSpacing.yml, RFCCompoundHyphen.yml
+citations: true
 
 # Expansion on first use, and the RFC Editor abbreviations list.
+# AbbreviationVerbs.yml -- expansion on first use is not yet implemented.
 abbreviations: false

@@ -1,0 +1,12 @@
+extends: existence
+message: "Don't hyphenate an RFC citation into a compound ('%s'); reword, e.g. 'as described in RFC 5011 [RFC5011]'."
+link: https://www.rfc-editor.org/styleguide/
+level: warning
+ignorecase: false
+# See CitationSpacing for why this rule is nonword and raw-scoped.
+nonword: true
+scope: raw
+# Updates to the RFC Style Guide, RECOMMENDED: "Avoid forming compounds by
+# hyphenating RFC numbers".
+tokens:
+  - '\[RFC\d{3,5}\]-\w+'

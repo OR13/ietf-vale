@@ -1,0 +1,13 @@
+extends: existence
+message: "An Internet-Draft must not refer to itself as an RFC ('%s')."
+link: https://authors.ietf.org/language-and-style
+level: error
+ignorecase: false
+scope: ~code & ~blockquote
+# Internet-Draft Author Resources, Language and style: "Your I-D must not refer
+# to itself as an RFC or a draft RFC." Disable this rule once the document is in
+# the RFC Editor queue.
+tokens:
+  - '\b[Tt]his RFC\b'
+  - '\b[Tt]his draft RFC\b'
+  - '\b[Tt]his Internet Standard\b'

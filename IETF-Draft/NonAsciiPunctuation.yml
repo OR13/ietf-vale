@@ -1,0 +1,11 @@
+extends: existence
+message: "Use the ASCII equivalent of this punctuation character."
+link: https://www.rfc-editor.org/styleguide/
+level: warning
+nonword: true
+scope: ~code
+# Updates to the RFC Style Guide, XML Formatting: "ASCII equivalents are to be
+# used for punctuation (e.g., smart quotes and em dashes)." RFC 7997 permits
+# non-ASCII characters themselves; this rule is about punctuation only.
+tokens:
+  - '[\x{2018}\x{2019}\x{201C}\x{201D}\x{2013}\x{2014}\x{2026}]'

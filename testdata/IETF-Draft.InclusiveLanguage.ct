@@ -1,0 +1,9 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/InclusiveLanguage
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:39:IETF-Draft.InclusiveLanguage:Consider 'allowlist' instead of 'whitelist' (NISTIR 8366, via the IESG statement on inclusive language).
+test.md:3:50:IETF-Draft.InclusiveLanguage:Consider 'denylist' instead of 'blacklist' (NISTIR 8366, via the IESG statement on inclusive language).
+test.md:3:61:IETF-Draft.InclusiveLanguage:Consider 'primary/secondary' instead of 'master/slave' (NISTIR 8366, via the IESG statement on inclusive language).
+test.md:4:1:IETF-Draft.InclusiveLanguage:Consider 'exempted' instead of 'grandfathered' (NISTIR 8366, via the IESG statement on inclusive language).
+test.md:4:16:IETF-Draft.InclusiveLanguage:Consider 'they' instead of 'he/she' (NISTIR 8366, via the IESG statement on inclusive language).
+test.md:4:24:IETF-Draft.InclusiveLanguage:Consider 'caused by humans' instead of 'manmade' (NISTIR 8366, via the IESG statement on inclusive language).
+test.md:4:39:IETF-Draft.InclusiveLanguage:Consider 'priority order' instead of 'totem pole' (NISTIR 8366, via the IESG statement on inclusive language).

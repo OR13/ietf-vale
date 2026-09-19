@@ -1,0 +1,26 @@
+extends: substitution
+message: "Use '%s' instead of '%s'."
+link: https://rpc-wiki.rfc-editor.org/doku.php?id=terms
+level: warning
+ignorecase: false
+# A specification quoting a wrong spelling puts it in a code span.
+scope: ~code
+# The RFC Production Center's RFC-Specific Terms list. Entries that the list
+# defers to the document -- Acknowledgments, where it says "If consistent (with
+# or without the 'e'), leave it" -- are deliberately absent: that is a
+# consistency question, not a settled spelling.
+swap:
+  'US-ASCII': ASCII
+  'IPSEC': IPsec
+  'IPSec': IPsec
+  'DiffServ': Diffserv
+  'demultiplexor': demultiplexer
+  'e-mail': email
+  'E-mail': email
+  'on-line': online
+  'multi-homed': multihomed
+  'multi-homing': multihoming
+  'pseudo-wire': pseudowire
+  'sub-domain': subdomain
+  'time-stamp': timestamp
+  'Internet Draft': Internet-Draft

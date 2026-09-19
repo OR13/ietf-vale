@@ -48,7 +48,7 @@ maps those tiers, plus IETF document status, onto Vale levels.
 
 idnits and DraftForge implement checks; they do not define requirements. A check
 in one of those tools is **corroboration that a requirement is enforced in
-practice, and a floor for coverage** — never the authority for a rule. Three
+practice, and a floor for coverage** -- never the authority for a rule. Three
 things follow, and each has already bitten this specification:
 
 1. **A tool may under-cover a requirement.** DraftForge's inclusive-language
@@ -135,7 +135,7 @@ Some guidance reaches IETF participants by reference rather than by consensus.
 The clearest case is inclusive language: the RFC Editor marks it RECOMMENDED
 because each stream has chosen to follow the IESG statement[^iesg-inclusive],
 and that statement "encourages IETF participants to use the guidance in
-[NISTIR8366]" — a NIST document, not an IETF consensus document.
+[NISTIR8366]" -- a NIST document, not an IETF consensus document.
 
 Such guidance is Tier C. Rules implementing it ship in their own file so they can
 be disabled in one line, and their documentation states the chain of authority

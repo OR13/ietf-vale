@@ -1,0 +1,21 @@
+extends: substitution
+message: "Consider '%s' instead of '%s': BCP 54 asks participants to limit slang."
+link: https://www.rfc-editor.org/rfc/rfc7154.html#section-2
+level: suggestion
+ignorecase: true
+scope: ~code
+# RFC 7154 (BCP 54), Section 2: "All participants, particularly those with
+# English as a first language, attempt to accommodate the needs of other
+# participants by communicating clearly, including speaking slowly and limiting
+# the use of slang."
+swap:
+  'gonna': going to
+  'wanna': want to
+  'gotta': have to
+  'kinda': kind of
+  'sorta': sort of
+  "ain't": is not
+  'dunno': do not know
+  "y'all": you all
+  'bunch of': several
+  'a ton of': many

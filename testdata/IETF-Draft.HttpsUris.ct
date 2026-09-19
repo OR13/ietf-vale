@@ -1,0 +1,3 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/HttpsUris
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:45:IETF-Draft.HttpsUris:Use an HTTPS URI where one is available.

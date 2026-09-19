@@ -1,0 +1,19 @@
+extends: existence
+message: "This judges a person rather than an argument; BCP 54 asks that we dispute ideas by reasoned argument."
+link: https://www.rfc-editor.org/rfc/rfc7154.html#section-2
+level: suggestion
+ignorecase: true
+scope: ~code & ~blockquote
+# RFC 7154 (BCP 54), Section 2: "We dispute ideas by using reasoned argument
+# rather than through intimidation or personal attack."
+#
+# This rule cannot determine whether a message is uncivil, and an alert is never
+# evidence that it is. The list is deliberately short: these are phrasings that
+# read worse than their authors usually intend.
+tokens:
+  - "you (clearly|obviously|evidently) (don't|do not|didn't|did not)"
+  - 'you people'
+  - '(did|have) you even read'
+  - "you (don't|do not) understand"
+  - 'anyone who (thinks|believes|says)'
+  - 'are you serious'

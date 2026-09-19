@@ -1,0 +1,4 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/CitationSpacing
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:30:IETF-Draft.CitationSpacing:Remove the space from the citation tag: write "[RFC2119]".
+test.md:3:45:IETF-Draft.CitationSpacing:Remove the space from the citation tag: write "[RFC8174]".

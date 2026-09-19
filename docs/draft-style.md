@@ -100,13 +100,18 @@ Every rule traces to one of:
   rules are generated from, and the machine-readable
   `abbreviations.json`[^rpc-abbrev-json] and `names.json`[^rpc-names-json] that
   the RPC's own tooling runs on.
-Official IETF tooling — idnits[^idnits] and DraftForge[^draftforge] — is **not**
+Official IETF tooling -- idnits[^idnits] and DraftForge[^draftforge] -- is **not**
 in that list. Those tools corroborate that a requirement is enforced in practice
 and set a floor for what an author will hear from a reviewer, and their source is
 a useful implementation reference, but a rule here traces to published guidance
 or it does not ship. See the [tool landscape](/tool-landscape.md).
 
 # Rule inventory
+
+**Shipped in v0.1**: `Terms`, `CitationSpacing`, `RFCCompoundHyphen`,
+`AbbreviationVerbs`, `DidacticCapitalization`, `NonAsciiPunctuation`,
+`DraftSelfReference`, `HttpsUris`, `InclusiveLanguage`. Everything else below is
+specified and not yet implemented.
 
 Each rule is one PR. `Level` is the target level under the evidence policy. A
 rule whose alert rate makes it unsupportable ships one level lower, or disabled
@@ -119,7 +124,7 @@ says nothing about whether the guidance exists. See the
 Every rule below implements a **documented requirement**. The tooling column
 records whether idnits or DraftForge also checks it, because a requirement an
 IETF-aware reviewer's tools already flag is one an author will certainly hear
-about — but the tool is corroboration, not the source. Where a tool covers less
+about -- but the tool is corroboration, not the source. Where a tool covers less
 than the requirement, these rules cover the requirement.
 
 | Rule | Requirement and source | Also checked by | Extends | Level |
@@ -132,12 +137,12 @@ than the requirement, these rules cover the requirement.
 The exception list for `IETF-Draft.Abbreviations` is **generated** from
 `abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file:
 3277 entries of `{term, full, wellknown?, note?}`, of which 279 are marked
-well-known. This supersedes scraping the wiki page — same data, versioned, with
+well-known. This supersedes scraping the wiki page -- same data, versioned, with
 the well-known flag readable rather than inferred from an asterisk.
 
 `IETF-Draft.InclusiveLanguage` is generated from NISTIR 8366 Table 1. Its
-message names the chain of authority — RFC Editor RECOMMENDED, via the IESG
-statement, via NIST — so a reader can see at a glance that it is encouragement,
+message names the chain of authority -- RFC Editor RECOMMENDED, via the IESG
+statement, via NIST -- so a reader can see at a glance that it is encouragement,
 not IETF consensus.
 
 ## Group 0b: tooling conventions with no documented requirement
@@ -170,17 +175,17 @@ scope for matching text their sources do not describe.
 
 | Rule | Requirement | Basis | Extends | Level |
 |---|---|---|---|---|
-| `IETF-Draft.Terms` | Use the RFC Production Center's settled spelling of RFC-specific terms, except where the list defers to internal consistency | Terms list: "IPsec — Not 'IPSEC' or 'IPSec'"; "email … (not 'e-mail' or 'Email')"; "online … (not 'on-line')"; "timestamp … (not 'time-stamp')"; "ASCII — Not 'US-ASCII'"[^rpc-terms] | `substitution` | warning |
+| `IETF-Draft.Terms` | Use the RFC Production Center's settled spelling of RFC-specific terms, except where the list defers to internal consistency | Terms list: `IPsec` not `IPSEC`; `email` not `e-mail`; `online` not `on-line`; `timestamp` not `time-stamp`; `ASCII` not `US-ASCII`[^rpc-terms] | `substitution` | warning |
 | `IETF-Draft.CitationSpacing` | A citation tag contains no spaces | RFC 7322 §3.5: "A citation/reference tag must not contain spaces", e.g. `[RFC2119]` not `[RFC 2119]`[^rfc7322] | `substitution` | error |
 | `IETF-Draft.RFCCompoundHyphen` | Do not form compounds by hyphenating an RFC citation | Style Guide RECOMMENDED: "Avoid forming compounds by hyphenating RFC numbers", e.g. `[RFC5011]-style rollover`[^styleguide] | `existence` | warning |
-| `IETF-Draft.AbbreviationVerbs` | Affix suffixes to abbreviations without punctuation | Style Guide RECOMMENDED: "'XORed' (not XOR'ed) and 'NATed' (not NAT-ed)"[^styleguide] | `existence` | warning |
+| `IETF-Draft.AbbreviationVerbs` | Affix suffixes to abbreviations without punctuation | Style Guide RECOMMENDED: `XORed` not `XOR'ed`, `NATed` not `NAT-ed`[^styleguide] | `existence` | warning |
 | `IETF-Draft.DidacticCapitalization` | Do not capitalize mid-word to explain an abbreviation | Style Guide Author Choice: "Use of didactic capitalization is not needed", e.g. `Extensible Markup Language (XML)` not `eXtensible`[^styleguide] | `existence` | suggestion |
 | `IETF-Draft.NonAsciiPunctuation` | Use ASCII punctuation | Style Guide XML Formatting: "ASCII equivalents are to be used for punctuation (e.g., smart quotes and em dashes)"[^styleguide] | `existence` (`nonword`) | warning |
 
 `IETF-Draft.Terms` is generated from the Terms list, and the generator must drop
 the entries that defer to the document rather than settle the spelling. The
 clearest case is Acknowledgments, where the list says "If consistent (with or
-without the 'e'), leave it. If inconsistent, delete the 'e'."[^rpc-terms] — a
+without the 'e'), leave it. If inconsistent, delete the 'e'."[^rpc-terms] -- a
 `consistency` check, not a substitution.
 
 `IETF-Draft.NonAsciiPunctuation` excludes the `code` scope, and must not flag non-ASCII
@@ -199,7 +204,7 @@ these use Vale's Tengo `script` extension point.
 | `IETF-Draft.ExampleASN` | AS numbers in examples come from a documentation range | RFC 5398: "64496 - 64511" and "65536 - 65551" | warning |
 | `IETF-Draft.ExamplePhone` | Telephone numbers in examples are reserved for fictitious use | authors.ietf.org: "USA: +1-<area code>-555-<0100-0199>", "UK: +44-<geographic-area-code>-496-<0000-0999>"[^authors-examples] | warning |
 | `IETF-Draft.ExampleMAC` | MAC and EUI values in examples come from the documentation range | RFC 9542 (BCP 141), which reserves `00-00-5E-00-53-xx` for documentation | warning |
-| `IETF-Draft.ExampleDomains` | Example domain names use the reserved names | RFC 7322 §3.3: "DNS names … used as generic examples in RFCs should use the particular examples defined in 'Reserved Top Level DNS Names' [BCP32]"[^rfc7322] | warning |
+| `IETF-Draft.ExampleDomains` | Example domain names use the reserved names | RFC 7322 §3.3: "DNS names ... used as generic examples in RFCs should use the particular examples defined in 'Reserved Top Level DNS Names' [BCP32]"[^rfc7322] | warning |
 
 `IETF-Draft.ExampleDomains` duplicates idnits, which already enforces reserved
 example domains through `FQDN_EXAMPLE_RE` and raises `INVALID_DOMAIN_TLD`. It
@@ -252,7 +257,7 @@ claim of error.
 | `IETF-Draft.HttpsUris` | Prefer HTTPS URIs | Style Guide RECOMMENDED: "HTTPS URIs should be used when possible"[^styleguide] | `existence` |
 | `IETF-Draft.DoubleNegatives` | Avoid double negatives | Style Guide RECOMMENDED: "Double negatives are discouraged"[^styleguide] | `existence` |
 | `IETF-Draft.AngleBracketsURI` | Enclose bare URIs in angle brackets | RFC 7322 §3.3: "Angle brackets are strongly recommended around URIs"[^rfc7322] | `existence` |
-| `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited … and included as a normative reference"[^bcp14][^rfc7322] | `conditional` (level: warning) |
+| `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited ... and included as a normative reference"[^bcp14][^rfc7322] | `conditional` (level: warning) |
 | `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence`, **off by default** |
 | `IETF-Draft.Bcp14Sparingly` | Do not use SHOULD merely to express a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `occurrence` |
 | `IETF-Draft.StaleText` | Avoid text that dates the document | authors.ietf.org "Stale text": non-permanent URLs, "send comments to" a named list, assigning future work to a named WG[^authors-language] | `existence` |
@@ -282,6 +287,16 @@ preference that this style must not copy.
 
 Verified against Vale 3.21.0 rather than taken from documentation:
 
+- **Vale wraps `existence` and `substitution` tokens in `\b`.** A pattern that
+  begins or ends with a non-word character, such as a `[RFC1234]` citation tag,
+  can therefore never match without `nonword: true`. This cost two rules a
+  silent no-op before it was caught by reading their recorded expectations.
+- **Markdown hides bracketed citations and bare URIs from the text scope.**
+  `[RFC 2119]` is parsed as a link reference and `http://example.com` is
+  autolinked, so neither reaches a rule scoped to prose. `CitationSpacing`,
+  `RFCCompoundHyphen` and `HttpsUris` use `scope: raw` for this reason, which
+  also means they see fenced code -- a trade-off recorded in each rule.
+
 - `conditional` correctly flags an abbreviation used with no prior
   `Expansion (ABBR)`, which is the mechanism `IETF-Draft.Abbreviations` depends on.
 - `script` (Tengo) works with `scope: raw` and `text.re_find`, appending
@@ -299,7 +314,7 @@ Verified against Vale 3.21.0 rather than taken from documentation:
 [^styleguide]: [Updates to the RFC Style Guide](https://www.rfc-editor.org/styleguide/).
 [^authors-language]: [Language and style](https://authors.ietf.org/language-and-style), Internet-Draft Author Resources.
 [^authors-examples]: [Example addresses](https://authors.ietf.org/example-addresses), Internet-Draft Author Resources.
-[^bcp14]: [BCP 14](https://www.rfc-editor.org/info/bcp14) — RFC 2119 and RFC 8174.
+[^bcp14]: [BCP 14](https://www.rfc-editor.org/info/bcp14) -- RFC 2119 and RFC 8174.
 [^rpc-terms]: [RFC-Specific Terms list](https://rpc-wiki.rfc-editor.org/doku.php?id=terms).
 [^rpc-abbrev]: [Abbreviations list](https://rpc-wiki.rfc-editor.org/doku.php?id=abbrev_list).
 [^iesg-bcp14]: [IESG Statement on clarifying the use of BCP 14 key words](https://datatracker.ietf.org/doc/statement-iesg-statement-on-clarifying-the-use-of-bcp-14-key-words/), 17 March 2025.

@@ -1,0 +1,6 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Email/Idioms
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:36:IETF-Email.Idioms:Consider 'solve everything at once' instead of the idiom 'boil the ocean', which may not translate.
+test.md:3:59:IETF-Email.Idioms:Consider 'the easy cases' instead of the idiom 'low-hanging fruit', which may not translate.
+test.md:4:7:IETF-Email.Idioms:Consider 'revisiting a settled question' instead of the idiom 'beating a dead horse', which may not translate.
+test.md:4:37:IETF-Email.Idioms:Consider 'defer' instead of the idiom 'punt on', which may not translate.

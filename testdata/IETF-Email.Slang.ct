@@ -1,0 +1,6 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Email/Slang
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:4:1:IETF-Email.Slang:Consider 'going to' instead of 'gonna': BCP 54 asks participants to limit slang.
+test.md:4:22:IETF-Email.Slang:Consider 'have to' instead of 'gotta': BCP 54 asks participants to limit slang.
+test.md:4:51:IETF-Email.Slang:Consider 'kind of' instead of 'kinda': BCP 54 asks participants to limit slang.
+test.md:5:1:IETF-Email.Slang:Consider 'several' instead of 'bunch of': BCP 54 asks participants to limit slang.

@@ -9,7 +9,7 @@ reviewer can read as a diff.**
 
 Start with the specifications in [`docs/`](docs/index.md). A rule that is not in
 [draft style](docs/draft-style.md) or [email style](docs/email-style.md) needs a
-specification change first — that is where the argument about whether a rule
+specification change first -- that is where the argument about whether a rule
 belongs happens, before anyone writes YAML. The
 [evidence policy](docs/evidence-policy.md) decides its severity level and lists
 the evidence your PR has to show.
@@ -36,12 +36,12 @@ make new RULE=Slang STYLE=IETF-Email  # in the IETF-Email style
 That writes the stubs below; fill them in. Using `IETF-Draft.Ellipses` as the
 example:
 
-1. **The rule** — `IETF-Draft/Ellipses.yml`. It must set `extends`, `message`,
+1. **The rule** -- `IETF-Draft/Ellipses.yml`. It must set `extends`, `message`,
    `level`, and a `link` pointing at the guidance it implements (an RFC section,
    or a page of the [RFC Editor style guide](https://www.rfc-editor.org/styleguide/)).
    `make test` fails without all four.
 
-2. **A fixture** — `fixtures/IETF-Draft/Ellipses/` with a `.vale.ini` that
+2. **A fixture** -- `fixtures/IETF-Draft/Ellipses/` with a `.vale.ini` that
    enables only this rule, plus at least one sample file:
 
    ```ini
@@ -56,7 +56,7 @@ example:
    Include both text that should be flagged **and** text that should not. The
    near-misses are what stop a rule from over-matching later.
 
-3. **The expectation** — `testdata/IETF-Draft.Ellipses.ct`. It opens with the
+3. **The expectation** -- `testdata/IETF-Draft.Ellipses.ct`. It opens with the
    two commands every case shares, and `make update` fills in the rest:
 
    ```
@@ -70,9 +70,9 @@ example:
 
    Then read the generated file. It is the record of what the rule actually
    does, line and column included, and it is what reviewers will read. Never
-   hand-edit the recorded alerts — change the rule or the fixture and rerun.
+   hand-edit the recorded alerts -- change the rule or the fixture and rerun.
 
-4. **Coverage** — flip the matching key in `coverage/IETF-Draft/` to `true` and
+4. **Coverage** -- flip the matching key in `coverage/IETF-Draft/` to `true` and
    name the rule in a comment above it:
 
    ```yaml
@@ -88,7 +88,7 @@ example:
 Run `make update` and commit the resulting `testdata/` diff **in the same
 commit** as the rule change. That diff is the review: it shows every alert that
 appeared, disappeared, or moved. A rule change with no testdata diff means the
-fixture doesn't cover the change — extend the fixture.
+fixture doesn't cover the change -- extend the fixture.
 
 ## Review expectations
 

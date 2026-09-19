@@ -1,0 +1,5 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/DidacticCapitalization
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:41:IETF-Draft.DidacticCapitalization:Didactic capitalization isn't needed in 'eXtensible'; capitalize normally, as in 'Extensible Markup Language (XML)'.
+test.md:3:69:IETF-Draft.DidacticCapitalization:Didactic capitalization isn't needed in 'EXtensible'; capitalize normally, as in 'Extensible Markup Language (XML)'.
+test.md:4:22:IETF-Draft.DidacticCapitalization:Didactic capitalization isn't needed in 'eXtended'; capitalize normally, as in 'Extensible Markup Language (XML)'.

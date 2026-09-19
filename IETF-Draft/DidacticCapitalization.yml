@@ -1,0 +1,12 @@
+extends: existence
+message: "Didactic capitalization isn't needed in '%s'; capitalize normally, as in 'Extensible Markup Language (XML)'."
+link: https://www.rfc-editor.org/styleguide/
+level: suggestion
+ignorecase: false
+scope: ~code
+# Updates to the RFC Style Guide, Author Choice: "Use of didactic capitalization
+# is not needed", with eXtensible / EXtensible as the worked example.
+tokens:
+  - '\beXtensible\b'
+  - '\bEXtensible\b'
+  - '\beXtended\b'

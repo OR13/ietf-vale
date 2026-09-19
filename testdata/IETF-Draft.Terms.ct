@@ -1,0 +1,16 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/Terms
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:5:IETF-Draft.Terms:Use 'IPsec' instead of 'IPSEC'.
+test.md:3:15:IETF-Draft.Terms:Use 'IPsec' instead of 'IPSec'.
+test.md:3:49:IETF-Draft.Terms:Use 'email' instead of 'e-mail'.
+test.md:3:57:IETF-Draft.Terms:Use 'email' instead of 'E-mail'.
+test.md:3:65:IETF-Draft.Terms:Use 'online' instead of 'on-line'.
+test.md:4:1:IETF-Draft.Terms:Use 'timestamp' instead of 'time-stamp'.
+test.md:4:13:IETF-Draft.Terms:Use 'subdomain' instead of 'sub-domain'.
+test.md:4:25:IETF-Draft.Terms:Use 'multihomed' instead of 'multi-homed'.
+test.md:4:38:IETF-Draft.Terms:Use 'multihoming' instead of 'multi-homing'.
+test.md:4:52:IETF-Draft.Terms:Use 'pseudowire' instead of 'pseudo-wire'.
+test.md:4:65:IETF-Draft.Terms:Use 'Diffserv' instead of 'DiffServ'.
+test.md:5:1:IETF-Draft.Terms:Use 'demultiplexer' instead of 'demultiplexor'.
+test.md:5:16:IETF-Draft.Terms:Use 'ASCII' instead of 'US-ASCII'.
+test.md:5:30:IETF-Draft.Terms:Use 'Internet-Draft' instead of 'Internet Draft'.

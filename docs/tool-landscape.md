@@ -105,11 +105,11 @@ these checks is the draft style's first priority rather than an afterthought.
 `rfc-editor-drafts/common`[^rpc-common] publishes the data the RPC's own tooling
 runs on, as JSON, in git:
 
-- `abbreviations.json`[^rpc-abbrev-json] — 3277 entries of
+- `abbreviations.json`[^rpc-abbrev-json] -- 3277 entries of
   `{term, full, wellknown?, note?}`, of which 279 are marked well-known. This
   supersedes scraping the wiki page: it is the same data, versioned, with the
   well-known flag machine-readable.
-- `names.json`[^rpc-names-json] — `{description, match[]}` entries recording
+- `names.json`[^rpc-names-json] -- `{description, match[]}` entries recording
   author names whose preferred form differs from the obvious one.
 
 Rules generated from these files are regenerated, never hand-edited, and the

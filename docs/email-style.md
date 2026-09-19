@@ -54,8 +54,8 @@ Therefore:
 
 # Scope
 
-**In scope**: prose the author is about to send — mailing list posts, issue and
-pull request comments, review notes — in plain text, `.eml`, and Markdown. Vale
+**In scope**: prose the author is about to send -- mailing list posts, issue and
+pull request comments, review notes -- in plain text, `.eml`, and Markdown. Vale
 lints all three directly, with no transform.
 
 **Out of scope**: anything requiring thread context, history, or intent. These
@@ -84,13 +84,16 @@ as a pre-send checklist.
 | RFC 7154[^bcp54] | **BCP 54**, current | "IETF participants extend respect and courtesy to their colleagues at all times"; "We dispute ideas by using reasoned argument rather than through intimidation or personal attack"; "limiting the use of slang" |
 | RFC 9245[^bcp45] | **BCP 45**, current, obsoletes RFC 3005 | Inappropriate postings include "Uncivil commentary, regardless of the general subject" |
 | RFC 9945[^bcp245] | **BCP 245**, current, obsoletes RFC 3934 and RFC 3683 | Non-normative examples of disruptive behavior, and the statement that moderation is subjective |
-| RFC 8716[^bcp25] | **BCP 25**, current, updates RFC 7776 | Establishes that harassment is handled by people, not tooling — cited here for the boundary it sets |
+| RFC 8716[^bcp25] | **BCP 25**, current, updates RFC 7776 | Establishes that harassment is handled by people, not tooling -- cited here for the boundary it sets |
 
 Cite RFC 9245 and RFC 9945, never RFC 3005 or RFC 3934; both were obsoleted, and
 RFC 3005's "Unprofessional commentary" became "Uncivil commentary" in the
 current text.
 
 # Rule inventory
+
+**Shipped in v0.1**: `Slang`, `Idioms`, `PersonalAttacks`,
+`UnsupportedDismissals`. `Incivility` is specified and not yet implemented.
 
 Each rule is one PR, subject to the evidence policy. All are `suggestion`.
 

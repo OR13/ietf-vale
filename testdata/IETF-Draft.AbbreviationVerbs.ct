@@ -1,0 +1,5 @@
+$ cdf ${ROOTDIR}/fixtures/IETF-Draft/AbbreviationVerbs
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:3:45:IETF-Draft.AbbreviationVerbs:Affix the suffix to the abbreviation without punctuation: 'XOR'ed' should be one word, as in 'XORed' and 'NATed'.
+test.md:3:68:IETF-Draft.AbbreviationVerbs:Affix the suffix to the abbreviation without punctuation: 'NAT-ed' should be one word, as in 'XORed' and 'NATed'.
+test.md:4:21:IETF-Draft.AbbreviationVerbs:Affix the suffix to the abbreviation without punctuation: 'NAT-ing' should be one word, as in 'XORed' and 'NATed'.
