@@ -1,6 +1,9 @@
 # Build output
 *.zip
 
+# Corpus samples are fetched, never committed
+.corpus/
+
 # Vale
 styles/
 .vale-cache/

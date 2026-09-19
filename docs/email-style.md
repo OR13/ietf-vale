@@ -115,6 +115,39 @@ depending on who they are about. Both keep deliberately short token lists, and
 both fail the evidence policy's overreach check if their message asserts that the
 text *is* uncivil rather than asking the author to look again.
 
+# Measured behavior, v0.1
+
+Measured over 1,428 messages fetched from the IETF's anonymous IMAP archive
+(`imap.ietf.org:993`) across eleven lists, including `mod-discuss`, `ietf` and
+`tls`, after stripping quoted text and signatures. Reproduce with
+`make corpus-mail EMAIL=you@example.org`.
+
+| Rule | Alerts | Per 1000 lines |
+|---|---|---|
+| `Slang` | 18 | 0.35 |
+| `Idioms` | 2 | 0.04 |
+| `UnsupportedDismissals` | 1 | 0.02 |
+| `PersonalAttacks` | **0** | 0.00 |
+
+What this does and does not establish:
+
+- **No noise problem.** Roughly 0.4 alerts per 1000 lines across the whole
+  style. Nothing here would make a participant turn the style off.
+- **`PersonalAttacks` is unvalidated.** It has never fired on any real IETF
+  message we have measured. That is not evidence the rule is wrong, since the
+  sample may simply be civil, and it is not evidence the rule works either. Its
+  token list was written from the guidance rather than observed from anything,
+  and it should be treated as untested until an alert is seen and adjudicated.
+- **The sample is civil by construction.** It is the most recent traffic on
+  technical lists. Testing the conduct rules against the behavior BCP 245
+  describes would need a sample chosen because it contains that behavior, which
+  is a decision about people, not about text. This project does not make that
+  decision casually, and any such sample would be de-identified before use.
+- **Nothing here may change the rule set.** Per the
+  [validation methodology](/validation.md), these numbers measure the
+  implementation. Adding a token because it appears in the corpus would be
+  fitting the style to the sample.
+
 # Rules deliberately not proposed
 
 - **Profanity lists beyond contempt markers.** Swearing about a protocol is not
