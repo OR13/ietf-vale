@@ -93,7 +93,7 @@ jobs:
       - run: cp LICENSE IETF/LICENSE
       - run: zip -r IETF.zip IETF -x "*.DS_Store"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: IETF.zip
           path: IETF.zip
