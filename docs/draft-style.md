@@ -100,8 +100,11 @@ Every rule traces to one of:
   rules are generated from, and the machine-readable
   `abbreviations.json`[^rpc-abbrev-json] and `names.json`[^rpc-names-json] that
   the RPC's own tooling runs on.
-- **Official IETF tooling** — idnits[^idnits] and DraftForge[^draftforge] — whose
-  check definitions live in git and state what the tools flag today.
+Official IETF tooling — idnits[^idnits] and DraftForge[^draftforge] — is **not**
+in that list. Those tools corroborate that a requirement is enforced in practice
+and set a floor for what an author will hear from a reviewer, and their source is
+a useful implementation reference, but a rule here traces to published guidance
+or it does not ship. See the [tool landscape](/tool-landscape.md).
 
 # Rule inventory
 
@@ -111,38 +114,54 @@ by default; it is not dropped for being rarely triggered, since a clean corpus
 says nothing about whether the guidance exists. See the
 [validation methodology](/validation.md).
 
-## Group 0: parity with official tooling
+## Group 0: requirements that official tooling already enforces
 
-DraftForge[^draftforge] is the RFC Production Center's VS Code extension, and its
-validation checks are the closest published statement of which prose issues IETF
-tooling flags today. It is an editor extension only: an author who does not use
-VS Code, or who wants these checks in CI, cannot run them. Parity is therefore
-this style's first priority.
+Every rule below implements a **documented requirement**. The tooling column
+records whether idnits or DraftForge also checks it, because a requirement an
+IETF-aware reviewer's tools already flag is one an author will certainly hear
+about — but the tool is corroboration, not the source. Where a tool covers less
+than the requirement, these rules cover the requirement.
 
-These rules take their definitions from DraftForge's source, and the PR cites the
-command file and commit it was generated from.
-
-| Rule | Requirement | Upstream | Extends | Level |
+| Rule | Requirement and source | Also checked by | Extends | Level |
 |---|---|---|---|---|
-| `IETF-Draft.Placeholders` | No unresolved placeholders | `placeholders.js`: `TBD`, `TBA`, `XX`, `YY`, `NN`, `MM`, `0000`, `TODO`, matched adjacent to `RFC` | `existence` | error |
-| `IETF-Draft.Typos` | Common misspellings, including invalid BCP 14 terms | `typos.js`, 62 entries covering 79 terms | `substitution` | warning |
-| `IETF-Draft.InclusiveLanguage` | Potentially biased terminology | `inclusive-language.js`: whitelist, blacklist, master, slave, native, grandfather, he/she — with the alternates it suggests | `substitution` | suggestion |
-| `IETF-Draft.RepeatedWords` | No word repeated across a line break | `repeated-words.js` | `repetition` | warning |
-| `IETF-Draft.RFCTerms` | IETF terms used and capitalized as the series uses them | `rfc-terms.js`: `RFC series`, `working group`, `standards track`, `last call`, `area director`, `chair`, `shepherd`, `internet draft`, stream names | `existence` | suggestion |
-| `IETF-Draft.Articles` | Correct indefinite article before vowels, consonants, and initialisms | `articles.js`, including its exception lists and the `an LF` case | `script` | warning |
-| `IETF-Draft.Names` | Author names in the form the author prefers | `names.json`[^rpc-names-json] | `existence` | suggestion |
-| `IETF-Draft.InconsistentCapitalization` | One capitalization of a term per document | `inconsistent-capitalization.js` | `consistency` | suggestion |
+| `IETF-Draft.InclusiveLanguage` | The full NISTIR 8366 Table 1, roughly two dozen terms, which the IESG statement points to and the RFC Editor marks RECOMMENDED[^styleguide] | DraftForge, 7 of those terms | `substitution` | suggestion |
+| `IETF-Draft.Abbreviations` | authors.ietf.org: "Abbreviations should generally be expanded in parentheses"[^authors-language]; RFC 7322 §3.6[^rfc7322] | DraftForge `abbreviations` | `conditional` | warning |
+| `IETF-Draft.RFCTerms` | RFC 7322 §3.4: "Capitalization must be consistent within the document and ideally should be consistent with related RFCs"[^rfc7322] | DraftForge `rfc-terms`, `inconsistent-capitalization` | `existence` | suggestion |
+| `IETF-Draft.Names` | RFC 7322 §4.12 on author names, and the RPC's recorded preferred forms[^rpc-names-json] | DraftForge `names` | `existence` | suggestion |
 
-Levels follow the upstream tools' own framing. DraftForge says of inclusive
-language that "It's up to the draft authors and RPC staff to determine whether a
-term should be left as-is", and of names that "A match doesn't automatically
-signify an error" — both are `suggestion` here for that reason. `Placeholders` is
-the exception: an unresolved `RFCXXXX` in a submitted draft is unambiguous.
+The exception list for `IETF-Draft.Abbreviations` is **generated** from
+`abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file:
+3277 entries of `{term, full, wellknown?, note?}`, of which 279 are marked
+well-known. This supersedes scraping the wiki page — same data, versioned, with
+the well-known flag readable rather than inferred from an asterisk.
 
-`IETF-Draft.InclusiveLanguage` supersedes the Group 5 entry of the same name.
-Taking the term list from IETF tooling rather than from NISTIR 8366 directly
-shortens the chain of authority, and the NIST guidance remains its ultimate
-source through the IESG statement.
+`IETF-Draft.InclusiveLanguage` is generated from NISTIR 8366 Table 1. Its
+message names the chain of authority — RFC Editor RECOMMENDED, via the IESG
+statement, via NIST — so a reader can see at a glance that it is encouragement,
+not IETF consensus.
+
+## Group 0b: tooling conventions with no documented requirement
+
+These implement checks that official tooling performs but no published guidance
+states. They are useful, and an author may well hear them from a reviewer using
+DraftForge, but they are **not requirements**. Each ships disabled by default and
+says so in its own documentation, per the
+[evidence policy](/evidence-policy.md).
+
+| Rule | What it checks | Upstream | Why it is not a requirement |
+|---|---|---|---|
+| `IETF-Draft.Typos` | 62 dictionary entries covering 79 observed misspellings | DraftForge `typos.js` | A list of mistakes people made, not guidance anyone published |
+| `IETF-Draft.Articles` | `a` before a vowel, `an` before a consonant, with exception lists | DraftForge `articles.js` | General English grammar; RFC 7322 says only that the publication language is English |
+| `IETF-Draft.RepeatedWords` | A word repeated across a line break | DraftForge `repeated-words.js` | Same |
+
+**`Placeholders` is deliberately absent.** DraftForge flags `RFCXXXX`, `RFCTBD`
+and similar because it is used during final review, where such a placeholder must
+be resolved before publication. In an Internet-Draft the same string is correct:
+the number is not assigned yet, and authors leave a note for the RFC Editor. The
+check belongs to a workflow stage this style does not lint, and adopting it would
+turn correct text into an error. If it is ever added, it belongs with the
+draft-stage rules in Group 4, inverted: flag a placeholder that has **no**
+accompanying RFC Editor note.
 
 ## Group 1: mechanical
 
@@ -200,18 +219,11 @@ idnits solves the section-number problem with the lookbehind `(?<![0-9a-zA-Z]+\.
 which Vale's RE2 engine cannot express; see the
 [tool landscape](/tool-landscape.md) for what to do instead.
 
-## Group 3: abbreviations and structure
+## Group 3: structure
 
 | Rule | Requirement | Basis | Extends | Level |
 |---|---|---|---|---|
-| `IETF-Draft.Abbreviations` | Expand an abbreviation on first use, unless it is marked well-known | authors.ietf.org: "Abbreviations should generally be expanded in parentheses. The RFC Production Center maintains a list of approved abbreviations that do not need to be expanded"[^authors-language]; RFC 7322 §3.6[^rfc7322] | `conditional` | warning |
 | `IETF-Draft.AbstractCitations` | The Abstract contains no citations | RFC 7322 §4.3: "the Abstract must not contain citations"[^rfc7322] | `existence`, section-scoped | error |
-
-The exception list for `IETF-Draft.Abbreviations` is **generated** from
-`abbreviations.json`[^rpc-abbrev-json], the RPC's machine-readable data file:
-3277 entries of `{term, full, wellknown?, note?}`, of which 279 are marked
-well-known. This supersedes scraping the wiki page — same data, versioned, with
-the well-known flag readable rather than inferred from an asterisk.
 
 ## Group 4: draft-stage only
 
@@ -243,7 +255,6 @@ claim of error.
 | `IETF-Draft.Bcp14Boilerplate` | Uppercase key words are accompanied by the BCP 14 boilerplate and citation | RFC 8174 §2; RFC 7322 §4.8: "RFC 2119 must be cited … and included as a normative reference"[^bcp14][^rfc7322] | `conditional` (level: warning) |
 | `IETF-Draft.Bcp14Lowercase` | Review lowercase key words for intent | RFC 8174: "The words have the meanings specified herein only when they are in all capitals"[^bcp14] | `existence`, **off by default** |
 | `IETF-Draft.Bcp14Sparingly` | Do not use SHOULD merely to express a preference | IESG statement: key words "shouldn't be used merely to express a preference"[^iesg-bcp14] | `occurrence` |
-| `IETF-Draft.InclusiveLanguage` | Review potentially biased terminology | RFC Editor RECOMMENDED, via the IESG statement, via NISTIR 8366 — see the evidence policy on referenced guidance | `substitution` |
 | `IETF-Draft.StaleText` | Avoid text that dates the document | authors.ietf.org "Stale text": non-permanent URLs, "send comments to" a named list, assigning future work to a named WG[^authors-language] | `existence` |
 
 `IETF-Draft.Bcp14Lowercase` ships disabled because lowercase key words are explicitly

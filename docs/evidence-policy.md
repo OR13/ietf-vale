@@ -40,15 +40,35 @@ maps those tiers, plus IETF document status, onto Vale levels.
 | Tier | Source class | Vale level |
 |---|---|---|
 | A | IETF consensus (BCP or Standards Track), or an RFC Editor **MUST**, mechanically checkable in prose | `error` |
-| B | RFC Editor **RECOMMENDED**, an authors.ietf.org "must"/"should" for Internet-Drafts, or a check implemented by official IETF tooling (idnits, DraftForge) | `warning` |
+| B | RFC Editor **RECOMMENDED**, or an authors.ietf.org "must"/"should" for Internet-Drafts | `warning` |
 | C | RFC Editor **Author Choice**, an IESG statement, or guidance the IETF points to but did not produce | `suggestion` |
 | D | Guidance about participant **behavior**, which a linter can only approximate | `suggestion`, opt-in |
 
-A check that official tooling implements is a source in its own right: it is what
-an IETF-aware reviewer's tools report today, and its definition is in git where a
-reviewer can read it. Where such a tool states its own confidence, that wins over
-the table — DraftForge calls its inclusive-language and names matches advisory,
-so those ship as `suggestion` regardless of tier.
+# Official tooling is not a source
+
+idnits and DraftForge implement checks; they do not define requirements. A check
+in one of those tools is **corroboration that a requirement is enforced in
+practice, and a floor for coverage** — never the authority for a rule. Three
+things follow, and each has already bitten this specification:
+
+1. **A tool may under-cover a requirement.** DraftForge's inclusive-language
+   dictionary holds 7 entries; NISTIR 8366 Table 1, which the IESG statement
+   actually points to, holds roughly two dozen. A rule built for parity would
+   cover under a third of the guidance. The rule is built from the requirement.
+2. **A tool may check something no requirement states.** DraftForge's typo
+   dictionary is 62 observed mistakes, and its article checks are English
+   grammar. Both are useful; neither traces to IETF guidance. Such a rule is
+   Tier C at best, ships disabled by default, and says in its own documentation
+   that it implements a tooling convention rather than a requirement.
+3. **A tool encodes the workflow it was built for.** DraftForge flags `RFCXXXX`
+   as a placeholder because it is used in final review, where such a placeholder
+   must be resolved. In an Internet-Draft the same string is correct: numbers are
+   not assigned yet, and authors leave a note for the RFC Editor. Copying the
+   check without its context turns correct text into an error.
+
+Where a tool states its own confidence, that caps ours: DraftForge calls its
+inclusive-language and names matches advisory, so no rule derived from the same
+guidance ships above `suggestion`.
 
 Two constraints override the table:
 
@@ -92,6 +112,8 @@ upstream.
 This extends the checklist in `CONTRIBUTING.md`. A rule PR shows:
 
 1. **Source**, by stable URL, with the **verbatim sentence** the rule implements.
+   A tool's source code is not this sentence. If no documented sentence exists,
+   say so, and the rule ships disabled by default as a tooling convention.
 2. **Standing**: the BCP number and current status from the RFC index, or the
    RFC Editor tier (MUST / RECOMMENDED / Author Choice), or "IESG statement", or
    "non-IETF guidance the IETF points to". State it; do not imply it.
