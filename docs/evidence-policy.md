@@ -25,7 +25,9 @@ sources:
 ---
 
 This policy applies to both the [draft style](/draft-style.md) and the
-[email style](/email-style.md). It exists to answer one question before any rule
+[email style](/email-style.md), and pairs with the
+[validation methodology](/validation.md), which governs what evidence shows a
+rule is correct. It exists to answer one question before any rule
 merges: when a participant asks "who says so?", what do we point at?
 
 # Severity tiers
@@ -92,8 +94,11 @@ This extends the checklist in `CONTRIBUTING.md`. A rule PR shows:
 4. **Tier and level**: which row of the table above, and why the level matches.
 5. **Audience**: draft style, email style, or draft-stage-only, and why the other
    audience is unaffected.
-6. **False positives**: the measured rate over the pinned corpus, plus the
-   near-misses in the fixture that pin the boundary.
+6. **Behavior in real text**: a sample of corpus alerts classified as deviation,
+   rule defect, or legitimate exception, plus the alert rate per 1000 lines and
+   the near-misses in the fixture that pin the boundary. See the
+   [validation methodology](/validation.md), which also records the two corpus
+   inferences that are not admissible.
 7. **Overreach check**: one sentence naming what the rule does *not* claim.
 
 # Guidance the IETF points to but did not write

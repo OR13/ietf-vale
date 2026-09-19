@@ -85,22 +85,31 @@ Every rule traces to one of:
 
 # Rule inventory
 
-Each rule is one PR. `Level` is the target level under the evidence policy; a
-rule whose measured false-positive rate is too high ships one level lower or not
-at all.
+Each rule is one PR. `Level` is the target level under the evidence policy. A
+rule whose alert rate makes it unsupportable ships one level lower, or disabled
+by default; it is not dropped for being rarely triggered, since a clean corpus
+says nothing about whether the guidance exists. See the
+[validation methodology](/validation.md).
 
 ## Group 1: mechanical
 
-These have precise triggers and near-zero false positives.
+These have precise triggers and, by inspection of their patterns, near-zero
+scope for matching text their sources do not describe.
 
 | Rule | Requirement | Basis | Extends | Level |
 |---|---|---|---|---|
-| `IETF-Draft.Terms` | Use the RFC Production Center's settled spelling of RFC-specific terms | Terms list: "IPsec — Not 'IPSEC' or 'IPSec'"; "email … (not 'e-mail' or 'Email')"; "online … (not 'on-line')"; "timestamp … (not 'time-stamp')"; "ASCII — Not 'US-ASCII'"[^rpc-terms] | `substitution` | warning |
+| `IETF-Draft.Terms` | Use the RFC Production Center's settled spelling of RFC-specific terms, except where the list defers to internal consistency | Terms list: "IPsec — Not 'IPSEC' or 'IPSec'"; "email … (not 'e-mail' or 'Email')"; "online … (not 'on-line')"; "timestamp … (not 'time-stamp')"; "ASCII — Not 'US-ASCII'"[^rpc-terms] | `substitution` | warning |
 | `IETF-Draft.CitationSpacing` | A citation tag contains no spaces | RFC 7322 §3.5: "A citation/reference tag must not contain spaces", e.g. `[RFC2119]` not `[RFC 2119]`[^rfc7322] | `substitution` | error |
 | `IETF-Draft.RFCCompoundHyphen` | Do not form compounds by hyphenating an RFC citation | Style Guide RECOMMENDED: "Avoid forming compounds by hyphenating RFC numbers", e.g. `[RFC5011]-style rollover`[^styleguide] | `existence` | warning |
 | `IETF-Draft.AbbreviationVerbs` | Affix suffixes to abbreviations without punctuation | Style Guide RECOMMENDED: "'XORed' (not XOR'ed) and 'NATed' (not NAT-ed)"[^styleguide] | `existence` | warning |
 | `IETF-Draft.DidacticCapitalization` | Do not capitalize mid-word to explain an abbreviation | Style Guide Author Choice: "Use of didactic capitalization is not needed", e.g. `Extensible Markup Language (XML)` not `eXtensible`[^styleguide] | `existence` | suggestion |
 | `IETF-Draft.NonAsciiPunctuation` | Use ASCII punctuation | Style Guide XML Formatting: "ASCII equivalents are to be used for punctuation (e.g., smart quotes and em dashes)"[^styleguide] | `existence` (`nonword`) | warning |
+
+`IETF-Draft.Terms` is generated from the Terms list, and the generator must drop
+the entries that defer to the document rather than settle the spelling. The
+clearest case is Acknowledgments, where the list says "If consistent (with or
+without the 'e'), leave it. If inconsistent, delete the 'e'."[^rpc-terms] — a
+`consistency` check, not a substitution.
 
 `IETF-Draft.NonAsciiPunctuation` excludes the `code` scope, and must not flag non-ASCII
 characters used as examples, which RFC 7997 §3.1 permits.

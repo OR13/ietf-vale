@@ -10,3 +10,4 @@ okf_version: "0.2"
 # Policy
 
 * [Evidence policy](/evidence-policy.md) - How a rule earns its severity level, and what every rule PR must show.
+* [Validation methodology](/validation.md) - What evidence shows a rule is correct, and which corpus signals are not evidence at all.
