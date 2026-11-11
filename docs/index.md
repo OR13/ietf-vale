@@ -32,6 +32,8 @@ landscape](/tool-landscape.md) explains which checks belong to which tool.
 * [Draft style](/draft-style.md) - Normative specification for the `IETF-Draft` Vale style, which lints Internet-Draft and RFC-bound prose.
 * [Email style](/email-style.md) - Normative specification for the `IETF-Email` Vale style, which lints mailing list and issue-tracker prose.
 
+* [Optional prose style](/prose-style.md) - Research and experimental non-IETF editorial checks, enabled separately.
+
 # Reference
 
 * [Tool landscape](/tool-landscape.md) - What idnits, DraftForge, xml2rfc and this style each own, and how an author runs them together.

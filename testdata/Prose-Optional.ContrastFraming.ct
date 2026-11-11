@@ -1,0 +1,13 @@
+$ cdf ${ROOTDIR}/fixtures/Prose-Optional/ContrastFraming
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:1:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.md:2:1:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.md:3:14:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.md:4:14:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.md:5:10:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.md:21:12:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.txt:1:1:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.txt:2:1:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.txt:3:14:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.txt:4:14:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.
+test.txt:5:10:Prose-Optional.ContrastFraming:Consider stating the claim directly; retain this contrast only if it resolves a real distinction.

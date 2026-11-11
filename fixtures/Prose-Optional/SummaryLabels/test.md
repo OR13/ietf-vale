@@ -1,0 +1,28 @@
+Bottom line: the client retries.
+In short, the client retries.
+In short: the client retries.
+The simplest mental model is a queue.
+Bottom line, this behavior is optional.
+The request failed. In short: retry it.
+
+The bottom line contains the checksum.
+In short messages, omit optional padding.
+The section explains why the simplest mental model is insufficient.
+A summary follows the measurements.
+
+`Bottom line: the client retries.`
+
+```text
+Bottom line: the client retries.
+In short, the client retries.
+In short: the client retries.
+The simplest mental model is a queue.
+Bottom line, this behavior is optional.
+The request failed. In short: retry it.
+```
+
+## Bottom line: retries
+
+## In short: retries
+
+## The simplest mental model is a queue

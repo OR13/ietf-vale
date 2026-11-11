@@ -1,0 +1,10 @@
+extends: existence
+message: "Consider stating the claim directly; retain this contrast only if it resolves a real distinction."
+link: https://graphite.io/research/ai-tells
+level: suggestion
+scope: ~code
+ignorecase: true
+tokens:
+  - '(?:it|this|that)(?:\s+is\s+not|\s+isn[''’]t)\s+about\s+[^.!?;\n]{1,100}[.;]\s*(?:it|this|that)(?:\s+is|[''’]s)\s+about'
+  - '(?:is\s+not|isn[''’]t)\s+(?:just|merely|simply)\s+[^.!?;\n]{1,100}?,?\s+but\s+(?:also\s+)?'
+  - 'less\s+like\s+(?:a|an)\s+[^.!?;\n]{1,100}?\s+and\s+more\s+like'

@@ -1,0 +1,11 @@
+extends: existence
+message: "Check whether '%s' names a concrete technical property; otherwise state the relationship directly."
+link: https://www.ietf.org/archive/id/draft-fengfar-led-01.html#section-2
+level: suggestion
+scope: ~code
+ignorecase: true
+# Experimental wording review; the cited individual draft is not IETF policy.
+# Variants and matching boundaries are project choices, not draft requirements.
+tokens:
+  - 'the\s+seam\s+is'
+  - 'there\s+are\s+(?:[1-9][0-9]?|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty)\s+dimensions'

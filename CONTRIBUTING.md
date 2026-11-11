@@ -3,16 +3,23 @@
 Thanks for helping build an IETF style for [Vale](https://vale.sh).
 
 Every rule here changes what a warning means for someone writing an
-Internet-Draft or posting to a working group list, so the bar is: **each rule
+Internet-Draft or posting to a working group list. For IETF styles, **each rule
 cites published IETF guidance, and its exact behavior is recorded in a test a
 reviewer can read as a diff.**
 
 Start with the specifications in [`docs/`](docs/index.md). A rule that is not in
 [draft style](docs/draft-style.md) or [email style](docs/email-style.md) needs a
-specification change first. That is where the argument about whether a rule
-belongs happens, before anyone writes YAML. The
+specification change first. Use the optional prose specification for
+`Prose-Optional`. That is where the argument about whether a rule belongs
+happens, before anyone writes YAML. The
 [evidence policy](docs/evidence-policy.md) decides its severity level and lists
 the evidence your PR has to show.
+
+The separate `Prose-Optional` style follows the
+[optional prose specification](docs/prose-style.md). It accepts research and
+editorial sources without implying IETF standing. These rules remain opt-in
+suggestions, require the same metadata and fixture snapshots, and document
+false positives and deferred checks. They do not enter IETF coverage manifests.
 
 ## Before you open a PR
 
@@ -96,7 +103,8 @@ The [evidence policy](docs/evidence-policy.md) lists the seven things a rule PR
 has to show. On top of those, reviewers will ask:
 
 - **Is it in the guidance?** Follow the `link`. A rule that encodes a personal
-  preference, however reasonable, belongs in a user's own style, not here.
+  preference belongs in a user's own style or, with documented sources and
+  limitations, the experimental `Prose-Optional` style.
 - **Is the source current?** Several obvious sources are obsolete: cite RFC 9245
   not RFC 3005, RFC 9945 not RFC 3934, RFC 9542 not RFC 7042.
 - **Is it in the right style?** `IETF-Draft` rules must not fire on mail, and

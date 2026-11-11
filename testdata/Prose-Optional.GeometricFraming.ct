@@ -1,0 +1,11 @@
+$ cdf ${ROOTDIR}/fixtures/Prose-Optional/GeometricFraming
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:1:Prose-Optional.GeometricFraming:Check whether 'The seam is' names a concrete technical property; otherwise state the relationship directly.
+test.md:2:1:Prose-Optional.GeometricFraming:Check whether 'There are 17 dimensions' names a concrete technical property; otherwise state the relationship directly.
+test.md:3:1:Prose-Optional.GeometricFraming:Check whether 'There are seventeen dimensions' names a concrete technical property; otherwise state the relationship directly.
+test.md:4:1:Prose-Optional.GeometricFraming:Check whether 'There are two dimensions' names a concrete technical property; otherwise state the relationship directly.
+test.md:21:1:Prose-Optional.GeometricFraming:Check whether 'The seam is' names a concrete technical property; otherwise state the relationship directly.
+test.txt:1:1:Prose-Optional.GeometricFraming:Check whether 'The seam is' names a concrete technical property; otherwise state the relationship directly.
+test.txt:2:1:Prose-Optional.GeometricFraming:Check whether 'There are 17 dimensions' names a concrete technical property; otherwise state the relationship directly.
+test.txt:3:1:Prose-Optional.GeometricFraming:Check whether 'There are seventeen dimensions' names a concrete technical property; otherwise state the relationship directly.
+test.txt:4:1:Prose-Optional.GeometricFraming:Check whether 'There are two dimensions' names a concrete technical property; otherwise state the relationship directly.

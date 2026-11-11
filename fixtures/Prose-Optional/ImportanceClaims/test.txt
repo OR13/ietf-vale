@@ -1,0 +1,4 @@
+This matters because deployments depend on it.
+The key takeaway is that retries need a limit.
+The main takeaway is that retries need a limit.
+The only thing that matters is throughput.

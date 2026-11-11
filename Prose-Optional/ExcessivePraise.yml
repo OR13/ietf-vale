@@ -1,0 +1,12 @@
+extends: existence
+message: "Consider removing '%s' and answering the question or explaining the agreement directly."
+link: https://www.ietf.org/archive/id/draft-fengfar-led-01.html#section-2
+level: suggestion
+scope: ~code
+ignorecase: true
+# Experimental wording review; the cited individual draft is not IETF policy.
+# Variants and matching boundaries are project choices, not draft requirements.
+tokens:
+  - 'you(?:\s+have|[’\x27]ve)\s+asked\s+exactly\s+the\s+right\s+question'
+  - 'you(?:\s+are|[’\x27]re)\s+(?:absolutely|completely|entirely)\s+right'
+  - '(?:that\s+is|that[’\x27]s|this\s+is)\s+(?:an?\s+)?(?:excellent|great|fantastic|brilliant)\s+question'

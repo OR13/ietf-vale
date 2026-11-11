@@ -1,0 +1,14 @@
+$ cdf ${ROOTDIR}/fixtures/Prose-Optional/ReaderPrompts
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:1:Prose-Optional.ReaderPrompts:Consider removing 'Let that sink in' and stating the observation directly.
+test.md:2:1:Prose-Optional.ReaderPrompts:Consider removing 'Sit with that' and stating the observation directly.
+test.md:3:1:Prose-Optional.ReaderPrompts:Consider removing 'Here's the thing' and stating the observation directly.
+test.md:4:1:Prose-Optional.ReaderPrompts:Consider removing 'Here is the thing' and stating the observation directly.
+test.md:5:1:Prose-Optional.ReaderPrompts:Consider removing 'Let’s unpack that' and stating the observation directly.
+test.md:6:1:Prose-Optional.ReaderPrompts:Consider removing 'Let's unpack this' and stating the observation directly.
+test.txt:1:1:Prose-Optional.ReaderPrompts:Consider removing 'Let that sink in' and stating the observation directly.
+test.txt:2:1:Prose-Optional.ReaderPrompts:Consider removing 'Sit with that' and stating the observation directly.
+test.txt:3:1:Prose-Optional.ReaderPrompts:Consider removing 'Here's the thing' and stating the observation directly.
+test.txt:4:1:Prose-Optional.ReaderPrompts:Consider removing 'Here is the thing' and stating the observation directly.
+test.txt:5:1:Prose-Optional.ReaderPrompts:Consider removing 'Let’s unpack that' and stating the observation directly.
+test.txt:6:1:Prose-Optional.ReaderPrompts:Consider removing 'Let's unpack this' and stating the observation directly.

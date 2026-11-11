@@ -1,0 +1,12 @@
+Fifteen wibbles: two designs.
+15 wibbles: 2 designs.
+Three competing proposals: two deployment models.
+Two inputs: three outputs.
+
+Supported versions: 1, 2, and 3.
+There are two designs: one for each deployment.
+Fifteen wibbles: two designs are available.
+The summary is fifteen wibbles: two designs.
+12:30 is the scheduled start time.
+Two inputs:
+three outputs.

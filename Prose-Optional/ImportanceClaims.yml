@@ -1,0 +1,10 @@
+extends: existence
+message: "Consider replacing '%s' with the concrete consequence or evidence."
+link: https://graphite.io/research/ai-tells
+level: suggestion
+scope: ~code
+ignorecase: true
+tokens:
+  - 'this\s+matters\s+because'
+  - 'the\s+(?:key|main)\s+takeaway\s+is'
+  - 'the\s+only\s+thing\s+that\s+matters'

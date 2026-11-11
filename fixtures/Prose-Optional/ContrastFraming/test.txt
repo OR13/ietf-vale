@@ -1,0 +1,5 @@
+This isn't about speed. It's about trust.
+This is not about speed; this is about trust.
+The proposal is not just a patch, but a new architecture.
+The proposal isn’t merely a patch but also a new architecture.
+It feels less like a protocol and more like a promise.

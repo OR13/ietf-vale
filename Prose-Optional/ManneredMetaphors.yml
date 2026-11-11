@@ -1,0 +1,10 @@
+extends: existence
+message: "Consider expressing the literal meaning of '%s'; retain it if the metaphor or physical description is intended."
+link: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1#writing-density
+level: suggestion
+scope: ~code
+ignorecase: true
+# Vendor examples motivate review; matching variants are project choices.
+tokens:
+  - '(?:a|the|this|that)\s+dial\s+worth\s+turning'
+  - '(?:point|argument|analogy|metaphor)\s+earns\s+its\s+keep'

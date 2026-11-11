@@ -1,0 +1,8 @@
+extends: existence
+message: "Name the conditions, measurement, or evidence supporting '%s'."
+link: https://graphite.io/research/ai-tells
+level: suggestion
+scope: ~code
+ignorecase: true
+tokens:
+  - 'without\s+(?:sacrificing|compromising)\s+(?:security|performance|reliability|scalability|flexibility|simplicity|correctness|privacy)'

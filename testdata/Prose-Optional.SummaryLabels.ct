@@ -1,0 +1,14 @@
+$ cdf ${ROOTDIR}/fixtures/Prose-Optional/SummaryLabels
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.md:2:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.md:3:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.md:4:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.md:5:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.md:6:21:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.txt:1:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.txt:2:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.txt:3:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.txt:4:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.txt:5:1:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.
+test.txt:6:21:Prose-Optional.SummaryLabels:Consider stating the conclusion directly; retain the summary introduction if it helps the reader.

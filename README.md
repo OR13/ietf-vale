@@ -62,6 +62,47 @@ These rules run at suggestion level and are packaged separately, so existing
 users do not receive them unless they opt in. Their rationale is documented in
 the [draft-style specification](docs/draft-style.md#group-0b-tooling-conventions-with-no-documented-requirement).
 
+## Prose-Optional
+
+[`Prose-Optional`](Prose-Optional/) adds nine experimental editorial checks for
+formulaic contrasts, importance framing, reader-directed filler, claims
+of benefits without tradeoffs, excessive praise, geometric framing, and
+counted-label sentences, stock summary lead-ins, and decorative metaphors.
+These are suggestions with no IETF standing.
+They do not detect AI authorship or verify facts. Read the
+[research, rule boundaries, and validation](docs/prose-style.md).
+
+To try the style from this checkout, point `StylesPath` at its absolute path:
+
+```ini
+StylesPath = /path/to/ietf-vale
+MinAlertLevel = suggestion
+
+[*.{md,txt}]
+BasedOnStyles = IETF-Draft, Prose-Optional
+# Disable an individual check if it is unhelpful for your document:
+# Prose-Optional.ContrastFraming = NO
+```
+
+To install the released package in another project, add its URL to `Packages`
+and its style name to `BasedOnStyles`:
+
+```ini
+StylesPath = styles
+MinAlertLevel = suggestion
+
+Packages = https://github.com/OR13/ietf-vale/releases/download/v0.5.0/IETF-Draft.zip, \
+           https://github.com/OR13/ietf-vale/releases/download/v0.5.0/Prose-Optional.zip
+
+[*.{md,txt}]
+BasedOnStyles = IETF-Draft, Prose-Optional
+```
+
+Run `vale sync` to install or update the packages. Preserve any other packages,
+styles, and file-specific settings your project already uses. Replace
+`download/v0.5.0` with `latest/download` to follow future releases.
+The repository's default configuration does not enable these checks.
+
 ## Installation
 
 Install [Vale](https://vale.sh/docs/install) with the package manager for your
@@ -143,7 +184,8 @@ For repeatable builds, replace the latest package URL with a tagged URL such as
 ## Repository Structure
 
 - [`IETF-Draft/`](IETF-Draft/), [`IETF-Email/`](IETF-Email/), and
-  [`IETF-Draft-Optional/`](IETF-Draft-Optional/) contain the YAML rules and
+  [`IETF-Draft-Optional/`](IETF-Draft-Optional/), plus
+  [`Prose-Optional/`](Prose-Optional/), contain the YAML rules and
   each style's `meta.json`. These directories are packaged for release.
 - [`docs/`](docs/) contains the [OKF](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
   specifications. A rule is specified here before it is implemented.

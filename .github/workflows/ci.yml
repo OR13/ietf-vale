@@ -28,7 +28,7 @@ jobs:
 
       - run: pip install yamllint
 
-      - run: yamllint -c .yamllint.yml IETF-Draft/ IETF-Email/ coverage/
+      - run: yamllint -c .yamllint.yml IETF-Draft/ IETF-Email/ IETF-Draft-Optional/ Prose-Optional/ coverage/
 
   test:
     name: Rules + fixtures
@@ -120,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        style: [IETF-Draft, IETF-Email, IETF-Draft-Optional]
+        style: [IETF-Draft, IETF-Email, IETF-Draft-Optional, Prose-Optional]
     steps:
       - uses: actions/checkout@v7
 

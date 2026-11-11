@@ -1,0 +1,11 @@
+extends: existence
+message: "Consider stating the conclusion directly; retain the summary introduction if it helps the reader."
+link: https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra#personality-and-writing-style
+level: suggestion
+scope: sentence & ~heading
+ignorecase: true
+nonword: true
+# Vendor examples motivate review; matching variants are project choices.
+tokens:
+  - '^(?:bottom\s+line|in\s+short)\s*[:,]'
+  - '^the\s+simplest\s+mental\s+model\s+is\b'

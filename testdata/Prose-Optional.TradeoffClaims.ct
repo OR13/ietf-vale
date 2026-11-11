@@ -1,0 +1,9 @@
+$ cdf ${ROOTDIR}/fixtures/Prose-Optional/TradeoffClaims
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:31:Prose-Optional.TradeoffClaims:Name the conditions, measurement, or evidence supporting 'without sacrificing security'.
+test.md:2:28:Prose-Optional.TradeoffClaims:Name the conditions, measurement, or evidence supporting 'without compromising correctness'.
+test.md:3:10:Prose-Optional.TradeoffClaims:Name the conditions, measurement, or evidence supporting 'without sacrificing reliability'.
+test.md:18:28:Prose-Optional.TradeoffClaims:Name the conditions, measurement, or evidence supporting 'without compromising correctness'.
+test.txt:1:31:Prose-Optional.TradeoffClaims:Name the conditions, measurement, or evidence supporting 'without sacrificing security'.
+test.txt:2:28:Prose-Optional.TradeoffClaims:Name the conditions, measurement, or evidence supporting 'without compromising correctness'.
+test.txt:3:10:Prose-Optional.TradeoffClaims:Name the conditions, measurement, or evidence supporting 'without sacrificing reliability'.

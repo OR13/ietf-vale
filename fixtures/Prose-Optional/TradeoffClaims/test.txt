@@ -1,0 +1,4 @@
+The cache improves throughput without sacrificing security.
+The change reduces latency without compromising correctness.
+It works without sacrificing
+reliability.

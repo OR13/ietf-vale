@@ -30,6 +30,11 @@ This policy applies to both the [draft style](/draft-style.md) and the
 rule is correct. It exists to answer one question before any rule
 merges: when a participant asks "who says so?", what do we point at?
 
+The separate [optional prose style](/prose-style.md) is outside these IETF
+severity tiers. Its research and editorial sources justify experimental,
+opt-in suggestions only; it makes no IETF compliance or authorship claim.
+Its rules retain the metadata, fixture, and limitation requirements.
+
 # Severity tiers
 
 A rule's level is a function of how strongly its source states the guidance, not

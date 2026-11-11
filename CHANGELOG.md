@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0 - 2026-11-11
+
+- Add the experimental, opt-in `Prose-Optional` package with nine editorial
+  prompts, research notes, regression fixtures, and RFC corpus smoke results.
+- Include experimental excessive-praise, geometric-framing, and counted-label
+  checks motivated by Farrell and Feng's individual discussion draft.
+- Add summary-label and mannered-metaphor checks informed by official OpenAI
+  and Anthropic writing guidance, plus guidance for reviewing Vale suggestions.
+
 ## 0.4.6 - 2026-09-19
 
 - Replace the noisy lowercase BCP 14 keyword prompt with mixed-case and

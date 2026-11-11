@@ -1,0 +1,33 @@
+You've asked exactly the right question about deployment.
+You have asked exactly the right question.
+You’re absolutely right about retries.
+You are completely right.
+You're entirely right.
+That's an excellent question.
+That is a great question.
+This is a fantastic question.
+That's a brilliant question.
+You have asked exactly
+the right question.
+
+You asked whether the client retries.
+You are right: the field is optional.
+The right question is whether the signature covers the field.
+That is an open question.
+The result is entirely right-aligned.
+
+`You've asked exactly the right question about deployment.`
+
+```text
+You've asked exactly the right question about deployment.
+You have asked exactly the right question.
+You’re absolutely right about retries.
+You are completely right.
+You're entirely right.
+That's an excellent question.
+That is a great question.
+This is a fantastic question.
+That's a brilliant question.
+You have asked exactly
+the right question.
+```

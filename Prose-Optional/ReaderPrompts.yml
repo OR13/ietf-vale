@@ -1,0 +1,11 @@
+extends: existence
+message: "Consider removing '%s' and stating the observation directly."
+link: https://claudisms.ai/
+level: suggestion
+scope: ~code
+ignorecase: true
+tokens:
+  - 'let\s+that\s+sink\s+in'
+  - 'sit\s+with\s+that'
+  - 'here(?:\s+is|[’\x27]s)\s+the\s+thing(?=\s*[:,.!?])'
+  - 'let[’\x27]s\s+unpack\s+(?:that|this)'

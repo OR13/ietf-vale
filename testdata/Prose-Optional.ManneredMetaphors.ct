@@ -1,0 +1,21 @@
+$ cdf ${ROOTDIR}/fixtures/Prose-Optional/ManneredMetaphors
+$ vale --output=line --sort --normalize --relative --no-global --no-exit .
+test.md:1:16:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'a dial worth turning'; retain it if the metaphor or physical description is intended.
+test.md:2:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'point earns its keep'; retain it if the metaphor or physical description is intended.
+test.md:3:5:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'argument earns its keep'; retain it if the metaphor or physical description is intended.
+test.md:4:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'analogy earns its keep'; retain it if the metaphor or physical description is intended.
+test.md:5:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'metaphor earns its keep'; retain it if the metaphor or physical description is intended.
+test.md:6:16:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'the dial worth turning'; retain it if the metaphor or physical description is intended.
+test.md:7:10:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'this dial worth turning'; retain it if the metaphor or physical description is intended.
+test.md:8:10:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'that dial worth turning'; retain it if the metaphor or physical description is intended.
+test.md:9:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'point earns its keep'; retain it if the metaphor or physical description is intended.
+test.md:35:38:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'a dial worth turning'; retain it if the metaphor or physical description is intended.
+test.txt:1:16:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'a dial worth turning'; retain it if the metaphor or physical description is intended.
+test.txt:2:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'point earns its keep'; retain it if the metaphor or physical description is intended.
+test.txt:3:5:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'argument earns its keep'; retain it if the metaphor or physical description is intended.
+test.txt:4:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'analogy earns its keep'; retain it if the metaphor or physical description is intended.
+test.txt:5:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'metaphor earns its keep'; retain it if the metaphor or physical description is intended.
+test.txt:6:16:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'the dial worth turning'; retain it if the metaphor or physical description is intended.
+test.txt:7:10:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'this dial worth turning'; retain it if the metaphor or physical description is intended.
+test.txt:8:10:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'that dial worth turning'; retain it if the metaphor or physical description is intended.
+test.txt:9:6:Prose-Optional.ManneredMetaphors:Consider expressing the literal meaning of 'point earns its keep'; retain it if the metaphor or physical description is intended.
